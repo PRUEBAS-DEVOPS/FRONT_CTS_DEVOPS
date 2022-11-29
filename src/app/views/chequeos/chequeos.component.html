@@ -1,0 +1,370 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Chequeos</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-8 ">
+                        <input type="text" class="form-control3" id="filterCheq" name="filterCheq" placeholder="Buscar..." [(ngModel)]="filterCheq" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <button [ngClass]="{'btn1': permisos === false,'btn1-disabled': permisos === true}" [disabled]="permisos" type="button" (click)="modalcrearChequeo()"><i id="iconomas"
+                            class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- esta parte es para la lista de los Chequeos -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion chequeos</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th>Cod</th>
+                                <th>Chequeo</th>
+                                <th>Categoría</th>
+                                <th id="Columna1">Examenes</th>
+                                <th id="Columna2">Editar</th>
+                                <th id="Columna3">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let Check of GesCheck | filterChequeos:filterCheq| paginate: {id:'primerapagina',  itemsPerPage: 10, currentPage: paginaChequeo, totalItems: totalRecords} ">
+                            <tr>
+                                <td>{{Check.CodAthenea}}</td>
+                                <td>{{Check.NombreChequeo}}</td>
+                                <td>{{Check.NombreCategoria}}</td>
+
+                                <td id="fila1"><button  [ngClass]="{'btn-primary1': permisos === false,'btn-primary1-disabled': permisos === true}" [disabled]="permisos"(click)="AgregarExamen(Check.Id)"><i
+                                    class="fas fa-notes-medical"></i></button></td>
+                                <!-- Boton de editar -->
+                                <td id="fila2"><button  [ngClass]="{'btn-primary': permisos === false,'btn-primary-disabled': permisos === true}" [disabled]="permisos"  (click)="EditarChequo(Check.Id, Check)"><i
+                                    class="fas fa-edit"></i></button>
+                                  </td>
+
+
+                                <!-- Boton activar e inactivar -->
+                                <td id="fila3" *ngIf="IdRol!=6 ; else elseBlock">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{Check.Id}}" (change)="inactivarChequeo(Check.Id,Check,$event.target.checked)" [checked]="Check.NomEstado" />
+                                        <label class="custom-control-label" for="{{Check.Id}}"></label>
+                                    </div>
+                                </td>
+                                <ng-template #elseBlock>
+                                    <td id="Colum" style="text-align: center;">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="primerapagina" (pageChange)="paginaChequeo = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Crear chequeo -->
+
+<div class="modal fade " id="CrearChequeos" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content2">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear chequeo</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="CrearChequeo()" [formGroup]="FormChequeo">
+                        <div class="row m-0">
+                            <!--Campo para ingresar el nombre del modulo-->
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Categoría <sup class="auth">*</sup> </label>
+                                <select class="form-control" formControlName="IdCategoria">
+                                <option value="" selected="">Seleccione La categoria...</option>
+                                <option *ngFor="let Categ of CategoryCheck" value="{{Categ.Id}}">{{Categ.Nombre}}
+                                </option>
+                            </select>
+                                <span *ngIf="submit && f.IdCategoria.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <!--Campo nombre de Observaciones-->
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Código Atenea <sup class="auth">*</sup> </label>
+                                <input type="text" class="form-control" formControlName="CodAthenea">
+                                <span *ngIf="submit && f.CodAthenea.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Nombre de chequeo <sup class="auth">*</sup> </label>
+                                <input type="text" class="form-control" formControlName="NombreChequeo">
+                                <span *ngIf="submit && f.NombreChequeo.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Descripción <sup class="auth">*</sup> </label>
+                                <textarea class="form-control" formControlName="Descripcion" id="style-textarea"></textarea>
+                                <span *ngIf="submit && f.Descripcion.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Recomendación <sup class="auth">*</sup> </label>
+                                <textarea class="form-control" formControlName="Recomendaciones" id="style-textarea"></textarea>
+                                <span *ngIf="submit && f.Recomendaciones.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12 " data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Chequeos -->
+<div class="modal fade " id="EditarChequeo" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de chequeos</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="ActualizarChequeo()" [formGroup]="editFormChequeo">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Categoría</label>
+                                <select class="form-control" formControlName="IdCategoria">
+                                    <option value="" selected="">Seleccione La categoria...</option>
+                                    <option *ngFor="let Categ of CategoryCheck" value="{{Categ.Id}}">{{Categ.Nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!--Campo nombre de Observaciones-->
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Código Atenea</label>
+                                <input type="text" class="form-control" formControlName="CodAthenea">
+
+                            </div>
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Nombre de chequeo</label>
+                                <input type="text" class="form-control" formControlName="NombreChequeo">
+
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Descripción</label>
+                                <textarea class="form-control" formControlName="Descripcion"></textarea>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Recomendación</label>
+                                <textarea class="form-control" formControlName="Recomendaciones"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12 " data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Agregar Examen -->
+<div class="modal fade " id="AgregarExamen" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content3">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Agregar Examen</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form [formGroup]="formGuardarExamen">
+                        <div class="row">
+                            <div class="col-6 col-md-7 mb-3 form-group">
+                                <div class="ng-autocomplete">
+                                    <ng-autocomplete #auto [data]="examenes" [searchKeyword]="keyword" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" placeholder="Buscar Examenes ..." (selected)='SelectExam($event)'>
+                                    </ng-autocomplete>
+                                    <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.NombreExamen"></a>
+                                    </ng-template>
+                                    <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 mb-3 form-group">
+                                <button class="btn-primary2" (click)='GuardarExamenTemp()'><i
+                                        class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="Table" style="padding-top: 30px;">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div class="dt-responsive table-responsive" *ngIf="TablaExamenes">
+                                            <table id="table_id" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th id="estiletabla">Codigo Athenea</th>
+                                                        <th style="width: 44%;">Nombre Examen</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let examen of DetalleExamCheck">
+                                                        <td id="estiletabla"><a (click)='EliminarExamen(examen.IdChequeoExam)'><i
+                                                                    class="fas fa-trash-alt"></i></a></td>
+                                                        <td id="estiletabla">{{examen.CodAthenea}}</td>
+                                                        <td>{{examen.NombreExamen}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" (click)='Cancelar()'>Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn10" (click)='GuardarGeneralExamen()'>Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal ver detalle -->
+<!-- <div class="modal fade " id="VerDetalle" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Detalle Chequeo</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form >
+                        <div class="row m-0" *ngFor="let detallecheck of detalleChequeo">
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label id="titulo" class="detall-control1">Categoría</label>
+                                <input type="text" class="detall-control1" value="{{detallecheck.NombreCategoria}}" disabled>
+                            </div>
+                  
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label id="titulo">Código Atenea</label>
+
+                                <input type="text" class="detall-control1" value="{{detallecheck.CodAthenea}} " disabled>
+
+                            </div>
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label id="titulo">Nombre de chequeo</label>
+                                <input type="text" class="detall-control1" value="{{detallecheck.NombreChequeo}} " disabled>
+
+                            </div>
+                            <div class="col-12 col-md-12 mb-2 form-group">
+                                <label id="titulo">Descripción</label>
+
+                                <p class="detall-control1">{{detallecheck.Descripcion}}</p>
+                   
+                            </div>
+                            <div class="col-12 col-md-12 mb-1 form-group">
+                                <label id="titulo">Recomendación</label>
+                                <p class="detall-control1">{{detallecheck.Recomendaciones}}</p>
+                               
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="Table" style="padding-top: 30px;">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div class="dt-responsive table-responsive">
+                                            <table id="table_id" class="table ">
+
+                                                <tr>
+                                                    <th id="estiletabla" style="width: 50%;">Codigo Athenea</th>
+
+                                                    <th>Nombre Examen</th>
+                                                </tr>
+
+                                                <tbody>
+                                                    <tr *ngFor="let CheckExamen of DetalleExamCheck | paginate: { id:'CuartaPagina', itemsPerPage: 7, currentPage: paginadetalle}  ">
+                                                        <td id="estiletabla">{{CheckExamen.CodAthenea}}</td>
+                                                        <td>{{CheckExamen.NombreExamen}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <pagination-controls id="CuartaPagina" (pageChange)="paginadetalle = $event" previousLabel="" nextLabel=""></pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn btn10" data-dismiss="modal">Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

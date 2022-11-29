@@ -1,0 +1,1121 @@
+<div class="container" *ngIf="VerPrincipal">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Carga de resultados</h1>
+        </div>
+
+        <div class="mt-1 col-12 col-md-12 mb-3">
+            <div class="row m-0">
+                <div class="col-12 col-md-3 form-group">
+                <label>Fecha de creación</label>
+                    <input placeholder="Inicio" type="date" class="form-control colorForm" id="txtfechaini">
+                </div>
+                <div class="col-12 col-md-3 mt-2 form-group">
+                    <label></label>
+                    <input placeholder="Fin" type="date" class="form-control colorForm" id="txtfechafin">
+                </div>
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Tipo Documento</label>
+                    <select class="form-control colorForm margenDocumento" id="seltipodoc">
+                        <option value="0">Tipo Documento</option>
+                        <option *ngFor="let item of Arraytipodocumento" value="{{item.id}}">{{item.tipodocumento}}</option>
+                    </select>
+                </div>
+                
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>No documento</label>
+                    <input type="text" class="form-control colorForm" id="txtdocumento">
+                </div>
+               
+            </div>
+            <div class="row m-0">
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>No solicitud</label>
+                    <input type="text" class="form-control colorForm" id="txtnosolicitud">
+                </div>
+                <div class=" col-12 col-md-6 form-group margenProcedimiento " >                   
+                    <div class="ng-autocompletePlan m-0 " id="tamañoInputProcedimiento" >
+                        <ng-autocomplete  #auto
+                        [data]="ArrayProcedimientos" [searchKeyword]="keyword" (selected)='Selected($event)' 
+                           [itemTemplate]="itemTemplate"
+                            [notFoundTemplate]="notFoundTemplate" placeholder="Seleccione un procedimiento" 
+                            >
+                        </ng-autocomplete>
+                        <ng-template #itemTemplate let-item>
+                            <a [innerHTML]="item.NombreProcedimiento"></a>
+                        </ng-template>
+                        <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                    </div>
+                </div>              
+                <!-- <div class="col-12 col-md-1 form-group">
+                    <button type="button" class="btn-buscar" (click)="ConsultarInfo()"><i class="fa fa-search"
+                            aria-hidden="true"></i>
+                    </button>
+                </div> -->
+                <div class="col-12 col-md-1 form-group margenTamaño">
+                    <button type="button" class="btn-procesos" (click)="ConsultarInfo()"><i class="fa fa-search "
+                            aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="col-12 col-md-1 form-group ml-4-fa-broom">
+                    <button type="button" class="btn-procesos botonlimpiar" (click)="limpiarFiltros()"><i class="fas fa-broom"
+                        aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="dt-responsive table-responsive-general" *ngIf="Vertabla">       
+            <table class="table m-0">
+                <tr>
+                    <th>No Solicitud</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Procedimiento</th>
+                    <th>Cargar Solicitud</th>
+                </tr>
+                <tr *ngFor="let data of ArrayGeneral | paginate: {id:'Pagina',  itemsPerPage: 5, currentPage: Pagina, totalItems: totalRecords}">               
+                    <td>{{data.numeroSolicitud}}</td>
+                    <td>{{data.FechaSolicitud}}</td>
+                    <td>{{data.NombreExamen}}</td>
+                    <td><button type="button" class="btn-seleccionar" (click)="CargarArchivo(data.IdSolicitud,data.numeroSolicitud,data.FechaSolicitud,data.NombreExamen,data.Archivo,data.Comentario,data.Validacion)">Seleccionar</button></td>
+                    <!-- <h6><span id="spanCovid" class="badge badge-solicitud" (click)="ConsultarPacientesSolicitud(data.IdSolicitud,data.numeroSolicitud,data.cantidadPaciente,data.FechaSolicitud,data.NombreExamen)">Seleccionar</span></h6> -->
+                </tr>
+            </table>
+            <pagination-controls id="Pagina" (pageChange)="Pagina = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+        </div>    
+    </div>
+</div>
+
+<div class="container" *ngIf="VerValidacion">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Validación de resultados</h1>
+        </div>    
+        <div class="container">                   
+            <div class="row m-0 mt-2 mb-3" style="width: 107%;">
+                <div class="col-12 mb-3 d-flex ml-progress margenDatos" >
+                    <h4>Datos de la solicitud</h4>
+                </div> 
+                <div class="connecting-line-detalle"></div>
+              <div class="col-12 col-md-2 margenDatos1" >                         
+                <p class="font-weight-light">No de Solicitud</p>
+                <p>{{numerosolicitud}}</p>
+              </div>
+              <div class=" col-12 col-md-3 margenDatos2" >     
+                <p class="font-weight-bolder">Fecha Solicitud</p>                     
+                <p>{{fechaSolicitud}}</p>
+              </div>
+              <div class=" col-12 col-md-3 margenDatos3" >
+                <p class="font-weight-bolder">Procedimiento</p>  
+                <p>{{examen}}</p>
+              </div>
+              <div class=" col-12 col-md-3 margenDatos4" >
+              <button id='preVisualizar'  (click)="Previsualizar(1)" [disabled]=disabled type="button" style="border: none;" data-toggle="tooltip" data-placement="top" title="Previsualizar"> <i class="fas fa-eye"></i></button>&nbsp;
+               <button id='validar' (click)="Validar()" [disabled]=disabledValidar type="button" style="border: none;" data-toggle="tooltip" data-placement="top" title="Validar"><i class="fas fa-check-square"></i></button>  &nbsp;
+               <button id='imprimir' (click)="Previsualizar(2)"  [disabled]=disabledImprimir type="button" style="border: none;" data-toggle="tooltip" data-placement="top" title="Imprimir"> <i class="fas fa-print"></i></button><br>
+                <span id="badge" class="badge badge-secondary">{{textoBadge}}</span>
+              </div>
+            </div>
+            <div class="row" style="margin-left: 3em; width: 110%;">
+                <div class="col-12 col-md-5">
+                    <div class="dropzone" appCargue>
+                        <div class="row" >
+                            <div class=" margenWord" >
+                                <img id="excelcarga" src="/assets/images/MicrosoftTeams-image (6).png">
+                                <input type="file" #fileDropRef id="fileDropRef" [disabled]="disabledCargue" accept="application/pdf"
+                                    alife-file-to-base64 (onFileChanged)="incomingfile($event)">
+                            </div>
+                            <div class="col-9 tamañoDropzoneTablet">
+                                <label class="label-dropzone" for="fileDropRef" id="label1">{{nameFile}}
+                                   </label>
+                            </div>
+                        </div>
+                        <span *ngIf="extencionIncorrect" class="text-danger animated fadeIn">Se solicita archivos PDF</span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="div-comentario" (click)="RealizarComentario()" [disabled]="disabledComentario">
+                        <div class="row">
+                            <div class=" margenComentario" id="comentario">
+                                <img src="/assets/images/MicrosoftTeams-image (5).png" alt="" aria-hidden="true">      
+                            </div>
+                            <div class="col-9 tamañoDropzoneTablet">
+                                <label class="label-dropzone1" id="label1">{{TextComentario}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>    
+          <div class="container">                   
+            <div class="row m-0 mb-3">
+              <div class="col-12 col-md-3 text-center mt-5 mr-4 ml-progress">                         
+                <p class="font-weight-light margenPacientes">Pacientes Relacionados</p>
+              </div>        
+            </div>
+          </div>    
+        <div class="dt-responsive table-responsive-detalle">       
+            <table class="table m-0">
+                <tr>
+                    <th>Nombre Paciente</th>
+                    <th>Documento</th>
+                    <th class="margenTipo">Tipo de muestra</th>
+                    <th>Parentesco</th>
+                    <th>Detalle</th>
+                </tr>
+                <tr *ngFor="let data of ArrayPacientes | paginate: {id:'PaginaPaciente',  itemsPerPage: 5, currentPage: PaginaPaciente, totalItems: totalRecords}">
+                    <td>{{data.nombreCompleto}}</td>
+                    <td>{{data.documento}}</td> 
+                    <td style="padding-left: 33px;">{{data.Muestra}}</td> 
+                    <td style="padding-left: 28px;">{{data.NomParentesco}}</td> 
+                    <td><a class="verdetalle" (click)="verDatos(data.IdTipoDocumento,data.documento)">Ver más</a></td>                  
+                </tr>
+            </table>
+            <pagination-controls id="PaginaPaciente" (pageChange)="PaginaPaciente = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+
+        <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-4" style="height: 5em !important;">
+            <div class="btn-group" role="group">
+                <div><button type="button" class="btn-atras" (click)="atras()">Anterior</button></div>             
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="ModalAlerta" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title modal-titleTamaño" id="exampleModalLabel1">Recepción de muestra</p> 
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>          
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <div class="col-12 col-md-12 text-center">                    
+                        <i class="fas fa-check-circle fa-6x" aria-hidden="true"></i>
+                    </div>
+                    <div class="row m-0 mb-3">
+                        <div class="col-12 col-md-12 mt-2 text-center">
+                            <p class="parrafo1">
+                               {{mensajeRespuesta}}
+                            </p>                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mt-1" style="margin-left: 1.5em;">
+                <div class="col-md-12 col-md-offset-12 col-xs-12 text-center" >
+                    <div class="btn-group" role="group">         
+                        <div><button type="button" class="btn-siguiente" (click)="CerrarModal()">Aceptar</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade " id="Modalcomentario" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title modal-titleTamaño" id="exampleModalLabel1">Resultado de paciente</p>  
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>         
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">               
+                    <div class="row m-0 mb-3">
+                        <div class="col-12 col-md-12 mt-2 text-center">
+                            <p class="parrafo2">
+                               Por favor diligencie el siguiente campo con los comentarios<br> del respectivo resultado, para la correcta validación
+                            </p>                         
+                        </div>
+                    </div>
+                    <div class="row m-0 mb-3">
+                        <div class="col-12 col-md-12 mt-2 text-center">
+                            <textarea type="text" class="form-control colorBorder" rows="5" id="txtComentario"></textarea>                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 mt-1">
+                            <button type="button" class="btn14" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        <div class="col-12 col-md-6 mt-1">
+                            <button  type="button" class="btn13" (click)="GuardarComentario()">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="verDatos" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content modalTamañoVerdatos" >
+            <div class="modal-header">
+                <p class="modal-title " id="exampleModalLabel1" style="font-size: 20px; padding: .5% 2%;">Detalle de solicitud</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div class="col-12">
+                        <p
+                            class="fontTitulo1">
+                            Datos básicos
+                            <i (click)="ActualizarPaciente(ArrayDetalle)" class="fas fa-edit"></i>
+                        </p>
+                    </div>
+                    <div
+                        class="connecting-line-modal-paciente3">
+                    </div>
+                    <div class="row m-0" *ngFor="let item of ArrayDetalle">  
+                        <!-- <div class="col-12 col-md-12 mb-3"> -->
+                            <div
+                                class="col-3 mt-4 form-group1 modaldatosResponsive">
+                                <label class="tamañoDatos">Nombres:</label>
+                                <p>{{item.primerNombre}}{{item.segundoNombre}}</p>
+                            </div>
+                            <!--  -->
+                            <div
+                                class="col-3 mt-4 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Apellidos:</label>
+                                <p>{{item.primerApellido}}{{item.segundoApellido}}</p>
+                            </div>
+                            <!-- -->
+                            <div
+                                class="col-3 mt-4 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Fecha de
+                                    nacimiento: </label>
+                                <p>{{item.fechanacimiento}}</p>
+                            </div>
+                            <!--  -->
+                            <div
+                                class="col-3  mt-4 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Edad:
+                                </label>
+                                <p>{{item.fechanacimiento}}</p>
+                            </div>
+                            <!--  -->
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive">
+                                <label class="tamañoDatos">Dirección:</label>
+                                <p>{{item.direccion}}</p>
+                            </div>
+                            <!--  -->
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Sexo: </label>
+                                <p>{{item.sexo}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Estado civil:</label>
+                                <p>{{item.Estadocivil}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Teléfono/Celular:</label>
+                                <p>{{item.telefono}}</p>
+                            </div>                           
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive">
+                                <label class="tamañoDatos">Afiliación:</label>
+                                <p>{{item.TipoAfiliacion}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Eps:</label>
+                                <p>{{item.Eps}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">País:</label>
+                                <p>Colombia</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Ciudad:</label>
+                                <p>{{item.Ciudad}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Departamento:</label>
+                                <p>{{item.Depto}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Localidad:</label>
+                                <p>{{item.NombreLocalidad}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Barrio:</label>
+                                <p>{{item.BarrioPac}}</p>
+                            </div>
+                            <div
+                                class="col-3  mt-3 form-group1 modaldatosResponsive" >
+                                <label class="tamañoDatos">Estrato:</label>
+                                <p>{{item.Estrato}}</p>
+                            </div>
+                            <div
+                                class="col-3 mt-3 form-group1 modaldatosResponsive">
+                                <label class="tamañoDatos">Correo:</label>
+                                <p>{{item.correo}}</p>
+                            </div>
+                           
+                        <!-- </div> -->
+
+                    </div>
+                </div>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">
+                        <div class="col-3 mt-1" style="margin: auto;">
+                            <button  type="button" class="btn13" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="ModalPrevisualizacion" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title modal-titleTamaño" id="exampleModalLabel1">Previsualizar Resultado</p>  
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>         
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">           
+                    <embed   width="750" height="560">
+                    <!-- <iframe  width="800" height="300"></iframe> -->
+                </div>
+            </div>
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">                        
+                        <div class="col-3 mt-1" style="margin: auto;">
+                            <button  type="button" class="btn13" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="verDatos" tabindex="-1 " data-backdrop="static" data-keyboard="false"></div> -->
+
+<div class="modal fade modalScroll" id="DivPacientes" data-backdrop="static" data-keyboard="false" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content modalTamañoDivTablet">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Actualizar Paciente</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <form class="col-12 modal-scroll" [formGroup]="formPacientes" (ngSubmit)="CrearPacientes(1)">
+              <div class="modal-body" >
+                  <div class="container">
+                      <section>
+                          <div class="row">
+                              <div class="wizard">
+                                  <div class="tab-content col-12 col-md-12">
+                                      <div class="tab-pane2 active" role="tabpanel" id="registroPaciente">
+                                          <div class="col-12 col-md-12 mt-2">
+                                              <div class="row m-0 d-flex justify-content-center">
+                                                  <div class="col-12 mt-3">
+                                                      <div class="row m-0" style="margin-left: 2em !important;">
+                                                          <div class="col-12  col-md-6 inputTipoDocumento" >
+                                                              <select class="form-control colorForm1"
+                                                                  formControlName="tipodocumento" id="SelTipDoc">
+                                                                  <option value="" selected="">Seleccione el tipo de
+                                                                      documento...</option>
+                                                                  <option *ngFor="let TipDoc of GesDocument" 
+                                                                      value="{{TipDoc.id}}">
+                                                                      {{TipDoc.tipodocumento}}</option>
+                                                              </select>
+
+                                                          </div>
+                                                          <div class="col-12  col-md-5 inputDocumento" >
+                                                              <input type="text" placeholder="Número De Documento"
+                                                                  formControlName="documento" class="form-control colorForm1"
+                                                                  id="txtdocumento">
+                                                          </div>
+                                                          <div class="col-12 col-md-1 " style="margin-left: -12px;">
+                                                              <button type="button" class="btn-buscar1"
+                                                                  (click)="consultar()"><i
+                                                                      class="fa fa-search"></i></button>
+                                                          </div>
+                                
+                                                      </div>
+                                                      <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5"
+                                                          *ngIf="botonCerrar">
+                                                          <div class="btn-group" role="group">
+                                                              <div><button type="button" class="btn-atras"
+                                                                      data-dismiss="modal">Anterior</button></div>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="mt-1 col-12 mb-3" *ngIf="formularioPacientes">
+
+                                                          <div class="row" style="margin-left: -1.8em; width: 108%;">
+                                                              <div class="row">
+                                                                  <!-- se inicia la creacion del tab -->
+                                                                  <div class="container">
+                                                                      <section>
+                                                                          <div class="row">
+                                                                              <div class="wizard">
+                                                                                <div class="col-5">
+                                                                                <p
+                                                                                    class="fontTitulo">
+                                                                                    Datos basicos
+                                                                                </p>
+                                                                                    <div
+                                                                                        class="connecting-line-modal-paciente2">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="wizard-inner " >
+                                                                                    <div class="connecting-line-modal-paciente4"></div>
+                                                                                      <ul class="nav nav-tabs"
+                                                                                          role="tablist">
+                                                                                          <li role="presentation"
+                                                                                              class="active" id="Li1" style="width: 27% !important;">
+                                                                                              <a href="#step1"
+                                                                                                  data-toggle="tab"
+                                                                                                  aria-controls="step1"
+                                                                                                  role="tab"
+                                                                                                  title="Step 1"
+                                                                                                  id="tab1">
+                                                                                              </a>
+                                                                                              <span class="round-tab1">
+                                                                                                <i class="glyphicon glyphicon-pencil">1</i>
+                                                                                            </span>
+                                                                                          </li>
+                                                                                          <li role="presentation"
+                                                                                              class="disabled"
+                                                                                              id="Li2" style="width: 27% !important;">
+                                                                                              <a href="#step2"
+                                                                                                  data-toggle="tab"
+                                                                                                  aria-controls="step2"
+                                                                                                  role="tab"
+                                                                                                  title="Step 2"
+                                                                                                  id="tab2">
+                                                                                              </a>
+                                                                                              <span class="round-tab1">
+                                                                                                <i class="glyphicon glyphicon-pencil">2</i>
+                                                                                            </span>
+                                                                                          </li>
+                                                                                          <li role="presentation"
+                                                                                              class="disabled"
+                                                                                              id="Li3">
+                                                                                              <a href="#step3"
+                                                                                                  data-toggle="tab"
+                                                                                                  aria-controls="step3"
+                                                                                                  role="tab"
+                                                                                                  title="Step 3"
+                                                                                                  id="tab3">
+                                                                                              </a>
+                                                                                              <span class="round-tab1">
+                                                                                                <i class="glyphicon glyphicon-pencil">3</i>
+                                                                                            </span>
+                                                                                          </li>
+                                                                                      </ul>
+                                                                                  
+                                                                                  <div
+                                                                                      class="tab-content col-12 col-md-12">
+                                                                                      <div class="tab-pane3 active tamañoDivPacientes"
+                                                                                          role="tabpanel" id="step1" >
+                                                                                          <div class="row m-0 modal-datosBasicos" >
+                                                                                              <div class="col-5">
+                                                                                                  
+                                                                                              </div>
+                                                                                              
+                                                                                                  
+                                                                                              
+                                                                                              <div
+                                                                                                  class="col-md-6 col-md-offset-6 col-xs-6 text-right">
+                                                                                                  <div class="btn-group"
+                                                                                                      role="group"
+                                                                                                      *ngIf="BtnVerAcudiente">
+                                                                                                      <button
+                                                                                                          type="button"
+                                                                                                          id="btnacu"
+                                                                                                          class="btn-acu"
+                                                                                                          (click)="verAcudi()">Ver
+                                                                                                          Acudiente</button>
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label>Primer Nombre
+                                                                                                      <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <input type="text"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="primerNombre">
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.primerNombre.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              <!-- segundo nombre -->
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label> Segundo
+                                                                                                      Nombre</label>
+                                                                                                  <input type="text"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="segundoNombre">
+                                                                                              </div>
+                                                                                              <!-- primer apellido -->
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Primer
+                                                                                                      Apellido <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <input type="text"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="primerApellido">
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.primerApellido.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              <!-- segundo apellido -->
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Segundo
+                                                                                                      Apellido
+                                                                                                  </label>
+                                                                                                  <input type="text"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="segundoApellido">
+                                                                                              </div>
+                                                                                              <!-- agregamos el campo de la fecha -->
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Fecha de
+                                                                                                      nacimiento <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <input type="date"
+                                                                                                      formControlName="fechanacimiento"
+                                                                                                      class="fecha form-control colorForm1"
+                                                                                                      (change)="CalcularEdad($event.target.value,1)">
+
+                                                                                              </div>
+                                                                                              <!-- agregamos el campo de edad -->
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Edad </label>
+                                                                                                  <input type="text"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="edad"
+                                                                                                      disabled
+                                                                                                      value="{{showAge}}">
+
+                                                                                              </div>
+                                                                                              <div class="col-12 col-md-6 mt-2 mb-5 form-group topSexo">
+                                                                                                <label>Sexo <sup
+                                                                                                        class="auth">*</sup></label>
+                                                                                                <select class="form-control colorForm1" formControlName="Idsexo" (change)="ValidarGenero($event.target.value)" >
+                                                                                                    <option value="" selected="">Seleccione su
+                                                                                                        Sexo...
+                                                                                                    </option>
+                                                                                                    <option *ngFor="let TypeGenero of GesGenero"
+                                                                                                        value="{{TypeGenero.id}}">
+                                                                                                        {{TypeGenero.genero}}</option>
+                                                                                                </select>
+                                                                                                <span *ngIf="submit && f.Idsexo.errors" class="text-danger animated fadeIn">es
+                                                                                                    requerido</span>
+                                                                                              </div>
+                                                                                              <div class="col-12 col-md-3 mt-2 mb-3 form-group" *ngIf="verEmbarazo">
+                                                                                                <label>Embarazo</label>
+                                                                                                <select class="form-control colorForm1" formControlName="embarazo" >
+                                                                                                    <option value="0" selected="">Seleccione</option>
+                                                                                                    <option value="1">No</option>
+                                                                                                    <option  value="2">Si</option>
+                                                                                                    <option  value="3">Internacionales</option>
+                                                                                                </select>
+                                                                                            </div>
+                                
+                                                                                            <div class="col-12  mt-2 mb-3 form-group" [ngClass]="{'col-md-6': verEmbarazo === false,'col-md-3': verEmbarazo === true}">
+                                                                                                <label>Discapacidad</label>
+                                                                                                <select class="form-control colorForm1" formControlName="discapacidad" >
+                                                                                                   <option value="0" selected="">Seleccione</option>
+                                                                                                   <option *ngFor="let dis of ArrayDiscapacidad" value="{{dis.Id}}">{{dis.discapacidad}}</option>
+                                                                                               </select>
+                                                                                            </div>
+                                                                                              
+                                                                                            
+                                                                                          </div>
+                                                                                          <div
+                                                                                              class="list-inline text-center " style="position: absolute;top: 96%; margin: 0px 40%;">
+                                                                                              <li><button
+                                                                                                      type="button"
+                                                                                                      class="btn-siguiente botonSiguienteResponsive"
+                                                                                                      (click)="Next_Paciente(2)">Siguiente</button>
+                                                                                              </li>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                      <div class="tab-pane3"
+                                                                                          role="tabpanel" id="step2"
+                                                                                          style="display: none;">
+                                                                                          <div class="row m-0 modal-datosBasicos">
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label>Estado Civil
+                                                                                                      <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      formControlName="Idestadocivil">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          su
+                                                                                                          estado
+                                                                                                          civil...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let EstCivil of ArrayEstadoCivil"
+                                                                                                          value="{{EstCivil.id}}">
+                                                                                                          {{EstCivil.estadoCiv}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.Idestadocivil.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label>Teléfono o
+                                                                                                      Celular <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <input type="number"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="telefono">
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.telefono.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label>Tipo
+                                                                                                      Afiliacion <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      formControlName="IdTipAfil">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          su
+                                                                                                          Afiliacion...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let TipAfil of ArrayTipAfiliacion"
+                                                                                                          value="{{TipAfil.id}}">
+                                                                                                          {{TipAfil.tipoafiliacion}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.IdTipAfil.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label>Eps</label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      formControlName="IdEps">
+                                                                                                      <option value="0"
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          su Eps...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let typeesp of ArrayEps"
+                                                                                                          value="{{typeesp.id}}">
+                                                                                                          {{typeesp.eps}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Correo
+                                                                                                      Electrónico <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <input type="email"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="correo"
+                                                                                                      id="txtcorreo"
+                                                                                                      (change)="ValidarEmail($event.target.value)">
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.correo.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Pais <sup
+                                                                                                          class="auth">*</sup>
+                                                                                                  </label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      formControlName="Pais">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          el pais...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let Country of ArrayPais"
+                                                                                                          value="{{Country.id}}">
+                                                                                                          {{Country.pais}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                              </div>
+
+                                                                                          </div>
+                                                                                          <div class="row siguienteAtrasResposive">
+                                                                                              <div
+                                                                                                  class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5">
+                                                                                                  <div class="btn-group"
+                                                                                                      role="group">
+                                                                                                      <div><button
+                                                                                                              type="button"
+                                                                                                              class="btn-atras"
+                                                                                                              (click)="Previous_Paciente(1)">Atras</button>
+                                                                                                      </div>
+                                                                                                      <div><button
+                                                                                                              type="button"
+                                                                                                              class="btn-siguiente"
+                                                                                                              (click)="Next_Paciente(3)">Siguiente</button>
+                                                                                                      </div>
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                      <div class="tab-pane3"
+                                                                                          role="tabpanel" id="step3"
+                                                                                          style="display: none; height: 26em;">
+                                                                                          <div class="row m-0 modal-datosBasicos" style="height: 24em;">
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label>Departamento
+                                                                                                      <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      (change)="listarCiudades($event.target.value)"
+                                                                                                      formControlName="IdDepto">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          El
+                                                                                                          departamento...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let depar of ArrayDepart"
+                                                                                                          value="{{depar.id}}">
+                                                                                                          {{depar.depto}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.IdDepto.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-3 form-group margen">
+                                                                                                  <label>Ciudad <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      id="SelCiudad"
+                                                                                                      (change)="listarLocalidades($event.target.value); ValidarCiudad($event.target.value,1);"
+                                                                                                      formControlName="Idciudad">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          su ciudad...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let ciud of ArrayCity"
+                                                                                                          value="{{ciud.id}}">
+                                                                                                          {{ciud.ciudad}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.Idciudad.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Localidad
+                                                                                                  </label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      id="SelLocalidad"
+                                                                                                      (change)="ListarBarrios($event.target.value)"
+                                                                                                      formControlName="IdLocalidad">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          su
+                                                                                                          localidad...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let Location of Arraylocalidad"
+                                                                                                          value="{{Location.id}}">
+                                                                                                          {{Location.localidad}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Barrio
+                                                                                                  </label>
+                                                                                                  <select
+                                                                                                      class="form-control colorForm1"
+                                                                                                      id="Selbarrio"
+                                                                                                      formControlName="Idbarrio">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Selecciona
+                                                                                                          su Barrio...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let Barri of ArrayBarrio"
+                                                                                                          value="{{Barri.id}}">
+                                                                                                          {{Barri.barrio}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                                  <input type="text"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="NombreBarrio"
+                                                                                                      id="txtbarrio"
+                                                                                                      style="display: none;" />
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Estrato <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      formControlName="Idestrato">
+                                                                                                      <option value=""
+                                                                                                          selected="">
+                                                                                                          Seleccione
+                                                                                                          su
+                                                                                                          Estrato...
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let Estr of ArrayEstr"
+                                                                                                          value="{{Estr.id}}">
+                                                                                                          {{Estr.estrato}}
+                                                                                                      </option>
+                                                                                                  </select>
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.Idestrato.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+
+
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Dirección
+                                                                                                      <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <input type="text"
+                                                                                                      class="form-control colorForm1"
+                                                                                                      formControlName="direccion">
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.direccion.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+
+
+                                                                                              <div
+                                                                                                  class="col-12 col-md-6 mt-2 form-group margen">
+                                                                                                  <label>Parentesco
+                                                                                                      <sup
+                                                                                                          class="auth">*</sup></label>
+                                                                                                  <select
+                                                                                                      class=" form-control colorForm1"
+                                                                                                      formControlName="IdParentesco">
+                                                                                                      <option
+                                                                                                          value="0"
+                                                                                                          selected="0">
+                                                                                                          Seleccione
+                                                                                                          una opción
+                                                                                                      </option>
+                                                                                                      <option
+                                                                                                          *ngFor="let parentesco of ArrayParentesco"
+                                                                                                          value="{{parentesco.IdParentesco}}">
+                                                                                                          {{parentesco.NomParentesco}}
+                                                                                                      </option>
+                                                                                                  </select>
+
+                                                                                                  <span
+                                                                                                      *ngIf="submit && f.IdParentesco.errors"
+                                                                                                      class="text-danger animated fadeIn">es
+                                                                                                      requerido</span>
+                                                                                              </div>
+                                                                                              <div
+                                                                                                  class="col-12 col-md-5 mt-3 form-group label-politicas">
+                                                                                                  <p>Esta de acuerdo con nuestra politica de tratamiento
+                                                                                                      de datos
+                                                                                                  </p>
+
+                                                                                              </div>
+                                                                                              <div
+                                                                                                    class="col-12 col-md-1 mt-3 form-group form-check form-check-inline botonsiNo">
+                                                                                                    <label
+                                                                                                        class="form-check-label"
+                                                                                                        for="inlineRadio1" 
+                                                                                                        style="padding: 6px;">Si</label>
+                                                                                                    <input
+                                                                                                        class=""
+                                                                                                        type="radio"
+                                                                                                        id="radioPolitica"
+                                                                                                        name="radioPaciente"
+                                                                                                        (click)="AsigPolitica($event.target.value,1)">
+                                                                                                    <label
+                                                                                                        class="form-check-label"
+                                                                                                        for="inlineRadio2" 
+                                                                                                        style="padding: 6px;">No</label>
+                                                                                                    <input
+                                                                                                        class=""
+                                                                                                        type="radio"
+                                                                                                        id="radioPolitica"
+                                                                                                        name="radioPaciente"
+                                                                                                        (click)="AsigPolitica($event.target.value)">
+                                                                                                </div>
+                                                                                          </div>
+
+                                                                                          <div class="row" style="margin-top: 4%;">
+                                                                                              <div class="col-md-12 col-md-offset-12 col-xs-12 text-center"
+                                                                                                  *ngIf="Pacienteexistente">
+                                                                                                  <div class="btn-group"
+                                                                                                      role="group">
+                                                                                                      <div><button
+                                                                                                              type="button"
+                                                                                                              class="btn-atras"
+                                                                                                              (click)="Previous_Paciente(2)">Atras</button>
+                                                                                                      </div>
+                                                                                                      <div><button
+                                                                                                              type="button"
+                                                                                                              class="btn-actualizar-paciente"
+                                                                                                              id="btnActualizar"
+                                                                                                              (click)="ActualizarDatos()">Actualizar</button>
+                                                                                                      </div>
+                                                                                                      <div id="btnSiguienteFin"
+                                                                                                          style="display: none;">
+                                                                                                          <button
+                                                                                                              type="button"
+                                                                                                              (click)="Next_Paciente(4)"
+                                                                                                              class="btn-siguiente">Siguiente</button>
+                                                                                                      </div>
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                              <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5"
+                                                                                                  *ngIf="pacientenuevo">
+                                                                                                  <div class="btn-group"
+                                                                                                      role="group">
+                                                                                                      <div><button
+                                                                                                              type="button"
+                                                                                                              class="btn-atras"
+                                                                                                              (click)="Previous_Paciente(2)">Atras</button>
+                                                                                                      </div>
+
+                                                                                                      <div><button
+                                                                                                              type="submit"
+                                                                                                              class="btn-siguiente"
+                                                                                                              id="btnGuardar">Guardar</button>
+                                                                                                      </div>
+                                                                                                      <div id="btnSiguienteFin"
+                                                                                                          style="display: none;">
+                                                                                                          <button
+                                                                                                              type="button"
+                                                                                                              (click)="Next_Paciente(4)"
+                                                                                                              class="btn-siguiente">Siguiente</button>
+                                                                                                      </div>
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                              <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5"
+                                                                                                  *ngIf="menordeedad">
+                                                                                                  <div class="btn-group"
+                                                                                                      role="group">
+                                                                                                      <div><button
+                                                                                                              type="button"
+                                                                                                              class="btn-atras"
+                                                                                                              (click)="Previous_Paciente(2)">Atras</button>
+                                                                                                      </div>
+                                                                                                      <div><button
+                                                                                                              type="button"
+                                                                                                              (click)="Next_Paciente(4)"
+                                                                                                              class="btn-siguiente">Siguiente</button>
+                                                                                                      </div>
+
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                  </div>
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>
+                                                                       
+                                                                    </section>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </section>
+
+                  </div>
+              </div>
+          </form>
+
+
+      </div>
+  </div>
+</div>
+

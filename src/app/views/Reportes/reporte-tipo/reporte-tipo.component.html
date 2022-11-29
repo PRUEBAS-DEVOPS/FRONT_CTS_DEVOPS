@@ -1,0 +1,40 @@
+
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12">
+            <h1>Generar Reporte</h1>
+        </div>
+        <div class="mt-1 col-12 mb-3">
+            <div class="row">
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Fecha</label>
+                    <input type="date" class="fecha form-control" id="fechaIni">
+                </div>
+                <!-- <div class="col-12 col-md-3 mb-3 form-group">
+                    <label class="fechala1">Fecha fin</label>
+                    <input type="date" class="fecha1 form-control" id="fechafin">
+                </div> -->
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label class="aseso1">Tipo</label>
+                    <select class="form-control" id="Seltipo">
+                        <option value="0" selected >Seleccione Tipo</option>
+                       <option *ngFor="let medio of mediosPago" value="{{medio.id}}">{{medio.medioPago}}</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-2 mt-4 form-group">
+                    <!-- <button type="submit" class="btn3 form-control" (click)="consultar()"><i class="fa fa-search"
+                            aria-hidden="true"></i>
+                    </button> -->
+                    <button class="bt4" (click)="downloadExcel()">                     
+                    </button>
+                </div>
+                <div class="col-12 col-md-1 mt-4 form-group">
+                    <button type="submit" class="btn3 form-control" (click)="LimpiarFormulario()"><i class="fas fa-broom"
+                        aria-hidden="true"></i>
+                </button>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+</div>

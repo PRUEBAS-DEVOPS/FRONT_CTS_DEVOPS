@@ -1,0 +1,203 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Sub-módulos</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-8 ">
+                        <input type="text" class="form-control3" id="filterSubmodul" name="filterSubmodul" placeholder="Buscar..." [(ngModel)]="filterSubmodul" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4" *ngIf="IdRol!=6">
+                        <button class="btn1" type="button" (click)="modalCrearSubModulo()"><i id="iconomas" class="fas fa-plus"></i>
+                            Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- listamos los sub-modulos -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion sub-modulos</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th>Sub-Módulo</th>
+                                <th>Módulo</th>
+                                <th>Descripción</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let submodel of GetSubModel | filterSubModulos:filterSubmodul | paginate: {itemsPerPage: 7, currentPage: PaginationSubModulo}">
+                            <tr>
+                                <td>{{submodel.Nombre}}</td>
+                                <td>{{submodel.nombreModulo}} </td>
+                                <td> {{submodel.Descripcion}}</td>
+                                <!-- Boton de editar -->
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="Editarinformacion(submodel.id, submodel)"><i class="fas fa-edit"></i></button></td>
+                                <!-- Boton activar e inactivar -->
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{submodel.id}}" (change)="inactivarSubmodulo(submodel.id,submodel,$event.target.checked)" [checked]="submodel.EstadoBool" />
+                                        <label class="custom-control-label" for="{{submodel.id}}"></label>
+                                    </div>
+                                </td>
+                                <ng-template #elseBlock>
+                                    <td id="Colum">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="PaginationSubModulo = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Crear sub-modulos -->
+<div class="modal fade " id="CrearSubModulos" tabindex="-1" data-backdrop="static" data-keyboard="false">>
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Sub-modulos</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <form (ngSubmit)="CrearSubModulo()" [formGroup]="form">
+                        <div class="row m-0">
+                            <!--Campo para ingresar el nombre del Sub-Modulo-->
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Nombre Sub-Módulo <sup class="auth">*</sup></label>
+                                <input type="text" class="form-control" formControlName="Nombre">
+                                <span *ngIf="submit && f.Nombre.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <!--Campo nombre de Descripcion-->
+                            <div class="col-12 col-md-8 mb-3 form-group">
+                                <label>Descripción <sup class="auth">*</sup></label>
+                                <textarea type="text" class="form-control" formControlName="Descripcion"></textarea>
+                                <span *ngIf="submit && f.Descripcion.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <!--Campo para ingresar a que modulo pertenece-->
+                            <div class="col-12 col-md-4 mb-3 form-group">
+                                <label>Modulo Principal <sup class="auth">*</sup></label>
+                                <select formControlName="IdModulo" class="sedes form-control">
+                                <option value="" disabled selected> seleccione el modulo</option>
+                                <option *ngFor="let model of gesModel" value="{{model.id}}">{{model.modulo}}</option>
+                            </select>
+                                <span *ngIf="submit && f.IdModulo.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <!--Campo nombre de Controlador-->
+                            <div class="col-12 col-md-8 mb-3 form-group">
+                                <label>Controlador <sup class="auth">*</sup></label>
+                                <input type="text" class="form-control" formControlName="controlador">
+                                <span *ngIf="submit && f.controlador.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <div id="color">
+                                <div class="row">
+                                    <div class="col-12 col-md-5 text-md-center mt-3" id="labels">
+                                        <p>Depende De </p>
+                                        <p> otro Sub-Módulo</p>
+                                    </div>
+                                    <div class="custom-control custom-switch col-12 col-md-2 mt-3" id="Checked">
+                                        <input type="checkbox" name="check" class="custom-control-input" id="checkedsub" onchange="javascript:showContent()" />
+                                        <label class="custom-control-label" for="checkedsub"></label>
+                                    </div>
+                                    <div class="col-12 col-md-4 mb-3 form-group " id="Modulo">
+                                        <label>Sub-Módulo Principal</label>
+                                        <select id="Activarsub" formControlName="IdModulo" class="sedes form-control" disabled="true">
+                                        <option value="" disabled selected> seleccione el sub-módulo</option>
+                                        <option *ngFor="let submodel of GetSubModel" value="{{submodel.id}}">
+                                            {{submodel.Nombre}}</option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar usuario -->
+<div class="modal fade " id="EditarSubmodulo" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content2">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de Sub-Modulos</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <div *ngFor="let editar of informacionEdit" class="row m-0">
+                        <form (ngSubmit)="Guardar()" [formGroup]="formEdit">
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 mb-3 ">
+                                    <label>Nombre SubModulo</label>
+                                    <input type="text" class=" form-control" formControlName="Nombre" value="{{editar.Nombre}}">
+                                </div>
+                                <div class="col-12 col-md-6 mb-3 form-group ">
+                                    <label>Modulo</label>
+                                    <select formControlName="IdModulo" class="sedes form-control">
+                                        <option value="" disabled selected> seleccione el modulo</option>
+                                        <option *ngFor="let model of gesModel" value="{{model.id}}">{{model.modulo}}</option>                               
+                                    </select>
+                                    <!-- <input type="text " class="form-control " formControlName="IdModulo" value="{{editar.IdModulo}}"> -->
+                                </div>
+                                <div class="col-12 col-md-12 mb-3 form-group ">
+                                    <label>Descripcion</label>
+                                    <textarea type="text " class="form-control " formControlName="Descripcion" value="{{editar.Descripcion}}"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer mt-1">
+                                <div class="col-12 col-md-12 ">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="submit" class="btn10">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

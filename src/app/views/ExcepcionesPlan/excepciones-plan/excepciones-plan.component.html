@@ -1,0 +1,489 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Excepciones</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-8 ">
+                        <input type="text" class="form-control3" id="filterPlanes" name="filterPlanes"
+                            placeholder="Buscar..." [(ngModel)]="filterPlanes" [ngModelOptions]="{standalone: true}"><i
+                            id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <button class="btn1" type="button" (click)="AbrirModalCreacion()"><i id="iconomas"
+                                class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade modalEditar" id="CrearExcepcion" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Excepción</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="BotonCancelar(0)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <form (ngSubmit)="CrearExecpciones()" [formGroup]="formularioExepcion">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12  mb-2" style="margin-left: -1em;">
+                                <label>Plan <sup class="auth">*</sup></label>
+                                <select class=" form-control" formControlName="idPlan" id="selPlan"
+                                    (change)="SeleccionarPlan()" style="width: 104%;">
+                                    <option value="" selected="">Seleccione el plan...</option>
+                                    <option *ngFor="let plan of listPlan" value="{{plan.Id}}">{{plan.NombrePlan}}
+                                    </option>
+                                </select>
+                                <span *ngIf="submit && fControls.idPlan.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-12-mb-3" *ngIf="VerRadioOpciones" style="margin-left: -1.5em;">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-12 mt-2">
+                                        <div class="connecting-line2 mb-3"></div>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <label> Tipo Procedimiento <sup
+                                                            class="auth">*</sup></label>
+                                                        <select class="form-control"
+                                                        (change)="VerModalOption($event.target.value)"
+                                                        id="selopciones" style="width: 108%;">
+                                                        <option value="0" selected=" ">Seleccione</option>
+                                                        <option value="1">Chequeo</option>
+                                                        <option value="2" >Exámenes</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <div *ngIf="Verchequeo">
+                                                        <div class="col-12 col-md-12-mb-3">
+                                                            <div class="row m-0">
+                                                                <div class="col-4 col-md-12 mb-2" style="margin-left: 4.5em !important;">
+                                                                    <div>
+                                                                        <label> Buscar Chequeo <sup
+                                                                            class="auth">*</sup>
+                                                                        </label>
+                                                                        <div>
+                                                                            <div
+                                                                                class="ng-autocompleteExamenes">
+                                                                                <ng-autocomplete
+                                                                                    #auto
+                                                                                    [data]="ArrayChequeos"
+                                                                                    [searchKeyword]="keyword"
+                                                                                    (selected)='ConsultaDatosCh($event);SelectChequeo($event)'
+                                                                                    [itemTemplate]="itemTemplate"
+                                                                                    id="ExamAutocomplete"
+                                                                                    [notFoundTemplate]="notFoundTemplate"
+                                                                                    placeholder="Buscar Chequeo ...">
+                                                                                </ng-autocomplete>
+                                                                                <ng-template
+                                                                                    #itemTemplate let-item>
+                                                                                    <a [innerHTML]="item.NombreProcedimiento"></a>
+                                                                                </ng-template>
+                                                                                <ng-template
+                                                                                    #notFoundTemplate let-notFound>
+                                                                                    <div
+                                                                                        [innerHTML]="notFound">
+                                                                                    </div>
+                                                                                </ng-template>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="VerExamen">
+                                                        <div class="col-12 col-md-12-mb-3">
+                                                            <div class="row m-0">
+                                                                <div
+                                                                    class="col-4 col-md-12 mb-2 " style="margin-left: 4.5em !important;">
+                                                                    <label> Buscar examen <sup
+                                                                            class="auth">*</sup>
+                                                                    </label>
+                                                                    <div>
+                                                                        <div
+                                                                            class="ng-autocompleteExamenes">
+                                                                            <ng-autocomplete
+                                                                                #auto
+                                                                                [data]="ArrayExamenes"
+                                                                                [searchKeyword]="keyword"
+                                                                                (selected)='SelectExam($event)'
+                                                                                [itemTemplate]="itemTemplate"
+                                                                                id="ExamAutocomplete"
+                                                                                [notFoundTemplate]="notFoundTemplate"
+                                                                                placeholder="Buscar Examenes ...">
+                                                                            </ng-autocomplete>
+                                                                            <ng-template
+                                                                                #itemTemplate let-item>
+                                                                                <a [innerHTML]="item.NombreProcedimiento"></a>
+                                                                            </ng-template>
+                                                                            <ng-template
+                                                                                #notFoundTemplate let-notFound>
+                                                                                <div
+                                                                                    [innerHTML]="notFound">
+                                                                                </div>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row m-0" *ngIf="MostrarTablaExam">
+                            <div style="width: 100%; margin: 1em;">
+                                <h2>Listado Exámenes</h2>
+                                <div class="col-12 col-md-12" style="margin-left: 1.8em;">
+                                    <input type="text" class="form-control3" placeholder="Buscar..." [(ngModel)]="filterEx" [ngModelOptions]="{standalone: true}"><i id="iconobuscar1" class="fas fa-search"></i>
+                                </div>
+                            </div>
+                            <div class="dt-responsive table-responsive">
+                                <table id="table_id" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="Centrarth">Cod Athenea</th>
+                                            <th class="Centrarth">Nombre examen</th>
+                                            <th class="Centrarth">Valor Tarifa</th>
+                                            <th class="Centrarth">Valor Excepción</th>
+                                            <th>Activo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let Exam of ArrayDetalle | excepExam: filterEx |  paginate: {itemsPerPage: 4, currentPage: PaginationException}" [ngClass]="{'backgraundInactive':Exam.activo==0}">
+                                            <!-- <td id="Colum"><button type="button" class="eliminar" (click)="EliminarDetalle(Exam.id,1)"><i
+                                                        class="fas fa-trash-alt"></i></button> </td> -->
+                                            <td style="text-align: center;">{{Exam.CodAthenea}}</td>
+                                            <td>{{Exam.NombreExamen}}</td>
+                                            <td>{{Exam.Valor |currency:'$':'symbol':'4.0-0'}}</td>
+                                            <td class="Centrarth" [ngClass]="{'inactive':Exam.activo==0}">
+                                                <input class="form-control" type="text" placeholder="$" id="ValorNuevo{{Exam.id}}" (change)="GuardarValor(Exam.id,1)" value="{{Exam.ValorExcepcion}}">
+                                            </td>
+                                            <td id="fila4">
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="{{Exam.id}}" (change)="EliminarDetalle(Exam.id,1,$event)" [checked]="Exam.activo" />
+                                                    <label class="custom-control-label" for="{{Exam.id}}"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="PaginationException = $event" maxSize="5" previousLabel="" nextLabel="">
+                                </pagination-controls>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div style="width: 100%; display: flex; justify-content: center;">
+                                    <div style="width: 50%;">
+                                        <button type="button" class="btn12" data-dismiss="modal" (click)="BotonCancelar(0)">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion Excepciones</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th id="colum1">Cod. Plan</th>
+                                <th id="colum2">NombrePlan</th>
+                                <th id="colum2">Detalle</th>
+                                <th id="colum3">Editar</th>
+                                <!-- <th id="colum4">Estado</th> -->
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of ArrayExcepciones | paginate: {itemsPerPage:7, currentPage: PaginationExcep} ">
+                            <tr>
+                                <td id="fila1">{{item.CodPlan}} </td>
+                                <td id="fila2"> {{item.NombrePlan}}</td>
+                                <td id="fila3">
+                                    <a id="buttonmas" (click)="ConsultarInformacion(item.id,item.idPlan,1)">Ver más</a>
+                                </td>
+                                <!-- Boton de editar -->
+                                <td id="fila3"><button class="btn-primary" (click)="ConsultarInformacion(item.id,item.idPlan,2)"><i class="fas fa-edit"></i></button></td>
+                                <!-- Boton activar e inactivar -->
+                                <!-- <td id="fila4">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{item.id}}" (change)="inactivarSede(item.id,item,$event.target.checked)" [checked]="item.EstadoNom" />
+                                        <label class="custom-control-label" for="{{item.id}}"></label>
+                                    </div>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="PaginationExcep = $event" maxSize="5" previousLabel="" nextLabel="">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="DivVerDetalle" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Ver Detalle</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                        <div class="row m-0">
+                            <h2>Exámenes</h2>
+                            <div class="dt-responsive table-responsive">
+                                <div class="connecting-line2 mb-3"></div>
+                                <table id="table_id" class="table">
+                                    <thead>
+                                        <tr>                                            
+                                            <th class="Centrarth">Cod Athenea</th>
+                                            <th class="Centrarth">Nombre examen</th>
+                                            <th class="Centrarth">Valor Tarifa</th>
+                                            <th class="Centrarth">Valor Excepción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let Exam of ArrayDetalle">                                          
+                                            <td>{{Exam.CodAthenea}}</td>
+                                            <td>{{Exam.NombreExamen}}</td>
+                                            <td>{{Exam.Valor  |currency:'$':'symbol':'4.0-0'}}</td>
+                                            <td>{{Exam.ValorExcepcion  |currency:'$':'symbol':'4.0-0'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div style="width: 100%; display: flex; justify-content: center;">
+                                    <div style="width: 50%;">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalEditar" id="DivEditar" tabindex="-1" data-backdrop="static" data-keyboard="false" style="overflow-y: auto;">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Editar</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="BotonCancelar(0)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <form (ngSubmit)="CrearExecpciones()" [formGroup]="formularioExepcion">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12  mb-2" style="margin-left: -1em;">
+                            <label>Plan <sup class="auth">*</sup></label>
+                            <select class=" form-control" formControlName="idPlan" id="selPlan"
+                                (change)="SeleccionarPlan()" style="width: 104%;" disabled="true">
+                                <option value="" selected="">Seleccione el plan...</option>
+                                <option *ngFor="let plan of listPlan" value="{{plan.Id}}">{{plan.NombrePlan}}
+                                </option>
+                            </select>
+                            <span *ngIf="submit && fControls.idPlan.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                        </div>
+                        <div class="col-12 col-md-12-mb-3" style="margin-left: -1.5em;">
+                            <div class="row m-0">
+                                <div class="col-12 col-md-12 mt-4">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-sm-5" style="margin-left: -0.4em;
+                                            margin-bottom: 2em;">
+                                                <label> Tipo Procedimiento <sup
+                                                        class="auth">*</sup></label>
+                                                    <select class="form-control"
+                                                    (change)="VerModalOption($event.target.value)"
+                                                    id="selopciones" style="width: 108%;">
+                                                    <option value="0" selected=" ">Seleccione</option>
+                                                    <option value="1">Chequeo</option>
+                                                    <option value="2" >Exámenes</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <div *ngIf="Verchequeo">
+                                                    <div class="col-12 col-md-12-mb-3">
+                                                        <div class="row m-0">
+                                                            <div class="col-4 col-md-12 mb-2" style="margin-left: 5em;">
+                                                                <div>
+                                                                    <label> Buscar Chequeo <sup
+                                                                        class="auth">*</sup>
+                                                                    </label>
+                                                                    <div>
+                                                                        <div
+                                                                            class="ng-autocompleteExamenes">
+                                                                            <ng-autocomplete
+                                                                                #auto
+                                                                                [data]="ArrayChequeos"
+                                                                                [searchKeyword]="keyword"
+                                                                                (selected)='ConsultaDatosCh($event);SelectChequeo($event,1)'
+                                                                                [itemTemplate]="itemTemplate"
+                                                                                id="ExamAutocomplete"
+                                                                                [notFoundTemplate]="notFoundTemplate"
+                                                                                placeholder="Buscar Chequeo ...">
+                                                                            </ng-autocomplete>
+                                                                            <ng-template
+                                                                                #itemTemplate let-item>
+                                                                                <a [innerHTML]="item.NombreProcedimiento"></a>
+                                                                            </ng-template>
+                                                                            <ng-template
+                                                                                #notFoundTemplate let-notFound>
+                                                                                <div
+                                                                                    [innerHTML]="notFound">
+                                                                                </div>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="VerExamen">
+                                                    <div class="col-12 col-md-12-mb-3">
+                                                        <div class="row m-0">
+                                                            <div
+                                                                class="col-4 col-md-12 mb-2 " style="margin-left: 5em;">
+                                                                <label> Buscar examen <sup
+                                                                        class="auth">*</sup>
+                                                                </label>
+                                                                <div>
+                                                                    <div
+                                                                        class="ng-autocompleteExamenes">
+                                                                        <ng-autocomplete
+                                                                            #auto
+                                                                            [data]="ArrayExamenes"
+                                                                            [searchKeyword]="keyword"
+                                                                            (selected)='SelectExam($event)'
+                                                                            [itemTemplate]="itemTemplate"
+                                                                            id="ExamAutocomplete"
+                                                                            [notFoundTemplate]="notFoundTemplate"
+                                                                            placeholder="Buscar Examenes ...">
+                                                                        </ng-autocomplete>
+                                                                        <ng-template
+                                                                            #itemTemplate let-item>
+                                                                            <a [innerHTML]="item.NombreProcedimiento"></a>
+                                                                        </ng-template>
+                                                                        <ng-template
+                                                                            #notFoundTemplate let-notFound>
+                                                                            <div
+                                                                                [innerHTML]="notFound">
+                                                                            </div>
+                                                                        </ng-template>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div style="width: 96%; margin-left: 1em;">
+                            <h2>Listado Exámenes</h2>
+                            <div class="col-12 col-md-12 " style="margin-left: 2em;">
+                                <input type="text" class="form-control3" placeholder="Buscar..." [(ngModel)]="filterEx" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="dt-responsive table-responsive">
+                            <div class="connecting-line2 mb-3"></div>
+                            <table id="table_id" class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="Centrarth">Cod Athenea</th>
+                                        <th class="Centrarth">Nombre examen</th>
+                                        <th class="Centrarth">Valor Tarifa</th>
+                                        <th class="Centrarth">Valor Excepción</th>
+                                        <th class="Centrarth">Activo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let Exam of ArrayDetalle | excepExam:filterEx | paginate: {itemsPerPage: 4, currentPage: PaginationException}" [ngClass]="{'backgraundInactive':Exam.activo==0}">
+                                        <!-- <td id="Colum"><button class="eliminar" type="button" (click)=""><i
+                                                    class="fas fa-trash-alt"></i></button> -->
+                                        <td style="text-align: center;">{{Exam.CodAthenea}}</td>
+                                        <td>{{Exam.NombreExamen}}</td>
+                                        <td>{{Exam.Valor |currency:'$':'symbol':'4.0-0'}}</td>
+                                        <td class="Centrarth">
+                                            <div style="display: flex; display: flex; align-items: center;" [ngClass]="{'inactive':Exam.activo==0}">
+                                                <input style="margin-inline: 0.8em;" [disabled]="idEdit!=Exam.id" class="form-control" type="text" placeholder="$" id="ValorNuevoEdit{{Exam.id}}" (change)="GuardarValor(Exam.id,2)" value="{{Exam.ValorExcepcion}}">
+                                                <span class="btn-primary" style="cursor: pointer;" (click)="activarEdicionValor(Exam.id)">
+                                                    <i *ngIf="idEdit!=Exam.id" class="fas fa-edit"></i> 
+                                                    <i *ngIf="idEdit==Exam.id" class="fas fa-save"></i>
+                                                </span>
+                                            </div>
+                                            
+                                        </td>
+                                        <td id="fila4">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="{{Exam.id}}" (change)="EliminarDetalle(Exam.id,1,$event)" [checked]="Exam.activo" />
+                                                <label class="custom-control-label" for="{{Exam.id}}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="PaginationException = $event" maxSize="5" previousLabel="" nextLabel="">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-1">
+                        <div class="col-12 col-md-12 ">
+                            <div style="width: 100%; display: flex; justify-content: center;">
+                                <div style="width: 50%;">
+                                    <button type="button" class="btn12" data-dismiss="modal" (click)="BotonCancelar(0)">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

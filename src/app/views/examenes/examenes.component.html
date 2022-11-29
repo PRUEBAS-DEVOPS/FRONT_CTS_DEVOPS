@@ -1,0 +1,380 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Exámenes</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 mt-2 mb-3">
+
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <input type="text" class="form-control3" id="filterExam" name="filterExam" placeholder="Buscar..." [(ngModel)]="filterExam" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <!-- <div class="col-12 col-md-4" *ngIf="IdRol!=6">
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fas fa-upload"></i> Carga masiva
+                        </label>
+                        <input id="file-upload" type="file" accept="application/.xlsx" />
+                    </div> -->
+
+
+                    <div class="col-12 col-md-4">
+                        <label for="file-upload" [ngClass]="{'custom-file-upload': permisos === false,'custom-file-upload-disabled': permisos === true}">
+                            <i class="fas fa-upload"></i> Carga masiva
+                        </label>
+                        <input id="file-upload" type="file" accept="application/.xlsx"  [disabled]="permisos"/>
+                    </div>
+                    <div class="col-12 col-md-4" *ngIf="IdRol!=6">
+                        <!-- <button class="btn1" type="button" (click)="modalcrearExamen()"><i  id="iconomas" class="fas fa-plus"></i> Crear nuevo</button> -->
+                        <button type="button" [ngClass]="{'btn1': permisos === false,'btn1-disabled': permisos === true}" [disabled]="permisos"  (click)="modalcrearExamen()"><i  id="iconomas" class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion exámenes</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th>Cod Athenea</th>
+                                <th>Nombre examen</th>
+                                <th id="td-centrar">Detalles</th>
+                                <th id="td-centrar">Agreg. Analito</th>
+                                <th>Editar</th>
+                                <th id="td-centrar">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Exam of gesexamen | filterExames:filterExam| paginate: { id:'PrimeraPagina', itemsPerPage: 7, currentPage: paginaExamenes}  ">
+                                <td>{{Exam.CodAthenea}}</td>
+                                <td>{{Exam.NombreExamen}}</td>
+                                <!-- Detalle -->
+                                <td id="td-centrar"> <a id="buttonmas" (click)="VerDetalle(Exam.id)">Ver más</a></td>
+                                <!-- agregar analitos -->
+                                <!-- <td id="td-centrar" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary1" (click)="AgregarAnalito(Exam.id)"><i class="fas fa-notes-medical"></i></button></td> -->
+                                <td id="td-centrar"><button [ngClass]="{'btn-primary1': permisos === false,'btn-primary1-disabled': permisos === true}" [disabled]="permisos" (click)="AgregarAnalito(Exam.id)"><i class="fas fa-notes-medical"></i></button></td>
+                                <!-- Boton de editar -->
+                                <!-- <td style="text-align: center; width: 1px;" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="EditarExamenes(Exam.id, Exam)"><i class="fas fa-edit"></i></button></td> -->
+                                <td style="text-align: center; width: 1px;"><button  [ngClass]="{'btn-primary': permisos === false,'btn-primary-disabled': permisos === true}" [disabled]="permisos" (click)="EditarExamenes(Exam.id, Exam)"><i class="fas fa-edit"></i></button></td>
+                             
+                                <td id="td-centrar" *ngIf="IdRol!=6 ; else elseBlock">
+                                    <!-- Boton activar e inactivar -->
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{Exam.id}}" (change)="inactivarExaman(Exam.id,Exam,$event.target.checked)" [checked]="Exam.NomEstado" />
+                                        <label class="custom-control-label" for="{{Exam.id}}"></label>
+                                    </div>
+                                </td>
+      
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="PrimeraPagina" (pageChange)="paginaExamenes = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--#region CrearAnalito -->
+<div class="modal fade " id="AgregarAnalito" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear analito</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="CrearAnalitos()" [formGroup]="FormCrearAnalitos">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-6 mb-3 ">
+                                <label>Codigo Analito <sup class="auth">*</sup>
+                                </label>
+                                <input type="text" class=" form-control" formControlName="CodAnalito">
+                                <span *ngIf="submit && AN.CodAnalito.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 ">
+                                <label>Nombre analito <sup class="auth">*</sup>
+                                </label>
+                                <input type="text" class=" form-control" formControlName="NombreAnalito">
+                                <span *ngIf="submit && AN.NombreAnalito.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 ">
+                                <label>Valor referencia min <sup class="auth">*</sup>
+                                </label>
+                                <input type="text" class=" form-control" formControlName="ValorMin">
+                                <span *ngIf="submit && AN.ValorMin.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group ">
+                                <label>Valor referencia max <sup class="auth">*</sup>
+                                </label>
+                                <input type="text " class="form-control" formControlName="ValorMax">
+                                <span *ngIf="submit && AN.ValorMax.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-12 mb-3 form-group ">
+                                <label>Unidad de medida <sup class="auth">*</sup>
+                                </label>
+                                <select class="form-control" formControlName="idUnidadMed" (change)="CrearUnidadMedida($event.target.value)">
+                                    <option value="" selected="">Seleccione una Opcion...</option>
+                                    <option *ngFor="let Unimed of Unimedid" value="{{Unimed.id}}">{{Unimed.Nombreunidad}}</option>
+                                    <option value="-1" >otro</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--#region CrearUnidadDeMedida  -->
+<div class="modal fade " id="CrearUnidaddeMedida" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content32">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Unidad De Medida</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="CrearUnidadMedidas()" [formGroup]="FormCrearUnidadMedida">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 mb-3 mt-5 ">
+                                <label>Nombre Unidad <sup class="auth">*</sup>
+                                </label>
+                                <input type="text" class=" form-control" formControlName="Nombreunidad">
+                                <span *ngIf="submit && UM.Nombreunidad.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-3">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--#region Editar examen  -->
+<div class="modal fade " id="EditarExamen" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de Examenes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="ActualizarExamen()" [formGroup]="editFormExamen">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 mb-3 ">
+                                <label>Codigo Atenea</label>
+                                <input type="text" class=" form-control" formControlName="CodAthenea">
+                            </div>
+                            <div class="col-12 col-md-12 mb-3 ">
+                                <label>Nombre Examen</label>
+                                <input type="text" class=" form-control" formControlName="NombreExamen">
+                            </div>
+                        </div>
+                        <div class="row m-0">
+                          <div class="col-12 col-md-12 mb-3 form-group">
+                            <label>Descripción</label>
+                            <label>
+                              <textarea rows="4" cols="70" formControlName="descripcion" class="form-control"></textarea>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--#region ver detalle  -->
+<div class="modal fade " id="VerDetalle" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Detalle Examenes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form>
+                        <div class="row m-0" *ngFor="let Exam of detallExam">
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <i id="Iconos" class="fas fa-qrcode"></i>
+                                <label id="LabelVer">Código Atenea :</label>
+                                <input id="textodetalle" type="text" class=" detall-control1" value="{{Exam.CodAthenea}} " disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <i id="Iconos" class="fas fa-book-open"></i>
+                                <label id="LabelVer">Nombre de Examen :</label>
+                                <input id="textodetalle" type="text" class=" detall-control1" value="{{Exam.NombreExamen}} " disabled>
+                            </div>
+                            <div class=" col-12 col-md-6 mb-3 form-group">
+                              <i id = "Iconos" class="fas fa-book-open"></i>
+                              <label id="LabelVer">Descripción :</label>
+                              <input id="textodetalle" type="text" class="detall-control1" value="{{Exam.Descripcion}}" disabled >
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="Table" style="padding-top: 30px;">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div class="dt-responsive table-responsive">
+                                            <table id="table_id" class="table ">
+                                                <thead>
+                                                    <tr>
+                                                        <th id="estiletabla">Cod</th>
+                                                        <th id="estiletabla">Nombre analito</th>
+                                                        <th id="estiletabla">Valor de referencia</th>
+                                                        <th id="estiletabla">unidad de medida</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let Anali of gesAnalitos | paginate: {id:'SegundaPagina',itemsPerPage: 4, currentPage: paginaAnalitos}">
+                                                        <td id="estiletabla">{{Anali.CodAnalito}}</td>
+                                                        <td id="estiletabla">{{Anali.NombreAnalito}}</td>
+                                                        <td id="estiletabla">{{Anali.valorMin}} {{Anali.valorMax}}</td>
+                                                        <td id="estiletabla">{{Anali.NomUnidadMed}}</td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <pagination-controls id="SegundaPagina" (pageChange)="paginaAnalitos = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-12 mt-1">
+                                        <button type="submit" class="btn11" data-dismiss="modal">Aceptar</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--#region modalcrearexamem  -->
+
+<div class="modal fade " id="CrearExamen" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Examenes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="crearExamenes()" [formGroup]="FormCrearExamen">
+                        <div class="row m-0">
+                            <!--Campo para ingresar el codigo de athenea-->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Código atenea <sup class="auth">*</sup>
+                                </label>
+                                <input type="text" class="form-control" formControlName="CodAthenea">
+                                <span *ngIf="submit && f.CodAthenea.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+
+                            <!--Campo nombre de examenes-->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Nombre examen <sup class="auth">*</sup>
+                                </label>
+                                <input type="text" class="form-control1" formControlName="NombreExamen">
+                                <span *ngIf="submit && f.NombreExamen.errors" class="text-danger animated fadeIn">es
+                            requerido</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

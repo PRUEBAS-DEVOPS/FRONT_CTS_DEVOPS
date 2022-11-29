@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12">
+            <h1>Reporte Ventas</h1>
+        </div>
+        <div class="mt-1 col-12 mb-3">
+            <div class="row">
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Fecha Inicio</label>
+                    <input placeholder="Inicial" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechaIni" [max]="hoy" (change)="validarFecha($event.target.value,1)">
+                </div>
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label class="fechala1">Fecha fin</label>
+                    <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechafin" [max]="hoy" (change)="validarFecha($event.target.value,2)">
+                </div>
+                <!-- <div class="col-12 col-md-3 mb-3 form-group">
+                    <label class="aseso1">Asesor</label>
+                    <select class="form-control" id="SelAsesor">
+                        <option value="0" selected >Seleccione Asesor</option>
+                       <option *ngFor="let asesor of Asesores" value="{{asesor.id}}">{{asesor.nombreCOmpleto}}</option>
+                    </select>
+                </div> -->
+                <div class="col-12 col-md-1 mt-4 form-group">
+                    <button type="submit" class="btn3 form-control" (click)="consultar()"><i class="fa fa-search"
+                            aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="col-12 col-md-1 mt-4 form-group">
+                    <button type="submit" class="btn3 form-control" (click)="LimpiarFormulario()"><i class="fas fa-broom"
+                        aria-hidden="true"></i>
+                </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-1 col-12 mb-3" *ngIf="show">
+            <div class="row">
+                <!--Descargar excel-->
+                <div class="col-12 col-md-2 mb-3 ">
+                    <button class="bt4" (click)="downloadExcel()">
+                    </button>
+                </div>
+                <div class="col-12 col-md-2 mb-3 align-items-center">
+                    <button class="bt5" (click)="generarPdf()"></button>
+                </div>
+            </div>
+
+            <div class="col-12 mt-1 table-responsive">
+                <table class=" md-3 r table ">
+                    <tr>
+                        <th id="colum">Fecha venta</th>
+                        <th>Factura</th>
+                        <th id="colum">Medio de pago</th>
+                        <th>No. Transacción</th>
+                        <th>Usuario Venta</th>
+                        <th>Usuario Atención</th>
+                        <th id="colum">Paciente</th>
+                        <th>Documento paciente</th>
+                        <th>Total venta</th>
+                    </tr>
+                    <tr *ngFor="let Arqueo of DataArqueo | paginate: {itemsPerPage: 6, currentPage: PaginationArqueo}">
+                        <td>{{Arqueo.FechaVenta}}</td>
+                        <td>{{Arqueo.NoFactura}}</td>
+                        <td>{{Arqueo.MedioPago}}</td>
+                        <td>{{Arqueo.NumTransaccion}}</td>
+                        <td>{{Arqueo.NombreCompleto}}</td>
+                        <td>{{Arqueo.Usuario_Factura}}</td>
+                        <td>{{Arqueo.paciente}}</td>
+                        <td>{{Arqueo.Documento}}</td>
+                        <td>{{Arqueo.TotalVenta  |currency:'$':'symbol':'4.0-0'}}</td>
+                    </tr>
+                </table>
+                <pagination-controls (pageChange)="PaginationArqueo = $event" maxSize="5" previousLabel="" nextLabel=""> </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+

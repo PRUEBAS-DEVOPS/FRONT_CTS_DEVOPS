@@ -1,0 +1,169 @@
+#color {
+    background-color: #80808054;
+    width: 100%;
+    height: auto;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+#text {
+    text-align: center;
+}
+
+.form-control {
+    border: 1px solid #0084b3;
+}
+
+.bt1 {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 110px;
+    height: 43px;
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+#labels {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Checked {
+    margin-top: 2.4% !important;
+    margin-left: -132px;
+    margin-right: auto;
+}
+
+#Modulo {
+    padding: 6px;
+    margin-left: -159px;
+    margin-right: 218px;
+}
+
+
+/* estilos del header de los modales */
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    background-color: #8e4b9a;
+    color: white;
+}
+
+.modal-content1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 194%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+    margin-left: -24%;
+}
+
+
+/* Gestion de sub-modulos */
+
+.bt1 {
+    background-color: #00A496 !important;
+    color: white !important;
+    width: 110px;
+    height: 43px;
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+.btn-primary {
+    background: #0084b3;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    width: 50%;
+    text-align: center;
+}
+
+
+/* estilo tabla general */
+
+#Colum {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+
+/* estilos del header de los modales */
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    background-color: #8e4b9a;
+    color: white;
+}
+
+.modal-content2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 132%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+
+/* estilo de los modales */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    outline: 0;
+    left: -4%;
+}
+
+@media screen and (max-width: 1199px) {
+    .modal-content1 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 177%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .3rem;
+        outline: 0;
+        border-radius: 10px;
+        margin-left: -24%;
+    }
+}

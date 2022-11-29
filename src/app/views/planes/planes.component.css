@@ -1,0 +1,192 @@
+input[type="file"] {
+    display: none;
+}
+
+.btn-primary {
+    background: #0084b3;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    width: 50%;
+    text-align: center;
+}
+
+#estiletabla {
+    text-align: center;
+}
+
+.btn-primary1 {
+    background: #0084b3;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    width: 31%;
+    text-align: center;
+    margin-left: 18px;
+}
+
+.detall-control1 {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    color: #808080db;
+}
+
+.detall-control1 .placeholder {
+    color: black;
+}
+
+#buttonmas {
+    color: #0084b3;
+    cursor: pointer;
+}
+
+.form-control {
+    border: 1px solid #0084b3;
+}
+
+.custom-file-upload {
+    border: 1px solid #0084b3;
+    display: inline-block;
+    padding: 1px 12px;
+    cursor: pointer;
+    width: 100%;
+    height: 98%;
+    background-color: #0084b3 !important;
+    text-align: center;
+    padding-top: 5px;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+.bt1 {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 60%;
+    height: 54%;
+    margin-top: 51%;
+    margin-left: -36%;
+    margin-right: 36%;
+    border: 1px solid #0084b3 !important;
+    border-radius: 10px !important;
+    outline: none;
+}
+
+#Colum {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.form-control1 {
+    display: block;
+    width: 113%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    border-radius: 10px !important;
+    border: 1px solid #0084b3;
+    outline: none;
+}
+
+
+/* estilos del header de los modales */
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    background-color: #8e4b9a;
+    color: white;
+}
+
+.modal-content1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 171%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+.modal-content2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 150%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+.modal-content3 {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 150%;
+    height: 35.3vh;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 15px;
+    outline: 0;
+}
+
+
+/* estilo de los modales */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    outline: 0;
+    left: -4%;
+}
+
+@media screen and (max-width: 1199px) {
+    .modal-content1 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 152%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .3rem;
+        outline: 0;
+        border-radius: 10px;
+    }
+}

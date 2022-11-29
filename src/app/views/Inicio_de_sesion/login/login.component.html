@@ -1,0 +1,67 @@
+<div class="contenedor d-flex justify-content-center align-items-center">
+    <div class="center ">
+        <form (ngSubmit)="login()" [formGroup]="form" class="row m-0 d-flex justify-content-center">
+            <div class="col-6 mb-3">
+                <img src="/assets/images/logo.png" class="logo">
+            </div>
+
+            <div class=" col-12  mb-3  p-0">
+                <span *ngIf="submit && f.usuario.errors" class="text-danger animated fadeIn"> Ingrese su usuario
+                </span>
+                <div class="row m-0">
+
+                    <div class="col-auto fondo-icono d-flex justify-content-center align-items-center">
+                        <i class="fa fa-user cust" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="col-10 pr-0">
+                        <input class="form-control" type="text" placeholder="Usuario" formControlName="usuario" (change)="ConsultarMenuAcceso($event.target.value)">
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-12 mb-3 p-0">
+                <span *ngIf="submit && f.contrasena.errors" class="text-danger animated fadeIn"> Al menos 6 caracteres
+                </span>
+                <div class="row m-0">
+
+                    <div class="col-auto fondo-icono d-flex justify-content-center align-items-center">
+                        <i class="fa fa-lock cust" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="col-10 pr-0">
+                        <input type="password" placeholder="Contraseña" class="form-control" formControlName="contrasena" required minlength="6">
+                        <input type="password" placeholder="Contraseña" class="form-control" formControlName="documento" hidden>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-12 mb-3 p-0">
+                <span *ngIf="submit && f.idsede.errors" class="text-danger animated fadeIn"> es requerido
+                </span>
+                <div class="row m-0">
+                    <div class="col-auto fondo-icono d-flex justify-content-center align-items-center">
+                        <i class="fa fa-building cust" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="col-10 pr-0">
+                        <select formControlName="idsede" class="sedes form-control" (change)="CargarSede()" disabled id="SelSede">
+                            <option value="" disabled selected> Sede</option>
+                            <option *ngFor="let sedUser of ArraySedeUser" value="{{sedUser.id}}">{{sedUser.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 mb-3 mt-3 p-0 ">
+                <button type="submit" class="btn btn-warning btn-block">Ingrese</button>
+            </div>
+            <div class="col-6 p-0 mt-1 align-items-center">
+                <div class="form-check"><input class="form-check-input" type="checkbox" value="1" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">
+                        Recuérdame
+                    </label></div>
+            </div>
+            <div class="col-6 p-0 align-items-center">
+                <button (click)="recuperar()" class="bt btn-link">Olvidé mi contraseña</button>
+            </div>
+        </form>
+    </div>
+</div>

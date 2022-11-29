@@ -1,0 +1,201 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Consulta de resultados</h1>
+        </div>
+
+        <div class="mt-1 col-12 col-md-12 mb-3">
+            <div class="row m-0">
+                <div class="col-12 col-md-3 form-group">
+                <label>Fecha de solicitud</label>
+                    <input placeholder="Inicio" type="date" class="form-control colorForm1" id="txtfechaini">
+                </div>
+                <div class="col-12 col-md-3 mt-2 form-group">
+                    <label></label>
+                    <input placeholder="Fin" type="date" class="form-control colorForm1" id="txtfechafin">
+                </div>
+                
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>No solicitud</label>
+                    <input type="text" class="form-control colorForm1" id="txtnosolicitud">
+                </div>
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Estado</label>
+                    <select class="form-control colorForm1" id="Selestado">
+                        <option value="0">Seleccione</option>
+                        <option value="1">Resultado recibido</option>
+                        <option value="2">Resultado parcial</option>
+                        <option value="3">En espera de resultado</option>
+                    </select>   
+                </div>
+            </div>
+            <div class="row m-0">
+                <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-2">
+                    <div class="btn-group" role="group">
+                        <div><button type="button" class="btn-filtrar" (click)="Consultar()">Filtrar</button></div>
+                        <div><button type="button" class="btn-limpiar" (click)="limpiarFiltros()">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dt-responsive table-responsive-general" *ngIf="verTablaGeneral">       
+            <table class="table m-0">
+                <tr>
+                    <th>No Solicitud</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Tipo Solicitud</th>
+                    <th>Estado</th>
+                    <th>Envios</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr *ngFor="let data of ArrayGeneral | paginate: {id:'Pagina',  itemsPerPage: 5, currentPage: Pagina, totalItems: totalRecords}">               
+                    <td>{{data.numeroSolicitud}}</td>
+                    <td>{{data.FechaSolicitud}}</td>
+                    <td>{{data.TipoSolicitud}}</td>
+                    <td>{{data.EstadoResultado}}</td>
+                    <div *ngIf="ArrayGeneral.EstadoResultado=='En espera'; else elseBlock">
+                        {{ListaResult.EstadoResultado}}</div>
+                    <ng-template #elseBlock>
+                        <td id="Colum"><button type="button" class="btn-envios" (click)="ConsultarEnvios(data.IdCargue)">Envios<span class="badge">{{data.Cont_Envio}}</span>
+                            </button></td>
+                    </ng-template>
+
+
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn-opciones dropdown-toggle" data-toggle="dropdown">
+                                Elegir
+                            </button>
+                            <div class="dropdown-menu">
+                                <a id="{{Opc.Opcion}}{{data.IdSolicitud}}" class="dropdown-item" style="color: #0084b3;" *ngFor="let Opc of LtsOpc" (click)='AccionClick(Opc.IdOpc,data.IdSolicitud)'><i id="Iconos" class="{{Opc.Icono}}"></i>  {{Opc.Opcion}}</a>
+                            </div>
+                        </div>
+                    </td>                    
+                </tr>
+            </table>
+            <pagination-controls id="Pagina" (pageChange)="Paginar($event)" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+        </div>    
+    </div>
+</div>
+
+
+<div class="modal fade " id="DivEnvio" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content-envios Rounded">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Envio de resultados</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+
+                    <div class="col-12 col-md-6 mb-3 form-group">
+                        <label>Correo Electronico <sup id="color-asterisco">*</sup></label>
+                        <input type="text" class="form-control" id="CorreoEnvio">
+                    </div>
+                    <div class="col-12 col-md-6 mb-3 form-group mt-2">
+                        <label class="mb-5"></label>
+                        <button type="submit" class="btn10" (click)="EnviarNotificacionResultados()">Enviar
+                            Notificación</button>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="card1">
+                        <div class="card-block">
+                            <div class="dt-responsive table-responsive-envios">
+                                <label>Historial de envios</label>
+                                <table id="table_id" class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th id="Colum">Fecha envio</th>
+                                            <th id="Colum">Correo</th>
+                                            <th id="Colum">Tipo envio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let ListHistResult of ArrayHistResult">
+                                        <tr>
+                                            <td id="Colum">{{ListHistResult.FechaEnvio}} </td>
+                                            <td id="Colum">{{ListHistResult.CorreoEnvio}} </td>
+                                            <td id="Colum">{{ListHistResult.TipoEnvio}} </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mt-1">
+                    <div class="col-12 col-md-12 ">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 mt-1">
+                                <button  type="button" class="btcancel" data-dismiss="modal">Cancelar</button>
+                            </div>                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="DivDetalleResultado" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content-detail Rounded">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Detalle resultados</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngFor="let item of arrayDetalle">
+                <div class="container">
+                    <div class="row m-0">
+                      <div class="col-12 col-md-4">
+                        <p class="font-weight-light">No de Solicitud:</p>
+                        <p>{{item.numeroSolicitud}}</p>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <p class="font-weight-bolder">Fecha Solicitud:</p>                     
+                        <p>{{item.FechaSolicitud}}</p>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <p class="font-weight-bolder">Procedimiento:</p>  
+                        <p>{{item.NombreExamen}}</p>
+                      </div>
+                    </div>
+                    <div class="row m-0">                 
+                      <div class="col-12 col-md-4">
+                        <p class="font-weight-bolder">Recepción de muestras:</p>  
+                        <p>{{item.Recepcion_Muestra}}</p>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <p class="font-weight-bolder">Recepción de resultado:</p>  
+                        <p>{{item.Recepcion_Resultado}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="connecting-line-detalle"></div>
+                <div class="row m-0 mt-3">
+                    <div class="col-12 col-md-12 mt-1">
+                        <p class="font-weight-bolder">Porcentaje de resultados</p> 
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" [style.width.%]="item.Porcentaje" aria-valuemin="0" aria-valuemax="100">{{item.Porcentaje}}%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer mt-1">
+                    <div class="col-12 col-md-12 ">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 mt-1">
+                                <button  type="button" class="btcancel" data-dismiss="modal">Aceptar</button>
+                            </div>                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

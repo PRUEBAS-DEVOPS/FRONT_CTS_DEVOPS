@@ -1,0 +1,546 @@
+.divSedes {
+    overflow-y: scroll;
+    height: 15rem;
+    width: 21rem;
+}
+
+.form-control {
+    border: 1px solid #0084b3;
+}
+
+.btnSedes {
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff !important;
+    ;
+    text-align: center;
+    width: 100% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #00a496 !important;
+    border: 1px solid #00a496;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-limpiar-firma {
+    background-color: #Ef7d22 !important;
+    padding: 7px;
+    color: #ffffff !important;
+    width: 7%;
+    border: none;
+    border-radius: 10px;
+    outline: none !important;
+    font-size: 9px;
+    margin-left: 11%;
+}
+
+.fontTitulo1{
+    font-size: 24px;
+    font-weight: normal;
+    color: black;
+}
+/* estilos gestion usurios */
+
+
+/* Estilos de los col de la tabla de permisos */
+
+#Col1 {
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+#Col2 {
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+#Col3 {
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+
+/* estilos tabla general */
+
+#Colum {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.around{
+  justify-content: space-around;
+
+}
+
+.aroundM{
+  display: grid;
+  grid-template-columns: 1fr 250px 147px;
+}
+
+.aroundS{
+  display: grid;
+  grid-template-columns: 1fr 250px 124px;
+}
+
+.opcion{
+  margin-left: 80px;
+  font-size: 16px !important;
+}
+
+/*Para Ocultar el scroll*/
+
+.modal-body::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.opcionsSub{
+  margin-left: 116px;
+  font-size: 14px !important;
+}
+
+.lineasubmenu{
+  grid-area: 2 /span 3;
+  margin-top: 0;
+  width: 95.5%;
+  margin-left: 16px;
+}
+
+.hrprimerlinea{
+  background-color: #8e4b9a;
+}
+
+div.aroundM:hover{
+  background-color: #f7f7f9;
+}
+
+/* Estilo del id prueba  */
+
+#preuba {
+  margin-left: 0%;
+  margin-right: 0%;
+  /* width: 32.1%; */
+  /* position: fixed; */
+
+  /* margin-left: 0%;
+  margin-right: 0%; */
+  /* width: 116%; */
+  /* position: inherit; */
+  /* display: table-row-group; */
+}
+
+
+/* estilo de los radios Button */
+
+.radiosPermitir {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(71px, 0px);
+}
+
+.radiosDenegar {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(360px, 0px);
+}
+
+.ModuloPermitir {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(38px, 0px);
+}
+
+.ModuloDenegar {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(33px, 0px);
+}
+
+
+/* estilo de los botones */
+
+
+/* estilo boton aceptar */
+
+.btn11 {
+    background: #0084b3 !important;
+    color: #f8f9fa !important;
+    border-radius: 10px !important;
+    height: 100% !important;
+    margin-left: 195px;
+    margin-right: 195px;
+    border: none;
+    width: 34%;
+    font-size: 23px;
+}
+
+
+/* estilo para mover */
+
+
+/* estilo de las imagenes */
+
+.imagen-linea {
+    margin-left: 45%;
+    margin-right: 45%;
+    margin-top: 6%;
+    position: absolute;
+}
+
+#mover {
+    margin-left: 15px;
+}
+
+
+/* boton primario */
+
+.btn-primary {
+    background: #0084b3;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    width: 50%;
+    text-align: center;
+}
+
+
+/* Estilo de los control dentro del ver detalle */
+
+.detall-control {
+    background-color: transparent;
+    border: none;
+    width: 43%;
+}
+
+.detall-control .placeholder {
+    color: black;
+}
+
+
+/* estilo de los iconos  */
+
+#icon {
+    color: #21252999;
+    padding: 6px;
+}
+
+
+/* estilo de los titulos de la carta */
+
+#titulo {
+    padding: 3px;
+    color: #7a7c7f;
+}
+
+
+/* color fecha final */
+
+#fin {
+    color: #8080807a;
+    padding: 5px;
+}
+
+
+/* estilo de los margin-button solo cuando sea 1 */
+
+.mb-1,
+.my-1 {
+    margin-bottom: -0.15rem!important;
+}
+
+
+/* estilo de los margin-button solo cuando sea 4 */
+
+.mt-4,
+.my-4 {
+    margin-top: 2.5rem!important;
+}
+
+
+/* estilo del nombre de usario */
+
+#principal {
+    font-size: 25px;
+    color: #0084b3;
+    width: 50%;
+}
+
+
+/* estilo del boton de ver mas  */
+
+#buttonmas {
+    color: #0084b3;
+    cursor: pointer;
+}
+
+.btn13 {
+    background-color: #0084b3 !important;
+    padding: 7px;
+    color: #ffffff !important;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    outline: none !important;
+    font-size: 18px;
+}
+/* estilos del header de los modales */
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    background-color: #8e4b9a;
+    color: white;
+}
+
+
+/* estilos del contenedor del modal */
+
+.scrollModal{
+    overflow: auto !important;
+}
+
+.scrollModal::-webkit-scrollbar {
+
+    -webkit-appearance: none;
+  
+  }
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 150%;
+    margin-left: 3em;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+.modal-content1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 195%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+.modal-content2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 239%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+    margin-left: -29%;
+}
+
+
+/* estilo de los modales */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    outline: 0;
+    left: -4%;
+}
+
+
+/* estilo del form-control */
+
+
+/* ------------------- */
+
+.divSedes {
+    overflow-y: scroll;
+    height: 15rem;
+    width: 27rem;
+}
+
+.btnSedes {
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff !important;
+    text-align: center;
+    width: 100% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #0084b3 !important;
+    border: 1px solid #0084b3;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btnFirma {
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff !important;
+    text-align: center;
+    width: 100% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #8e4b9a !important;
+    border: 1px solid #8e4b9a;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 100%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.card1 {
+    position: absolute;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 95%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    z-index: 9;
+}
+
+.modal-content-firma {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 113%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+.canvas-firma{
+    border: 1px solid #0084b3;
+    margin: 2% 2%;
+}
+
+.previsualizacionfirma64{
+  width: -webkit-fill-available;
+  border-style: ridge;
+  margin-bottom: 10px;
+  height: 100px;
+}
+
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 787px;
+    margin: 1.75rem auto;
+ }
+}
+
+@media screen and (max-width: 1199px) {
+    .modal-content2 {
+        width: 183%;
+        border-radius: 10px;
+        margin-left: -29%;
+    }
+    .modal-content1 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 148%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .3rem;
+        outline: 0;
+        border-radius: 10px;
+    }
+    .radiosDenegar {
+        transform: translate(280px, 0px);
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .imagen-linea {
+        position: fixed;
+        margin-left: 40%;
+        margin-right: 40%;
+        margin-top: 7%;
+    }
+    .modal-content1 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 150%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .3rem;
+        outline: 0;
+        border-radius: 10px;
+    }
+    .radiosDenegar {
+        transform: translate(284px, 0px);
+    }
+}

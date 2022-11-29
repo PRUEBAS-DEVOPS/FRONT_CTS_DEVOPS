@@ -1,0 +1,1053 @@
+.mt-4, .my-4 {
+    margin-top: 1.9rem !important;
+}
+
+.btn-buscar {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 195%;
+    height: 96%;
+    padding: 3px 0px 0px;
+    margin-top: 2%;
+    
+}
+
+.siNoResponsive{
+    margin-left: -3em;
+}
+
+.label-politicas{
+    margin-top: 2em !important; 
+    padding: 0px 42px 0px 18px;
+}
+
+.tamañoTipoDocumento{
+    margin-left: -3em;
+}
+
+.margen{
+    margin-bottom: .2em !important;
+}
+
+.tamañoDatos{
+    color: rgba(15, 15, 15, 0.534);
+}
+
+.glyphicon{
+    font-style: normal !important;
+}
+
+.margenNoSolicitud{
+    margin-left: 4.2em;
+}
+
+.barcode{
+    font-size: 25px;
+}
+
+.fa-search{
+    font-size: 20px;
+}
+
+.fa-broom{
+    font-size: 18px;
+}
+.ml-4-fa-broom {
+    margin-left: -0.5rem!important;
+}
+
+.modalVerdatosTamaño{
+    margin-left: -13em; 
+    width: 210%;
+}
+
+.fa-edit{
+    color: #0084b3;
+    font-size: 20px;
+    margin-left: 38.8em;
+    cursor: pointer; 
+}
+
+.btn-buscar1 {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 100%;
+    height: 60%;
+    padding: 4px 0px 0px;
+    border: 1px solid;
+    border-radius: 12px;
+    margin-top: 63%;
+}
+
+#IconoSuccess {
+    margin-left: 40%;
+    margin-right: 40%;
+    font-size: 90px;
+    color: #0084b3;
+}
+
+.connecting-line-modal-paciente4 {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 47%;
+    margin: 1px 52px;
+    left: 17%;
+    right: 5%;
+    top: 44%;
+    z-index: 0;
+}
+
+.tabActualizar{
+    display: none;
+}
+
+.labelBarras{   
+    width: 26em;
+    margin-left: 0em;
+    border: 2px solid #0084b3;
+    border-radius: 10px;
+    height: 5em;
+    margin-top: -2em;
+}
+
+.form-group1{
+    font-size: 20px;
+    
+}
+
+.fa-angle-double-down:before {
+    color: #0084b3;
+    font-size: 2em;
+    margin: 3em;
+}
+
+.containerImprimir{
+    margin-left: -.2em;
+    width: 13em;
+}
+
+.modal-codigo{
+    background: lightgray;
+    margin: 2em 2em 0em;
+    border-radius: 10px;
+}
+
+.eliminar{
+    border: none;
+    color: #0084b3;
+    cursor: pointer;
+    background-color: transparent;
+    margin-left: 17%;
+}
+
+.margenBoton{
+    margin: 3% 0% 0% 15%;
+}
+
+.btn13 {
+    background-color: #0084b3 !important;
+    padding: 7px;
+    color: #ffffff !important;
+    width: 76%;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    outline: none !important; 
+}
+
+.btn14 {
+    background-color: #ffffff !important;
+    padding: 7px;
+    color: #0084b3 !important;
+    width: 100% !important;
+    border: 1px solid #0084b3;
+    border-radius: 10px !important;
+    outline: none !important;
+}
+
+.margenDocumento{
+    width: 215%;
+}
+
+.margenNoDocumento{
+    margin: 0 0 0 25%;
+}
+
+.margenNoDocumento1{
+    width: 21.5em;
+}
+
+.badge-solicitud {
+    color: #fff;
+    background-color: #0084b3;
+    width: 70%;
+    cursor: pointer;
+    margin-left: 0.2em;
+    font-size: 15px !important;
+    font-weight: normal;
+    border-radius: 12px;
+}
+
+.badge-solicitud-anulada {
+    color: #fff;
+    background-color: #8E4B9A;
+    width: 70%;
+    margin-left: 0.2em;
+    font-size: 15px;
+    font-weight: normal;
+    border-radius: 12px;
+}
+
+.verdetalle {
+    color: #0084b3;
+    cursor: pointer;
+    padding-left: 0.6em;
+}
+
+.btn-etiqueta {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 42%;
+    border: none;
+    border-radius: 6px;  
+}
+
+.btn-etiqueta-disabled{
+    background-color: #bec0c2 !important;
+    color: white !important;
+    width: 42%;
+    border: none;
+    border-radius: 6px;
+    cursor: default !important;
+}
+
+.form-control-select {
+    display: block;
+    width: 102%;
+    margin-right: -6em;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.colorForm1{
+    border: 1px solid #0084b3 !important;
+}
+
+.table-responsive-detalle {
+    display: block;
+    width: 83%;
+    overflow-x: auto;
+    text-align: center;
+    -webkit-overflow-scrolling: touch;
+    margin-left: -2.2em;
+}
+
+.table-responsive-general {
+    display: block;
+    width: 80%;
+    overflow-x: auto;
+    text-align: center;
+    -webkit-overflow-scrolling: touch;
+}
+
+.btn-general {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    background-color: #0084b3 !important;
+    color: #ffff !important;
+    border-color: #0084b3 !important;
+    width: 110px;
+    height: 36px;
+    border: 1px solid !important;
+    border-radius: 10px !important;
+    margin-right: 0%;
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+.btn-agregar-paciente{
+    background-color: #8E4B9A !important;
+    color: white !important;
+    width: 150px;
+    height: 40px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.btn-atras {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    background-color: #ef7d2200 !important;
+    color: #0084b3 !important;
+    border-color: #0084b3 !important;
+    width: 110px;
+    height: 36px;
+    border: 1px solid !important;
+    border-radius: 10px !important;
+    margin-left: -58%;
+    margin-right: 0%;
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+.btn-imprimir {
+    display: inline-block;
+    font-weight: 400;
+    background-color: #0084b3 !important;
+    color: #ffffff !important;
+    border-color: #0084b3 !important;
+    width: 173px;
+    height: 36px;
+    border: 1px solid !important;
+    border-radius: 10px !important;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    margin-top: 4%;
+    margin-left: 10%;
+}
+
+.progress {
+    display: inline-flex !important;
+    height: 13%!important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+    font-size: .75rem !important;
+    background-color: #B7DBE8 !important;
+    border-radius: 0.25rem !important;
+    width: 80% !important;
+    border: 1px solid rgba(128, 128, 128, 0.877);
+    
+}
+
+.progress-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    color: #fff !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    background-color: #8E4B9A !important;
+    transition: width .6s ease !important;
+}
+
+.div-progress{
+    background-color: #B7DBE8;
+    /* width: 24%; */
+    width: 240px;
+    height: 45px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    vertical-align: middle;
+    color: rgba(0, 0, 0, 0.774) !important;
+}
+.btn-opciones { 
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    background-color: #0084b3 !important;
+    color: white !important;
+    border-color: #0084b3 !important;
+    width: 84px;
+    height: 34px;
+    border: 1px solid !important;
+    border-radius: 10px !important;
+    margin-left: 1em;
+    vertical-align: middle;
+    font-size: 1.1rem;
+    margin-top: -5%;
+}
+
+
+.ml-progress {
+    margin-left: 4rem!important;
+}
+
+.font-weight-light {
+    font-weight: 300!important;   
+    
+}
+
+.font-weight-light1 {
+    font-weight: 300!important;   
+    font-size: 1.3em;
+    margin-top: -0.4em;
+}
+
+.connecting-line-modal-paciente{
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 38%;
+    margin: 1px 52px;
+    left: 17%;
+    right: 5%;
+    top: 25%;
+    z-index: 0;
+}
+
+.connecting-line-detalle {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 54.4%;
+    margin: 7px 67px;
+    top: 14.5em;
+    z-index: 0;
+}
+
+.connecting-line-detalle1 {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 54.4%;
+    margin: 7px 67px;
+    top: 23.5em;
+    z-index: 0;
+}
+.tamañoCodigo{
+    width: 12em !important;
+    height: 5em !important;
+}
+.ml-modal-paciente {
+    margin-left:140px !important;
+  }
+
+  .ml-2, .mx-2 {
+    margin-left: 8.5rem!important;
+}
+
+  .connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 44%;
+    margin: 1px 113px;
+    left: 14%;
+    right: 5%;
+    top: 46%;
+    z-index: 0;
+}
+
+.connecting-line-modal-paciente2 {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 98%;
+    margin: 0px 81px;
+    left: -12%;
+    right: 5%;
+    top: 3em;
+    z-index: 0;
+}
+
+.connecting-line-modal-paciente3 {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 93%;
+    margin: 0px 110px;
+    top: 7%;
+    left: -8%;
+    right: 5%;
+    z-index: 0;
+}
+
+
+.connecting-line-modal-firma {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 100%;
+    margin: 0px 81px;
+    left: -16%;
+    right: 5%;
+    top: 12%;
+    z-index: 0;
+    }
+
+.connecting-line2 {
+        height: 2px;
+        background: #e0e0e0;
+        width: 76%;
+        z-index: 0;
+    }
+
+    .wizard {
+        margin: 20px auto;
+        background: #fff;
+    }
+    .wizard .nav-tabs {
+        position: relative;
+        margin-left: 45px;
+        margin-right: 45px;
+        margin-bottom: 0;
+        border-bottom-color: #e0e0e0;
+    }
+    
+    .wizard>div.wizard-inner {
+        position: relative;
+    }
+    
+    span.round-tab {
+        width: 47px;
+        height: 47px;
+        line-height: 45px;
+        display: inline-block;
+        border-radius: 100px;
+        background: #fff;
+        border: 2px solid #e0e0e0;
+        z-index: 999;
+        margin-left: 192px;
+        margin-right: 192px;
+        text-align: center;
+        font-size: 27px;
+    }
+    
+    span.round-tab i {
+        color: #0084b3;
+    }
+    
+    .wizard li.active span.round-tab {
+        background: #0084b3;
+        border: 2px solid #0084b3;
+    }
+    
+    .wizard li.active span.round-tab i {
+        color: #ffffff;
+    }
+    
+    span.round-tab:hover {
+        color: #0084b3;
+        border: 2px solid #0084b3;
+    }
+
+    span.round-tab1 {
+        width: 40px;
+        height: 40px;
+        line-height: 37px;
+        display: inline-block;
+        border-radius: 100px;
+        background: #fff;
+        border: 2px solid #e0e0e0;
+        z-index: 999;
+        margin-left: 118px;
+        margin-right: 118px;
+        text-align: center;
+        font-size: 22px;
+        position: relative;
+    }
+    
+    span.round-tab1 i {
+        color: #e0e0e0;
+    }
+    
+    .wizard li.active span.round-tab1 {
+        background: #0084b3;
+        border: 2px solid #0084b3;
+    }
+    
+    .wizard li.active span.round-tab1 i {
+        color: #ffffff;
+    }
+    
+    span.round-tab1:hover {
+        color: #0084b3;
+        border: 2px solid #0084b3;
+    }
+    
+    
+    .wizard .nav-tabs>li {
+        width: 12%;
+    }
+    
+    .wizard .nav-tabs2>li {
+        width: 42%;
+    }
+    
+    .wizard li:after {
+        content: " ";
+        position: absolute;
+        left: 46%;
+        opacity: 0;
+        margin: 0 auto;
+        bottom: 0px;
+        border: 5px solid transparent;
+        border-bottom-color: #0084b3;
+        transition: 0.1s ease-in-out;
+    }
+    
+    .nav-tabs {
+     border-bottom: 0px solid #dee2e6 !important; 
+    }
+    
+    .wizard .nav-tabs>li a {
+        width: 70px;
+        height: 70px;
+        margin: 20px auto;
+        border-radius: 100%;
+        padding: 0;
+    }
+    
+    .wizard .nav-tabs>li a:hover {
+        background: transparent;
+    }
+    
+    .wizard .tab-pane {
+        position: relative;
+        padding-top: 14px;
+    }
+    
+    .wizard .tab-pane1 {
+        position: relative;
+        padding-top: 14px;
+    }
+    
+    .tab-content>.tab-pane1 {
+        display: none;
+    }
+    
+
+    .btn-siguiente {
+        background-color: #0084b3 !important;
+        color: white !important;
+        width: 110px;
+        height: 36px;
+        border: none !important;
+        border-radius: 10px !important;
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        font-size: 1rem;
+        vertical-align: middle;
+    }
+    
+
+    .btn-buscar-paciente{
+        background: #0084b3;
+        color: white;
+        width: 180%;
+        border-radius: 7px;
+        margin-top: 20%;
+        border-color: #0084b3;
+        border: none;
+        height: 80%;
+    }
+    
+    .btn-actualizar-paciente {
+        background-color: #Ef7d22 !important;
+        color: white !important;
+        width: 110px;
+        height: 36px;
+        border: none !important;
+        border-radius: 10px !important;
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        font-size: 1rem;
+        vertical-align: middle;
+    }
+
+    #parrafo {
+        font-size: 19px !important;
+        color: #0084b3;
+        text-align: center;
+    }
+    .fontTitulo{
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 1em;
+    }
+
+    .fontTitulo1{
+        font-size: 24px;
+        font-weight: normal;
+        color: black;
+    }
+
+    .btn-firma {
+        background-color: #0084b3 !important;
+        color: white !important;
+        width: 126px;
+        height: 36px;
+        border: none !important;
+        border-radius: 10px !important;
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        font-size: 1rem;
+        vertical-align: middle;
+    }
+    
+    .modal-content1crear {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 102%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.3rem;
+        outline: 0;
+        border-radius: 10px;
+    }
+
+    .invoice {
+        page-break-after: always;
+        border: 1px solid gray;
+        background: white;
+        border-radius: 13px;
+        padding-top: 9px;
+        
+      }
+      .invoice:last-child {
+        page-break-after: avoid;
+      }
+
+      
+#Iconos {
+    margin-left: 40%;
+    margin-right: 40%;
+    font-size: 90px;
+    color: #0084b3;
+}
+
+.parrafo1{
+    text-align: center;
+    font-size: 20px;
+    color: #0084b3;
+    margin-top: 10px;
+    margin-bottom: -7%;
+}
+
+.parrafo3{
+    text-align: center;
+    font-size: 25px;
+    color: #0084b3;
+    margin-top: 10px;
+    padding: 0px 63px;
+    margin-bottom: -7%;
+}
+
+.parrafo2{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 8px;
+    color: black;
+}
+
+.parrafo4{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 8px;
+    text-align: left;
+    color: gray;
+}
+
+.parrafo5{
+    text-align: center;
+    font-size: 22px;
+    margin-top: 8px;
+    color: #0084b3;
+}
+
+.parrafo6{
+    text-align: center;
+    font-size: 32px;
+    margin-top: 8px;
+    color: black;
+}
+
+.parrafo-cambio-muestra {
+    text-align: center;
+    font-size: 20px;
+    color: #0084b3;
+    margin-top: 10px;
+    padding: 0px 63px;
+    margin-bottom: -7%;
+}
+
+.margenSolicitud{
+    margin-left: 3.2em !important;
+}
+
+.margenPacientes{
+    width: 127%; 
+}
+
+.labelBarras{   
+    width: 20em;
+    margin-left: 0em;
+    border: 2px solid #0084b3;
+    border-radius: 10px;
+    height: 2em;
+    margin-top: -2em;
+}
+
+#Iconos-accion {
+    padding: 5px;
+    color: #0084b3;
+}
+
+
+.form-check-input{
+    height: 1em !important; 
+    width: 1em !important;
+    position: static !important;
+    margin-top: 0.3rem;
+    margin-left: -0.5rem;
+}
+
+.nameclass {
+    top: -7%;
+    font-weight: 100;
+    color: black;
+    margin-left: 3em;
+    font-size: 0.6em;
+}
+
+@media screen and (max-width: 1400px) {
+
+    .margenSolicitud{
+        margin-left: 1.9em !important;
+    }
+
+    .connecting-line-detalle{
+        width: 59.4%;
+        margin: 7px 48px;
+    }
+
+    .connecting-line-detalle1{
+        width: 59.4%;
+        margin: 7px 48px;
+    }
+
+    .margenPacientes{
+        width: 115%;
+    }
+    
+    .btn-buscar1{
+        width: 129%;
+        margin-top: 19%;
+        height: 62%;
+    }
+
+    .margenNoDocumento1 {
+        width: 18.5em;
+    }
+
+    .badge-solicitud {
+        width: 75%;
+    }
+
+    .margenNoSolicitud{
+        margin-left: 2.2em;
+    }
+}
+
+@media screen and (max-width: 1366px){
+    .btn-buscar1{
+        margin-top: 81% !important;
+    }
+    
+    .ml-4-fa-broom {
+        margin-left: -0.5rem!important;
+    }
+
+    .modalScroll{
+        overflow: scroll !important;
+    }
+
+    .form-control-select {
+        width: 97%;
+    }
+}
+
+@media screen and (max-width: 960px){
+    .container{
+        max-width: 100% !important;
+    }
+
+    .margenNoDocumento1 {
+        width: 16.5em;
+    }
+
+    .badge-solicitud {
+        width: 88%;
+    }
+
+    .connecting-line-detalle {
+        width: 76.4%;
+    }
+
+    .connecting-line-detalle1{
+        width: 76.4%;
+    }
+
+    .fa-edit{
+        margin-left: 33.8em;
+    }
+    
+    .modalVerdatosTamaño{
+        width: 185%;
+    }
+
+    .modalEtiquetaTamaño{
+        margin-left: -7em;
+        width: 144%;
+    }
+
+    .connecting-line-modal-paciente{
+        width: 37%;
+        left: 19%;
+    }
+
+    .btn-buscar1 {
+        width: 153%;
+        margin-top: 112%;
+        height: 62%;
+    }
+    
+    .margenTamaño{
+        margin-right: 1em;
+    }
+}
+
+@media screen and (max-width: 660px){
+    .btn-buscar1{
+        width: 44%;
+        margin-top: 5%;
+        height: 62%;
+    }
+    
+    .botonLimpiar{
+        position: absolute;
+        margin-top: -3em;
+        height: 2.2em;
+        margin-left: 17em;
+    }
+
+    .table-responsive-general{
+        display: block;
+        width: 92%;
+    }
+
+    .badge-solicitud {
+        width: 101%;
+    }
+
+    .margenNoSolicitud {
+        margin-left: 2.2em;
+        margin-bottom: 1em;
+    }
+
+    .connecting-line-detalle1{
+        width: 74.4%;
+        margin: 133px 48px;
+    }
+
+    .table-responsive-detalle {
+        width: 79%;
+    }
+
+    .margenPacientes {
+        width: 89%;
+    }
+
+    .form-check-input {
+        position: static;
+    }
+
+    .fa-edit {
+        margin-left: 16em;
+    }
+
+    .modalEtiquetaTamaño {
+        margin-left: -2em;
+        width: 114%;
+        height: 48em;
+    }
+
+    .connecting-line-modal-paciente3 {
+        left: -16%;
+    }
+
+    .modalVerdatosTamaño{
+        width: 116%;
+        margin-left: -2em;
+    }
+
+    .margenNoSolicitud1{
+        margin-left: 2em !important;
+        margin-bottom: 1em;
+    }
+
+    .tamañoPacientes{
+        margin-left: 3em !important;
+        margin-bottom: 1em;
+    }
+
+    .tamañoMuestras{
+        margin-left: 3em !important;
+    }
+
+    .modal-datosBasicos{
+        margin-top: 1em !important;
+        overflow: scroll;
+        height: 22em !important;
+        width: 28em; 
+    }
+
+    .btn-buscar{
+        width: 100%;      
+        margin-left: -0.2em;
+    }
+
+    .tamañoTipoDocumento {
+        margin-left: -1em;
+       margin-bottom: 0.5em;
+    }
+
+    .tamañoDocumento{
+        margin-left: -1em;
+    }
+
+    .connecting-line-modal-paciente2 {
+        left: -18%;
+    }
+
+    .tipoSexo{
+        margin-bottom: 0.5em !important;
+    }
+
+    .label-politicas{
+        margin-top: 1em !important;
+        padding: 0px;
+        margin-left: 1em;
+    }
+
+    .siNoResponsive{
+        margin-left: 1em;
+        margin-top: -1em !important;
+    }
+    
+}

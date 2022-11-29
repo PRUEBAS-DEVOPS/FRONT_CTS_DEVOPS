@@ -1,0 +1,234 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Resultados Paciente</h1>
+        </div>
+        <div class="col-12 mt-5">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-3 mb-3">
+                        <label >Fecha Creación</label>
+                        <input placeholder="Inicio" type="text" onfocus="(this.type = 'date')" class="form-control" id="txtfechaIniCre" [max]="hoy" (change)="validarFecha($event.target.value,1)">
+                    </div>
+                    <div class="col-12 col-md-3 mb-3 mt-2">
+                        <label></label>
+                        <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="txtfechaFinCre" [max]="hoy" (change)="validarFecha($event.target.value,2)">
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <label >Número De Documento</label>
+                        <input type="text" class="form-control" id="txtdocumento">
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <label >Id De Solicitud</label>
+                        <input type="number" class="form-control" id="txtIdSol">
+                    </div>
+
+                    <div class="col-12 col-md-3 mb-3">
+                        <label >Estado</label>
+                        <select class="form-control" id="SelEstado">
+                            <option value="0">Seleccione</option>
+                            <option value="1">Resultado recibido</option>
+                            <option value="2">Resultado parcial</option>
+                            <option value="3">En espera de resultado</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <label >Fecha Recepción</label>
+                        <input placeholder="Inicio" type="text" onfocus="(this.type = 'date')" class="form-control" id="txtfechaIniRec">
+                    </div>
+                    <div class="col-12 col-md-3 mb-3 mt-2">
+                        <label></label>
+                        <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="txtfechaFinRec">
+                    </div>
+                    <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-2">
+                        <div class="btn-group" role="group">
+                            <div> <button type="button" class="bt3 form-control" (click)="Consultar()"><i
+                                class="fa fa-search" aria-hidden="true"></i> Filtrar
+                        </button>
+                            </div>
+                            <div> <button type="submit" class="bt4 form-control" (click)="LimpiarFormulario()"><i class="fas fa-broom"
+                                aria-hidden="true"></i>
+                        </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="VisualizarDiv">
+    <div class="Table">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Resultados</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th id="Colum">No.Solicitud</th>
+                                <th id="Colum">Documento</th>
+                                <th id="Colum">Nombre Completo</th>
+                                <th id="Colum">Estado</th>
+                                <th id="Colum">Fecha Solicitud</th>
+                                <th id="Colum">Fecha Recepeción</th>
+                                <th id="Colum">Envios</th>
+                                <th id="Colum">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let ListaResult of ArrayData | paginate: { id:'paginadorListar' , itemsPerPage: 7, currentPage: paginaResultados}">
+                            <tr>
+                                <td id="Colum">{{ListaResult.IdSolicitudAthenea}} </td>
+                                <td id="Colum">{{ListaResult.Documento}} </td>
+                                <td id="Colum">{{ListaResult.NombreCompleto}} </td>
+                                <td id="Colum"> {{ListaResult.EstadoResultado}}</td>
+                                <td id="Colum"> {{ListaResult.FechaVenta}}</td>
+                                <td id="Colum"> {{ListaResult.FechaCreacion}}</td>
+                                <!-- Boton de editar -->
+                                <div *ngIf="ListaResult.EstadoResultado=='En espera'; else elseBlock">
+                                    {{ListaResult.EstadoResultado}}</div>
+                                <ng-template #elseBlock>
+                                    <td id="Colum"><button type="button" class="btnEnvio btn-warning" (click)="ValidarEnvio(ListaResult.IdResultado,ListaResult.Documento,ListaResult.NombreCompleto)">
+                                            Envios<span class="badge badge-warning">{{ListaResult.Contador}}</span>
+                                        </button></td>
+                                </ng-template>
+
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                            Elegir
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a id="{{Opc.Opcion}}{{ListaResult.IdSolicitudAthenea}}" class="dropdown-item" style="color: #00A496;" *ngFor="let Opc of LtsOpc" (click)='AccionClick(Opc.IdOpc,ListaResult.IdResultado,ListaResult.IdSolicitudAthenea,ListaResult.Porcentaje)'><i
+                                                    id="Iconos" class="{{Opc.Icono}}"></i> {{Opc.Opcion}}</a>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginadorListar" (pageChange)="Paginar($event)"  maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="DivEnvio" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Envio de resultados</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+
+                    <div class="col-12 col-md-6 mb-3 form-group">
+                        <label>Correo Electronico <sup id="color-asterisco">*</sup></label>
+                        <input type="text" class="form-control" id="CorreoEnvio">
+                    </div>
+                    <div class="col-12 col-md-6 mb-3 form-group mt-2">
+                        <label class="mb-5"></label>
+                        <button type="submit" class="btn10" (click)="EnviarNotificacionResultados()">Enviar
+                            Notificación</button>
+                    </div>
+                </div>
+                <div class="row m-0">
+                    <div class="card1">
+                        <div class="card-block">
+                            <div class="dt-responsive table-responsive">
+                                <label>Historial de envios</label>
+                                <table id="table_id" class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th id="Colum">Fecha envio</th>
+                                            <th id="Colum">Correo</th>
+                                            <th id="Colum">Tipo envio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let ListHistResult of ArrayHistResult">
+                                        <tr>
+                                            <td id="Colum">{{ListHistResult.FechaEnvio}} </td>
+                                            <td id="Colum">{{ListHistResult.CorreoEnvio}} </td>
+                                            <td id="Colum">{{ListHistResult.TipoEnvio}} </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12">
+                            <button type="button" class="btcancel" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="DivDetalle" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content2">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Detalle Resultados</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row m-0 mb-3">
+                    <label>Porcentaje de resultados</label>
+                    <div class="col-12 col-md-12 mt-1">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" [style.width.%]="Porcentaje" aria-valuemin="0" aria-valuemax="100">{{Porcentaje}}%</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row m-0">
+                    <div class="card2">
+                        <div class="card-block">
+                            <div class="dt-responsive table-responsive">
+                                <label>Contenido</label>
+                                <table id="table_id" class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th id="Colum">Cod. Analito</th>
+                                            <th id="Colum">Nombre Analito</th>
+                                            <th id="Colum">Valor Resultado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let ListDetalle of ArrayDataDetalle">
+                                        <tr>
+                                            <td id="Colum">{{ListDetalle.CodAnalito}} </td>
+                                            <td id="Colum">{{ListDetalle.NombreAnalito}} </td>
+                                            <td id="Colum">{{ListDetalle.ValorResultado}} </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mt-1">
+                    <div class="col-12 col-md-12 ">
+                        <div class="col-12 col-md-6 mt-1">
+                            <button type="button" class="btcancel1" data-dismiss="modal">Cerrar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

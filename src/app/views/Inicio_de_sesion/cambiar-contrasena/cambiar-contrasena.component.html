@@ -1,0 +1,59 @@
+<!--Se inicia la creacion del formulario de recuperar contraseña-->
+<div class="contenedor d-flex justify-content-center align-items-center">
+    <div class="center ">
+        <div class="col-12 col-md-12 mt-5 d-flex d-flex justify-content-center align-items-center">
+            <img src="/assets/images/logo.png">
+        </div>
+        <form (ngSubmit)="GuardarCambio()" [formGroup]="form" class="row m-0 d-flex justify-content-center">
+            <div class="col-12 col-md-12 mt-3 d-flex d-flex justify-content-center align-items-center">
+                <label class="lb1">Restablecer Contraseña</label>
+            </div>
+
+            <div class="col-12 mb-4">
+                <div class="row">
+                    <div class="col-12 pr-0  d-flex justify-content-center align-items-center">
+                        <input type="password" class="form-control" formControlName="contrasena"
+                            placeholder="Nueva Contraseña" id="newPass">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 pr-0  d-flex justify-content-center align-items-center">
+                        <span *ngIf="submitLongitud" class="text-danger animated fadeIn"> Al menos 6 caracteres
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 pr-0  d-flex justify-content-center align-items-center">
+                        <input type="password" class="form-control" formControlName="contrasena"
+                        placeholder="Confirmar Contraseña" id="Pass">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 pr-0  d-flex justify-content-center align-items-center">
+                        <span *ngIf="submit" class="text-danger animated fadeIn">Las constraseñas no coinciden </span>                   
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 mt-3 d-flex d-flex justify-content-center align-items-center">
+                <button class="bt btn-primary">Confirmar</button>
+            </div>
+            <!-- <div class="col-12 col-md-12 mt-3 d-flex d-flex justify-content-center align-items-center">
+                <input type="text" class="form-control" formControlName="usuario" placeholder="Usuario">
+            </div>
+            <div class="col-12 col-md-12 mt-3 d-flex d-flex justify-content-center align-items-center">
+                <input type="password" class="form-control" formControlName="contrasenaAn" placeholder="Contraseña Antigua">
+            </div>
+            <div class="col-12 col-md-12 mt-3 d-flex d-flex justify-content-center align-items-center">
+                <input type="password" class="form-control" formControlName="contrasena" placeholder="Nueva Contraseña">
+            </div>
+            <div class="col-12 col-md-12 mt-3 d-flex d-flex justify-content-center align-items-center">
+                <input type="password" class="form-control" formControlName="contrasena" placeholder="Confirmar Contraseña">
+            </div>
+            <div class="col-12 col-md-12 mt-3 d-flex d-flex justify-content-center align-items-center">
+                <button class="bt btn-primary">Confirmar</button>
+            </div> -->
+        </form>
+    </div>
+</div>

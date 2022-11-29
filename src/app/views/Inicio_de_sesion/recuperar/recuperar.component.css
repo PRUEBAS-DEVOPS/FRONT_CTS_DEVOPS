@@ -1,0 +1,71 @@
+.btn-danger {
+    background: #8E4B9A !important;
+    border: 1px solid #8E4B9A;
+    border-radius: 20px;
+    color: #fff;
+    border: none;
+    border-radius: 20px !important;
+    width: 36% !important;
+    margin-left: auto;
+}
+
+.btn-primary {
+    font-weight: 400;
+    color: #fff !important;
+    margin-right: auto;
+    width: 36% !important;
+    background-color: #0084b3 !important;
+    border: 1px solid #0084b3;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 20px !important;
+    text-decoration: none;
+}
+
+
+/* estilo de los mt solo si son 5 */
+
+.mt-5,
+.my-5 {
+    margin-top: 7rem!important;
+}
+
+
+/* estilo de los mt solo si son 4 */
+
+.mt-4,
+.my-4 {
+    margin-top: 3.5rem!important;
+}
+
+
+/*estilos del form control del correo*/
+
+.form-control {
+    border: 1px solid #ef7d22;
+    width: 38%;
+}
+
+
+/*Estilo del label*/
+
+.lb1 {
+    font-size: 25px;
+}
+
+@media screen and (max-width: 767px) {
+    .btn-danger {
+        width: 100% !important;
+    }
+    .btn-primary {
+        width: 100% !important;
+    }
+    /*estilos del form control del correo*/
+    .form-control {
+        width: 100%;
+    }
+    /*Estilo del label*/
+    .lb1 {
+        font-size: 21px;
+    }
+}

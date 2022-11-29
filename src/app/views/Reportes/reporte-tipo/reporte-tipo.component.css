@@ -1,0 +1,45 @@
+.mt-4,
+.my-4 {
+    margin-top: 2.0rem!important;
+}
+
+.btn3 {
+    background-color: #0084b3 !important;
+    color: white !important;
+}
+
+.form-control {
+    border: 1px solid #0084b3;
+}
+
+.bt4 {
+    background-image: url(/assets/images/excel.png);
+    width: 151px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border: none;
+    text-align: center !important;
+}
+
+#colum {
+    width: 15%;
+}
+
+.bt5 {
+    background-image: url(/assets/images/pdf.png);
+    width: 151px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border: none;
+    text-align: center !important;
+}
+
+.table td,
+.table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #cccccc !important;
+    text-align: center;
+}

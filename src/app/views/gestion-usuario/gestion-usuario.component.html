@@ -1,0 +1,296 @@
+<div class="container">
+    <h1>Usuarios</h1>
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-4">
+            <h2>Usuarios creados</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+
+                                <th>Nombre usuario</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Documento</th>
+                                <th id="Colum">Detalle</th>
+                                <th id="Colum">Perfil</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of gesUSer | paginate: {itemsPerPage: 7, currentPage: PaginationGestUser}">
+
+                            <tr>
+
+                                <td> {{item.nombreCOmpleto}}</td>
+                                <td> {{item.usuario}}</td>
+                                <td> {{item.documento}}</td>
+                                <!-- boton de ver mas  -->
+                                <td id="Colum">
+                                    <a id="buttonmas" (click)="ConsultarInformacion(item.id)">Ver más</a>
+                                </td>
+                                <!-- Boton de agregar perfiles -->
+                                <td id="Colum"><button class="btn-primary" (click)="ValidarMenuUsuario(item.id,item.usuario)">
+                                    <i class="fas fa-plus-square"></i></button></td>
+
+                                <!-- Boton de editar -->
+                                <td id="Colum"><button class="btn-primary" (click)="Editarinformacion(item.id, item)"><i class="fas fa-edit"></i></button></td>
+
+                                <!-- Boton activar e inactivar -->
+                                <td id="Colum">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{item.id}}" (change)="InactivarUsuario(item.id,item,$event.target.checked)" [checked]="item.EstadoBool" />
+                                        <label class="custom-control-label" for="{{item.id}}"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="PaginationGestUser = $event" previousLabel="" nextLabel="">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal detalle-->
+    <div class="modal fade" id="Verdetalle" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <p class="modal-title " id="exampleModalLabel1">Detalle gestion de usuario</p>
+                    <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                        <span aria-hidden="true ">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 col-md-6-mb-3">
+                        <div *ngFor="let item of DetalUser" class="row m-0">
+                            <!--  -->
+                            <div class="col-12 col-md-12 mb-3 mt-2">
+                                <input type="text " id="principal" class="detall-control" value="{{item.nombreCOmpleto}} " disabled>
+                            </div>
+                            <div class="col-12 col-md-12 mb-1 ">
+                                <i id="icon" class="fas fa-user"></i><label id="titulo">Usuario: </label>
+                                <input type="number " class=" detall-control" value="{{item.usuario}} " disabled>
+                            </div>
+                            <!--  -->
+                            <div class="col-12 col-md-6 mb-1 form-group">
+                                <i id="icon" class="fas fa-id-card"></i><label id="titulo">Documento: </label>
+                                <input type="text " class="detall-control" value="{{item.documento}}" disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-1 form-group">
+                                <i id="icon" class="fas fa-building"></i><label id="titulo">Sede: </label>
+                                <input *ngFor="let valor of idEdit" type="text " class="detall-control" value="{{valor.nombre}}" disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-1 ">
+                                <i id="icon" class="fas fa-calendar-alt"></i><label id="titulo">Fecha Nacimiento:
+                                </label>
+                                <input type="date " class="detall-control" value="{{item.fechaNacimiento}}" disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-1 form-group">
+                                <i id="icon" class="fas fa-id-card-alt"></i><label id="titulo">Perfil: </label>
+                                <input type="text " class="detall-control" value="{{item.NombrePerfil}}" disabled>
+                            </div>
+                            <!--  -->
+                            <p class="imagen-linea">
+                                <img src="../../../assets/images/Línea 24.png" alt="">
+                            </p>
+                            <!--  -->
+                            <div class="col-12 col-md-6 mb-1 form-group">
+                                <i id="icon" class="fas fa-envelope"></i><label id="titulo">Correo Electronico: </label>
+                                <input type="text " class="detall-control" value="{{item.correo}} " disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-1 form-group">
+                                <i id="icon" class="fas fa-history"></i><label id="titulo">Fecha Creacion: </label>
+                                <input type="date " class="detall-control" value="{{item.fechaCreacion}}" disabled>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3 mt-4">
+                                <label id="fin">Ultima Fecha de ingreso: </label>
+                                <input id="fin" type="date " class="detall-control" value="{{item.UltimaFechaingreso}} " disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 mt-4">
+                                <button type="button" class="btn11" data-dismiss="modal">Aceptar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- modal perfil -->
+
+    <div class="modal fade" id="AgregarPerfil" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <p class="modal-title " id="exampleModalLabel1">Perfil</p>
+                    <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                        <span aria-hidden="true ">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="SaveModules()" [formGroup]="form" class="col-12">
+                        <div class=" col-12 col-md-12 mb-3 table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th id="Col1"> Modulo</th>
+                                        <th id="Col2"> Permitir</th>
+                                        <th id="Col3"> Denegar</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let Menu of menu">
+                                    <tr>
+                                        <td data-toggle="collapse" [attr.data-target]="'#Permisos' + Menu.id" aria-expanded="false" aria-controls="collapseOne">
+                                            {{Menu.opcion}}
+                                            <div class="collapse col-12 col-md-12 table-responsive" id="Permisos{{Menu.id}}" aria-labelledby="headingOne">
+                                                <table class="table">
+                                                    <!-- <tbody> -->
+                                                    <tr *ngFor="let Sub of subMenu">
+                                                        <td *ngIf="Menu.id===Sub.depende">
+                                                            {{Sub.opcion}}
+                                                        </td>
+                                                        <td id="preuba" *ngIf="Menu.id===Sub.depende">
+                                                            <div>
+                                                                <input class="form-check-input radiosPermitir" type="radio" name="checkpermiso{{Sub.id}}" id="SubP{{Sub.id}}" (change)="SaveTemp(Sub.id,1)">
+                                                            </div>
+                                                        </td>
+                                                        <td id="preuba" *ngIf="Menu.id===Sub.depende">
+                                                            <div>
+                                                                <input class="form-check-input radiosDenegar" type="radio" name="checkpermiso{{Sub.id}}" id="SubD{{Sub.id}}" (change)="SaveTemp(Sub.id,0)">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- </tbody> -->
+                                                </table>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input class="form-check-input ModuloPermitir" type="radio" name="exampleRadios{{Menu.id}}" id="MenP{{Menu.id}}">
+                                        </td>
+                                        <td>
+                                            <input class="form-check-input ModuloDenegar" type="radio" name="exampleRadios{{Menu.id}}" id="MenD{{Menu.id}}">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-footer mt-1 ">
+                                <div class="col-12 col-md-12 ">
+                                    <div class="row m-0 ">
+                                        <div class="col-12 col-md-6 mt-1 ">
+                                            <button type="submit " class="btn10">Agregar</button>
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-1 ">
+                                            <button type="button " class="btn12" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Editar usuario-->
+    <div class="modal fade " id="EditarUsuarios" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog ">
+            <div class="modal-content1 ">
+                <div class="modal-header ">
+                    <p class="modal-title " id="exampleModalLabel1">Actualizacion de Usuarios</p>
+                    <button type="button " class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true ">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body1 ">
+                    <div class="col-12 col-md-12-mb-3 ">
+                        <div *ngFor="let editar of informacionEdit" class="row m-0 ">
+                            <form (ngSubmit)="GuardarModificacion()" [formGroup]="form">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3 mt-3">
+                                        <label>Nombres Y Apellidos</label>
+                                        <input type="text " class=" form-control " formControlName="nombreCOmpleto" placeholder="{{editar.nombreCOmpleto}} ">
+                                        <input type="text " class=" form-control " formControlName="id" placeholder="{{editar.id}} " hidden>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3 mt-3">
+                                        <label>Usuario</label>
+                                        <input type="number " class=" form-control" formControlName="usuario" placeholder="{{editar.usuario}} ">
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3 form-group">
+                                        <label>Documento</label>
+                                        <input type="text " class="form-control" formControlName="documento" placeholder="{{editar.documento}} ">
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3 form-group">
+                                        <label>Correo Electronico</label>
+                                        <input type="text " class="form-control" formControlName="correo" placeholder="{{editar.correo}} ">
+                                    </div>
+                                    <div class="col-12 col-md-12 mb-3 form-group">
+                                        <button class="btnSedes dropdown-toggle" type="button" data-toggle="collapse" data-target="#DivSede" aria-expanded="false" aria-controls="collapseExample">
+                                            Seleccionar Sedes
+                                        </button>
+                                        <div class="collapse" id="DivSede">
+                                            <div class="card card-body divSedes">
+                                                <table id="table_id" class="md-3 table nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <td><input type="text" class="form-control" name="filterSedes" placeholder="Buscar" [(ngModel)]="filterSedes" [ngModelOptions]="{standalone: true}"></td>
+                                                            <td>
+                                                                <div style="padding-top: 9px;"><i class="fas fa-search"></i></div>
+                                                            </td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let sed of sedes | filter:filterSedes">
+                                                            <td>{{sed.nombre}}</td>
+                                                            <td><input type="checkbox" class="custom-input" (change)="CargarSedes(sed.id,$event.target.checked)" id="sede{{sed.id}}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3 form-group ">
+                                        <label>Perfil</label>
+                                        <select formControlName="perfil" class=" form-control">
+                                            <option value=" " disabled selected> seleccione el perfil</option>
+                                            <option *ngFor="let per of gesperfil " value="{{per.id}}">{{per.nombre}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3 form-group">
+                                        <label>Fecha de nacimiento</label>
+                                        <input type="text " data-dismiss="modal" placeholder="{{editar.fechaNacimiento}} " formControlName="fechaNacimiento" class="fecha form-control " disabled>
+                                    </div>
+                                </div>
+                                <div class="modal-footer mt-1 ">
+                                    <div class="col-12 col-md-12 ">
+                                        <div class="row m-0 ">
+                                            <div class="col-12 col-md-6 mt-1 ">
+                                                <button type="submit " class="btn10">Actualizar</button>
+                                            </div>
+                                            <div class="col-12 col-md-6 mt-1 ">
+                                                <button type="button " class="btn12 " data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

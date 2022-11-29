@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Tipo de servicio</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 mt-2 mb-3">
+
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <input type="text" class="form-control3" id="TipServicerfilter" name="TipServicerfilter" placeholder="Buscar..." [(ngModel)]="TipServicerfilter" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <button class="btn1" type="button" (click)="modalcrearTipServices()"><i id="iconomas" class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion tipo de servicios</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th id="Colum">Tipo Servicio</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tiposerv of LtsTipoServ | filterTipoServices:TipServicerfilter | paginate: {itemsPerPage: 7, currentPage: paginaTarifa}">
+                                <td id="Colum">{{tiposerv.TipoServicio}} </td>
+                                <!-- Boton de editar -->
+                                <td id="Colum"><button class="btn-primary" (click)="Editar(tiposerv.IdTipoServ, tiposerv)"><i class="fas fa-edit"></i></button></td>
+                                <td id="Colum">
+                                    <!-- Boton activar e inactivar -->
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{tiposerv.IdTipoServ}}" (change)="InactivaTipo(tiposerv.IdTipoServ,tiposerv,$event.target.checked)" [checked]="tiposerv.NombreEstado" />
+                                        <label class="custom-control-label" for="{{tiposerv.IdTipoServ}}"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="paginaTarifa = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal crear tipo servicio -->
+<div class="modal fade " id="CrearServicio" tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear tipo servicio</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="CrearTipoServ()" [formGroup]="form">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mb-3 form-group">
+                            <label>Tipo Servicio <sup class="auth">*</sup> </label>
+                            <input type="text" class="form-control" formControlName="TipoServicio">
+                            <span *ngIf="submit && f.TipoServicio.errors" class="text-danger animated fadeIn">es requerido</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-1">
+                        <div class="col-12 col-md-12">
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 mt-1">
+                                    <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                </div>
+                                <div class="col-12 col-md-6 mt-1">
+                                    <button type="submit" class="btn10">Crear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Editar -->
+<div class="modal fade " id="EditarServicio" tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualización Tipo Servicio</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="ModificarTipo()" [formGroup]="editform">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mb-3 form-group">
+                            <label>Tipo Servicio</label>
+                            <input type="text" class="form-control" formControlName="TipoServicio">
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-1">
+                        <div class="col-12 col-md-12">
+                            <div class="row m-0">
+                                <div class="col-12 col-md-6 mt-1">
+                                    <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                </div>
+                                <div class="col-12 col-md-6 mt-1">
+                                    <button type="submit" class="btn10">Actualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

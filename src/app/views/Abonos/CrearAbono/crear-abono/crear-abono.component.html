@@ -1,0 +1,178 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Crear abono</h1>
+        </div>
+        <div class="mt-1 col-12 col-md-10 mb-3 ">
+            <form (ngSubmit)="CrearAbono()" [formGroup]="formularioAbonos">
+                <div class="form-row mt-3 rowOpciones">
+                    <div class="col-5 tamañoLabel">
+                        <label>Por favor seleccione el tipo de abono que desea realizar.
+                        </label>
+                    </div>
+                        <div class ="col-2" id="divEntidades">
+                            <div class="form-check form-check-inline" >
+                                <label class="form-check-label" for="inlineRadio1">Entidades</label>
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" (click)="SeleccionarTipo(1)">
+                            </div>
+                        </div>                        
+                        <div class ="col-2" id="divTerceros">
+                            <div class="form-check form-check-inline" >
+                                <label class="form-check-label" for="inlineRadio2">Terceros</label>
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"  (click)="SeleccionarTipo(2)">
+                            </div>
+                        </div>
+                </div>
+            <div class="row m-0" *ngIf="VerEntidad">                
+                    <div class="col-12 Title">
+                        <p class="font-weight">Entidades</p>
+                        <div class="connecting-line2 mb-3"></div>
+                    </div>
+                <div class="col-12 col-md-6 form-group">
+                <label>Entidad<sup
+                    class="auth">*</sup></label>
+                <select class="form-control" formControlName="entidad"  [ngClass]="{'colorForm1': submit === false,'colorInputError': submit === true && validar.entidad.errors}">
+                    <option value="" selected>Seleccione</option>
+                    <option *ngFor="let entidad of arrayentidades"  value={{entidad.id}}>{{entidad.razonsocial}}</option>
+                </select>
+                <!-- <span *ngIf="submit && validar.entidad.errors" class="text-danger animated fadeIn">es
+                    requerido</span> -->
+                </div>
+                <div class="col-12 col-md-6 form-group">
+                    <label>Plan<sup
+                        class="auth">*</sup></label>
+                    <div class="ng-autocomplete m-0 InputPlan" colorForm1>
+                        <ng-autocomplete class="autocomplete-container"  #autoPlan [data]="arrayplanes"
+                            [searchKeyword]="keywordPlan"
+                            (selected)='PreselectPlan($event)'
+                            [itemTemplate]="itemTemplate"
+                            id="PlanesAutocomplete"
+                            [notFoundTemplate]="notFoundTemplate"
+                            placeholder="Buscar Planes ...">
+                        </ng-autocomplete>
+                        <ng-template #itemTemplate let-item >
+                            <a [innerHTML]="item.Concatenado"></a>
+                        </ng-template>
+                        <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                    </div>
+                </div>     
+            </div>
+            <div class="row m-0" *ngIf="VerTercero">
+                <div class="col-12 Title">
+                    <p class="font-weight">Entidades</p>
+                    <div class="connecting-line2 mb-3"></div>
+                </div>
+                <div class="col-12 col-md-6 form-group">
+                    
+                <label>Tipo Documento<sup
+                    class="auth">*</sup></label>
+                <select class="form-control" formControlName="tipodocumento"  [ngClass]="{'colorForm1': submit === false,'colorInputError': submit === true && validar.tipodocumento.errors}">
+                    <option value="" selected>Seleccione</option>
+                    <option *ngFor="let tipo of arrayTipoDocumento"  value={{tipo.id}}>{{tipo.tipodocumento}}</option>
+                </select>
+                <!-- <span *ngIf="submit && validar.entidad.errors" class="text-danger animated fadeIn">es
+                    requerido</span> -->
+                </div>
+                <div class="col-12 col-md-6 form-group">
+                    <label>Documento<sup class="auth">*</sup></label>
+                    <input type="text" class="form-control" formControlName="documento" [ngClass]="{'colorForm1': submit === false ,'colorInputError': submit === true && validar.documento.errors}">
+                </div>     
+            </div>
+            <div class="row m-0" *ngIf="verGeneral">
+                <div class="col-12 col-md-4 mb-3 form-group">
+                    <label>Monto<sup
+                        class="auth">*</sup></label>
+                 <input type="number" class="form-control" formControlName="valorAbono" [ngClass]="{'colorForm1': submit === false ,'colorInputError': submit === true && validar.valorAbono.errors}">
+           
+                </div>
+                <div class="col-12 col-md-4 mb-3 form-group margenNoDocumento">
+                    <label>Forma pago<sup
+                        class="auth">*</sup></label>
+                    <select class="form-control" formControlName="mediopago" [ngClass]="{'colorForm1': submit === false,'colorInputError': submit === true && validar.mediopago.errors}">
+                        <option value="" selected>Seleccione</option>
+                        <option *ngFor="let medios of arraymediospago"  value={{medios.id}}>{{medios.medioPago}}</option>
+                    </select>          
+                </div>
+                <div class="col-12 col-md-4 mb-3 form-group margenNoDocumento">
+                    <label>Concepto<sup
+                        class="auth">*</sup></label>
+                        <select class="form-control" formControlName="conceptoAbono"  [ngClass]="{'colorForm1': submit === false,'colorInputError': submit === true && validar.conceptoAbono.errors}">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let concepto of arrayconceptos"  value={{concepto.Id}}>{{concepto.concepto}}</option>
+                        </select> 
+                      
+                </div>             
+            </div>
+            <div class="col-12 col-md-12  col-md-offset-12 col-xs-12 text-center mt-2"  *ngIf="verGeneral">
+                <div class="row btn-group">
+                    <div class="col-12 col-md-6" id="divGuardar">
+                        <button type="submit" class="btn-guardar">Guardar</button>
+                    </div>
+                    <div class="col-12 col-md-6" id="divLimpiar">
+                        <button type="button" class="btn-limpiar" (click)="Limpiar()">Limpiar</button>
+                    </div>
+                </div>
+            </div>              
+            </form>
+        </div>
+        <div class="dt-responsive table-responsive-general" *ngIf="Vertabla">       
+            <table class="table m-0">
+                <tr>
+                    <th>Cód. abono</th>
+                    <th>Entidad</th>
+                    <th>Plan</th>
+                    <th>Monto</th>
+                    <th>Usuaurio</th>
+                    <th>F. de pago</th>
+                    <th>Concepto</th>
+                </tr>
+                <tr *ngFor="let data of ArrayGeneral | paginate: {id:'Pagina',  itemsPerPage: 5, currentPage: Pagina}">
+                    <td>{{data.codigoAbono}}</td>
+                    <td>{{data.nombreEntidad}}</td>
+                    <td>{{data.nombrePlan}}</td>
+                    <td>{{data.valorAbono |currency:'$':'symbol':'4.0-0'}}</td>
+                    <td>{{data.Usuario}}</td>
+                    <td>{{data.nombreMediopago}}</td>
+                    <td>{{data.descripcionConcepto}}</td>
+                </tr>
+            </table>
+            <pagination-controls id="Pagina" (pageChange)="Pagina = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+        </div>    
+    </div>
+</div>
+
+<div class="modal fade " id="ModalAlerta" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title modal-titleTamaño" id="exampleModalLabel1">Creación de abonos</p> 
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>          
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <div class="col-12 col-md-12 text-center">                    
+                        <i class="fas fa-check-circle fa-6x" aria-hidden="true"></i>
+                    </div>
+                    <div class="row m-0 mb-3">
+                        <div class="col-12 col-md-12 mt-2 text-center">
+                            <p class="parrafo1">
+                               {{mensajeRespuesta}}
+                            </p>                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mt-1" style="margin-left: 1.5em;">
+                <div class="col-md-12 col-md-offset-12 col-xs-12 text-center" >
+                    <div class="btn-group" role="group">         
+                        <div><button type="button" class="btn-guardar" (click)="CerrarModal()">Aceptar</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

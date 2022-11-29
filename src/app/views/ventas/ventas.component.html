@@ -1,0 +1,1570 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Ventas</h1>
+        </div>
+        <div class="col-12 mt-5">
+            <form class="col-12" [formGroup]="ConsultarPacienteVenta">
+                <div class="row m-0">
+                    <div class="col-12  col-md-6 mb-2">
+                        <select name="documento" class="form-control" formControlName="tipodocumento" id="SelTipDoc">
+                            <option value="" selected="">Seleccione el tipo de documento...</option>
+                            <option *ngFor="let Doc of GesDocument" value="{{Doc.id}}">{{Doc.tipodocumento}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12  col-md-5 mb-2">
+                        <input type="text" placeholder="Número De Documento" formControlName="documento"
+                            class="form-control" id="txtdocumento">
+                    </div>
+                    <div class="col-12 col-md-1 mb-2">
+                        <button type="button" class="btn btn-light" (click)="consultar()" id="btnshare"><i
+                                class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-1 col-12 mb-3" *ngIf="mostrarTaps">
+                    <div class="row">
+                        <!-- se inicia la creacion del tab -->
+                        <div class="container">
+                            <section>
+                                <div class="row" style="justify-content: center;">
+                                    <div class="wizard">
+                                        <div class="">
+                                          <div class="connecting-line"></div>
+                                            <ul class="nav--principal" role="tablist">
+                                                <!-- primer tab -->
+                                                <li role="presentation" class="active" id="Li1">
+                                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab"
+                                                        title="Datos" id="tab1">
+                                                        <span class="round-tab">
+                                                            <i class="glyphicon glyphicon-folder-open">1</i>
+                                                            <label class="titulo1">Datos</label>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <!-- segundo tab -->
+                                                <li role="presentation" class="disabled" id="Li2">
+                                                    <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab"
+                                                        title="Plan" id="tab2">
+                                                        <span class="round-tab">
+                                                            <i class="glyphicon glyphicon-pencil">2</i><br />
+                                                            <label class="titulo1">Plan</label>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <!-- tercer tab -->
+                                                <li role="presentation" class="disabled" id="Li3">
+                                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"
+                                                        title="Facturación" id="tab3">
+                                                        <span class="round-tab">
+                                                            <i class="glyphicon glyphicon-picture">3</i>
+                                                            <label class="labelvent">Facturación</label>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <!-- Cuarto tab -->
+                                                <li role="presentation" class="disabled" id="Li4">
+                                                    <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab"
+                                                        title="Resumen" id="tab4">
+                                                        <span class="round-tab">
+                                                            <i class="glyphicon glyphicon-picture">4</i>
+                                                            <label class="labelvent">Resumen</label>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- primer tab -->
+                                        <div>
+                                            <div class="tab-content col-12 col-md-12">
+                                                <div class="tab-pane active" role="tabpanel" id="step1">
+                                                    <div class="row m-0" *ngFor="let Cargar of Datospaciente">
+                                                        <div class="col-12 col-md-6 mt-4">
+                                                            <h2>Datos del titular</h2>
+                                                        </div>
+                                                        <div class="connecting-line1 mb-3"></div>
+                                                        <div class="container">
+                                                            <div class="grid-DatosTitular row m-0  mb-2">
+                                                                <div class=""> <label id="titulo">Nombres
+                                                                        Completos:
+                                                                    <input type="text" class="detall-control1"
+                                                                        value="{{Cargar.primerNombre}}  {{Cargar.segundoNombre}} "
+                                                                        disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Apellidos
+                                                                        Completos:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="{{Cargar.primerApellido}} {{Cargar.segundoApellido}}"
+                                                                        disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Fecha Nacimiento:
+                                                                  <input type="date " class="detall-control1"
+                                                                      value="{{Cargar.fechanacimiento}}" disabled>
+                                                                    </label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Edad:
+                                                                  <input type="number " class="detall-control1"
+                                                                      value="{{showAge}} " disabled></label>
+                                                                </div>
+
+                                                                <div class=""> <label id="titulo">sexo:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="{{Cargar.sexo}}" disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Estado civil:
+                                                                  <input type="text " class="detall-control1"
+                                                                      value="{{Cargar.Estadocivil}}" disabled>
+                                                                    </label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Telefono o Celular:
+                                                                  <input type="text " class="detall-control1"
+                                                                      value="{{Cargar.telefono}} " disabled>
+                                                                    </label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Tipo Afiliacion:
+                                                                  <input type="text " class="detall-control1"
+                                                                      value="{{Cargar.TipoAfiliacion}}" disabled>
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class=""> <label id="titulo">Eps:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="{{Cargar.Eps}} " disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">País:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="Colombia" disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Ciudad:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="{{Cargar.Ciudad}}" disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Departamento:
+                                                                  <input type="text " class="detall-control1"
+                                                                      value="{{Cargar.Depto}} " disabled>
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class=""> <label id="titulo">Localidad:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="{{Cargar.NombreLocalidad}}" disabled> </label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Barrio:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="{{Cargar.BarrioPac}}" disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Estrato:
+                                                                    <input type="text " class="detall-control1"
+                                                                        value="{{Cargar.Estrato}}" disabled></label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Dirección:
+                                                                  <input type="text " class="detall-control1"
+                                                                      value="{{Cargar.direccion}}" disabled> </label>
+                                                                </div>
+                                                                <div class=""> <label id="titulo">Urgente:
+                                                                    <select class="form-control" style="width: 70%;"
+                                                                        formControlName="Urgente">
+                                                                        <option value="0" selected>Seleccione</option>
+                                                                        <option value="1">No</option>
+                                                                        <option value="2">Si</option>
+                                                                        <option value="3">Internacionales</option>
+                                                                    </select></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="list-inline text-center mt-5">
+                                                                <li><button type="button" class="btn-sig"
+                                                                        (click)="siguiente(2)">Siguiente</button></li>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- segundo tab -->
+                                                <div class="tab-pane" role="tabpanel" id="step2">
+                                                    <!-- primera linea -->
+                                                    <div class="row conteiner-plan around-xs" style="margin-bottom: -2em;">
+                                                        <!-- <div class="row m-0"> -->
+                                                          <div class="col-6" style="margin-left: 1em;">
+                                                              <label>Planes Disponibles<sup class="auth">*</sup></label>
+                                                                <div class="ng-autocomplete m-0">
+                                                                    <ng-autocomplete
+                                                                        #autoPlan [data]="DataPlanes"
+                                                                        [searchKeyword]="keywordPlan"
+                                                                        (selected)='PreselectPlan($event)'
+                                                                        [itemTemplate]="itemTemplate"
+                                                                        id="PlanesAutocomplete"
+                                                                        [notFoundTemplate]="notFoundTemplate"
+                                                                        placeholder="Buscar Planes ..."
+                                                                        [disabled]=disabled>
+                                                                    </ng-autocomplete>
+                                                                    <ng-template #itemTemplate let-item>
+                                                                        <a [innerHTML]="item.Concatenado"></a>
+                                                                    </ng-template>
+                                                                    <ng-template #notFoundTemplate let-notFound>
+                                                                        <div [innerHTML]="notFound"></div>
+                                                                    </ng-template>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-3" style="top: -25px">
+                                                                <label class="mt-5"></label>
+                                                                <button type="button" class="btn2 btnUsarPlan" id="botonUsar"
+                                                                    (click)="SeleccionarPlan(1)">
+                                                                    Usar Plan
+                                                                </button>
+                                                                <button type="button" class="btn2 btnUsarPlan" id="botonCambiar"
+                                                                    style="display: none;" (click)="SeleccionarPlan(2)">
+                                                                    Cambiar Plan
+                                                                </button>
+                                                                
+                                                            </div>
+                                                            <div class="col-7 ">
+                                                                <label class="mt-5"></label>
+                                                                <button type="button" class="btn btn2 BtnUsar" id="botonLimpiar"
+                                                                        (click)="LimpiarFormulario()"><i class="fas fa-broom"></i>
+                                                                        Limpiar
+                                                                </button>
+                                                            </div>
+                                                        <!-- </div> -->
+                                                    </div>
+
+                                                    <div class="col-12 col-md-12-mb-3" *ngIf="VerRadioOpciones">
+                                                        <div class="row m-0">
+                                                            <div class="col-12 col-md-12 mt-4">
+                                                                <h2 class="p-2 bd-highlight">Agregar exámenes</h2>
+                                                                <div class="connecting-line2 mb-3"></div>
+                                                                <div>
+                                                                    <div class="row gridAgregarExamenes">
+                                                                        <div class="col-12 col-lg-4 mt-sm-1">
+                                                                          <label> Tipo Procedimiento <sup
+                                                                                    class="auth">*</sup>
+                                                                            <select class="form-control controlTipoProcedimiento" id="selopciones"
+                                                                                (change)="VerModalOption($event.target.value);cargarInformacion($event.target.value)">
+                                                                                <option value="0">Seleccione</option>
+                                                                                <option value="1">Chequeo</option>
+                                                                                <option value="2" selected>Exámenes
+                                                                                </option>
+                                                                            </select>
+                                                                          </label>
+                                                                        </div>
+                                                                        <div class="col-sm-8">
+                                                                            <div *ngIf="Verchequeo">
+                                                                                <div class="col-12 col-md-12-mb-3">
+                                                                                    <label> Buscar Chequeo <sup
+                                                                                        class="auth">*</sup>
+                                                                                    <div>
+                                                                                        <div
+                                                                                            class="ng-autocompleteExamenes">
+                                                                                            <ng-autocomplete
+                                                                                                #auto
+                                                                                                [data]="ArrayChequeos"
+                                                                                                [searchKeyword]="keyword"
+                                                                                                (selected)='ConsultaDatosCh($event);SelectChequeo($event,1)'
+                                                                                                [itemTemplate]="itemTemplate"
+                                                                                                id="ExamAutocomplete"
+                                                                                                [notFoundTemplate]="notFoundTemplate"
+                                                                                                placeholder="Buscar Chequeo ...">
+                                                                                            </ng-autocomplete>
+                                                                                            <ng-template
+                                                                                                #itemTemplate let-item>
+                                                                                                <a [innerHTML]="item.NombreProcedimiento"></a>
+                                                                                            </ng-template>
+                                                                                            <ng-template
+                                                                                                #notFoundTemplate let-notFound>
+                                                                                                <div
+                                                                                                    [innerHTML]="notFound">
+                                                                                                </div>
+                                                                                            </ng-template>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                  </label>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div *ngIf="VerExamen">
+                                                                              <label> Buscar examen <sup
+                                                                                      class="auth">*</sup>
+                                                                                <div>
+                                                                                  <div
+                                                                                      class="ng-autocompleteExamenes">
+                                                                                      <ng-autocomplete
+                                                                                          #auto
+                                                                                          [data]="ArrayExamenes"
+                                                                                          [searchKeyword]="keyword"
+                                                                                          (selected)='SelectExam($event,2)'
+                                                                                          [itemTemplate]="itemTemplate"
+                                                                                          id="ExamAutocomplete"
+                                                                                          [notFoundTemplate]="notFoundTemplate"
+                                                                                          placeholder="Buscar Examenes ...">
+                                                                                      </ng-autocomplete>
+                                                                                      <ng-template
+                                                                                          #itemTemplate
+                                                                                          let-item>
+                                                                                          <a
+                                                                                              [innerHTML]="item.NombreProcedimiento"></a>
+                                                                                      </ng-template>
+                                                                                      <ng-template
+                                                                                          #notFoundTemplate
+                                                                                          let-notFound>
+                                                                                          <div
+                                                                                              [innerHTML]="notFound">
+                                                                                          </div>
+                                                                                      </ng-template>
+                                                                                  </div>
+                                                                                </div>
+                                                                              </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-8 col-md-6 mt-2" style="max-width: 25% !important;">
+                                                        <h2 class="ml-auto bd-highlight">Exámenes cargados</h2>
+                                                    </div>
+                                                    <div class="col-12 mt-3 table-responsiveVentas">
+                                                        <div class="connecting-line2 mb-3"></div>
+                                                        <table class=" mb-3  table  TableProc"
+                                                            *ngIf="TablaProcedimientos">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Codigo</th>
+                                                                    <th>Servicios</th>
+                                                                    <th>Formulario</th>
+                                                                    <th>Valor</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let procedimientos of ArrayProcedimientos">
+                                                                    <td id="Colum"><button class="eliminar"
+                                                                            type="button"
+                                                                            (click)="EliminarProcedimientosVentas(procedimientos.id,1,procedimientos.CodAthenea,procedimientos.Bandera)"><i
+                                                                                class="fas fa-trash-alt"></i></button>
+                                                                    </td>
+                                                                    <td id="Colum">{{procedimientos.CodAthenea}}
+                                                                    </td>
+                                                                    <td id="Colum">{{procedimientos.NombreExamen}}
+                                                                    </td>
+                                                                    <td id="Colum" *ngIf="procedimientos.Validador==1"><h6>
+                                                                      <span *ngIf="procedimientos.Bandera_Formulario == 1" id="spanCovid{{procedimientos.id}}" class="badge-Covid1" (click)="DiligenciarFormulario(procedimientos.IdFormulario,procedimientos.id,procedimientos.CodAthenea)">Por diligenciar</span>
+                                                                      <span *ngIf="procedimientos.Bandera_Formulario == 2" id="spanCovid{{procedimientos.id}}" class="badge-Covid2" (click)="DiligenciarFormulario(procedimientos.IdFormulario,procedimientos.id,procedimientos.CodAthenea)">Diligenciado</span>
+                                                                  </h6></td>
+                                                                    <td id="Colum" *ngIf="procedimientos.Validador==0">--</td>
+                                                                    <!-- <ng-template #elseBlock>
+                                                                        <td id="Colum"><h6><span class="badge badge-Covid2" (click)="ConsultarFormulario(procedimientos.IdFormulario)">Diligenciado</span></h6></td>
+                                                                    </ng-template>-->
+                                                                    <td id="Colum">{{procedimientos.Valor
+                                                                        |currency:'$':'symbol':'4.0-0'}} </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="connecting-line6 mb-3" *ngIf="TablaProcedimientos">
+                                                        </div>
+                                                        <div class="col-12 col-md-12 d-md-flex justify-content-md-end"
+                                                            *ngIf="TablaProcedimientos">
+                                                            <label>TOTAL:</label>
+                                                            <input type="text" class="detall-control6"
+                                                                value="{{TotalFinal |currency:'$':'symbol':'4.0-0'}}"
+                                                                disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5">
+                                                        <div class="btn-busqueda-view" role="group">
+                                                            <div><button type="button" class="btn-atra"
+                                                                    (click)="atras(1)">Atras</button></div>
+                                                            <div><button type="button" class="btn-sig1"
+                                                                    (click)="siguiente(3)">Siguiente</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <!-- tercer  -->
+                                                <div class="tab-pane" role="tabpanel" id="step3">
+                                                    <h3 class="col-md-12 mt-4">Medios de pago</h3>
+                                                    <div class="connecting-line3 mb-3"></div>
+                                                    <div class="gridPagos">
+                                                        <div class="card1"
+                                                            *ngFor="let Medios of mediosPago">
+                                                            <div class="card-body">
+                                                                <div
+                                                                    class="custom-control custom-radio custom-control-inline">
+                                                                    <input type="radio"
+                                                                        id="customRadioInline{{Medios.id}}"
+                                                                        name="idMedioPago"
+                                                                        formControlName="idMedioPago"
+                                                                        class="custom-control-input"
+                                                                        value="{{Medios.id}}"
+                                                                        (click)="SelectMedioPago(Medios.id)">
+                                                                    <label class="custom-control-label" id="label1"
+                                                                        for="customRadioInline{{Medios.id}}">{{Medios.medioPago}}
+                                                                    </label>
+                                                                </div>
+                                                                <h5 class="card-title"></h5>
+                                                                <div>
+                                                                    <div class="col-12">
+                                                                        <label class="mt-2">Valor
+                                                                          <input type="text" class="detall-control1"
+                                                                            value="{{TotalFinal |currency:'$':'symbol':'4.0-0'}}"
+                                                                            disabled>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-12" *ngIf="Medios.id==1">
+                                                                        <img class="img-pagos"
+                                                                            src="../../../assets/images/efectivo1.png">
+                                                                    </div>
+                                                                    <div class="col-12" *ngIf="Medios.id==19">
+                                                                        <img class="img-pagos2"
+                                                                            src="../../../assets/images/nacional-efectivo.png">
+                                                                    </div>
+                                                                    <div class="col-12" *ngIf="Medios.id==17">
+                                                                        <img class="img-pagos"
+                                                                            src="../../../assets/images/pse-payu.png">
+                                                                    </div>
+                                                                    <div class="col-12" *ngIf="Medios.id==4">
+                                                                        <img class="img-pagos2"
+                                                                            src="../../../assets/images/tarjeta-credito.png">
+                                                                    </div>
+                                                                    <div class="col-12" *ngIf="Medios.id==16">
+                                                                        <img class="img-pagos"
+                                                                            src="../../../assets/images/transferecia-1.png">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <h3 class="col-md-12 mt-4">Terceros</h3>
+                                                    <div class="connecting-line4 mb-3"></div>
+                                                    <div class="row gridFacturarotraPersona m-0">
+                                                      <div class="col-12 col-md-12 mt-2 sn2">
+                                                        <label>¿Deseas facturar a nombre de
+                                                            otra persona?
+                                                        </label>
+                                                      </div>
+                                                      <div class="sn1">
+                                                        <div class="custom-control custom-radio custom-control-inline1 sn">
+                                                          <input type="radio" id="customRadioInline6"
+                                                            name="customRadioInline2"
+                                                            class="custom-control-input"
+                                                            (click)="mostrarrespo()">
+                                                          <label class="custom-control-label"
+                                                                      for="customRadioInline6">Si</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio custom-control-inline1 sn">
+                                                            <input type="radio" id="customRadioInline7"
+                                                                name="customRadioInline2"
+                                                                class="custom-control-input"
+                                                                (click)="ocultarrespo()">
+                                                            <label class="custom-control-label"
+                                                                for="customRadioInline7"> No</label>
+                                                         </div>
+                                                      </div>
+                                                    </div>
+
+                                                    <!-- div ver responsable factura -->
+                                                    <div class="mt-1 col-12 mb-3" *ngIf="MostrarResponsable">
+                                                        <div class="row">
+                                                            <form (ngSubmit)="CrearResponsable()"
+                                                                [formGroup]="formResponsable">
+                                                                <div class="row gridDatosFacturarotraPersona">
+                                                                    <div class=" datosf col-12 col-md-12 mt-4 mb-3">
+                                                                        <label>Ingresa los datos
+                                                                            correspondientes para su facturación
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-12 form-group">
+                                                                        <label>Tipo Documento</label>
+                                                                        <select class="form-control"
+                                                                            formControlName="tipodoc">
+                                                                            <option value="" selected="">Seleccione
+                                                                                el tipo de documento...</option>
+                                                                            <option *ngFor="let Doc of GesDocument"
+                                                                                value="{{Doc.id}}">
+                                                                                {{Doc.tipodocumento}}
+                                                                            </option>
+                                                                            <span
+                                                                                *ngIf="submit && ValidarResp.tipodoc.errors"
+                                                                                class="text-danger animated fadeIn">es
+                                                                                requerido</span>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-12 form-group">
+                                                                        <label>Documento</label>
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="documentoR">
+                                                                        <span
+                                                                            *ngIf="submit && ValidarResp.documentoR.errors"
+                                                                            class="text-danger animated fadeIn">es
+                                                                            requerido</span>
+                                                                    </div>
+                                                                    <div class="col-12 form-group">
+                                                                        <label>Nombres</label>
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="nombres">
+                                                                        <span
+                                                                            *ngIf="submit && ValidarResp.nombres.errors"
+                                                                            class="text-danger animated fadeIn">es
+                                                                            requerido</span>
+                                                                    </div>
+                                                                    <div class="col-12 form-group">
+                                                                        <label>Apellidos</label>
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="apellidos">
+                                                                        <span
+                                                                            *ngIf="submit && ValidarResp.apellidos.errors"
+                                                                            class="text-danger animated fadeIn">es
+                                                                            requerido</span>
+                                                                    </div>
+                                                                    <div class="col-12 form-group">
+                                                                        <label>Correo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="correo">
+                                                                        <span
+                                                                            *ngIf="submit && ValidarResp.correo.errors"
+                                                                            class="text-danger animated fadeIn">es
+                                                                            requerido</span>
+                                                                    </div>
+                                                                    <div class="datosf1 col-12 form-group">
+                                                                        <button type="submit" class="btn-Guard"><i
+                                                                                class="fas fa-plus"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- div segunda linea -->
+                                                    <div class="row m-0">
+                                                    </div>
+
+                                                    <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-2">
+                                                        <div class="btn-group" role="group">
+                                                            <div>
+                                                                <button class="btn-atra"
+                                                                    (click)="atras(2)">Atras</button>
+                                                            </div>
+                                                            <div><button class="btn-sig1"
+                                                                    (click)="siguiente(4)">Siguiente</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Cuarto y ultimo Tab -->
+                                                <div class="tab-pane" role="tabpanel" id="step4">
+                                                    <!-- primera linea -->
+                                                    <div class="row m-0 ">
+                                                        <h3 class="col-md-12 mt-4">Resumen de compra</h3>
+                                                        <div class="connecting-line4 mb-3"></div>
+                                                        <div class="col-12 col-md-12 mt-3 form-group">
+                                                            <div class="card4">
+                                                                <div class="card-body1 card4Color">
+                                                                    <div class="col-12 mt-1 table-responsive">
+                                                                        <h2 id="resumentitul" class="mt-3">Productos
+                                                                        </h2>
+                                                                        <table class=" mb-3  table" id="TableProcResum">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Codigo</th>
+                                                                                    <th>Servicios</th>
+                                                                                    <th>Valor</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr
+                                                                                    *ngFor="let procedimientos of ArrayProcedimientos">
+                                                                                    <td id="Colum">
+                                                                                        {{procedimientos.CodAthenea}}
+                                                                                    </td>
+                                                                                    <td id="Colum">
+                                                                                        {{procedimientos.NombreExamen}}
+                                                                                    </td>
+                                                                                    <td id="Colum">
+                                                                                        {{procedimientos.Valor
+                                                                                        |currency:'$':'symbol':'4.0-0'}}
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <div class="connecting-line6 mb-3"></div>
+                                                                        <div
+                                                                            class="col-12 col-md-12 d-md-flex justify-content-md-end">
+                                                                            <label>TOTAL:</label>
+                                                                            <input type="text" class="detall-control2"
+                                                                                value="{{TotalFinal |currency:'$':'symbol':'4.0-0'}}"
+                                                                                disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- div segunda linea -->
+                                                    <div class="row m-0 " style="justify-content: center">
+                                                        <h3 class="col-md-12 mt-4">Confirmación</h3>
+                                                        <div class="connecting-line4 mb-3"></div>
+                                                        <div class="col-12 col-md-12 mt-3 form-group">
+                                                            <label>Correo de confirmación de compra </label>
+                                                            <input type="email" placeholder="Correo Electronico"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="col-12 col-md-12 mt-3 form-group">
+                                                            <div class="form-floating">
+                                                                <label for="floatingTextarea2">Observacciones</label>
+                                                                <textarea class="form-control"
+                                                                    formControlName="Observacion"
+                                                                    style="height: 100px"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-5 mt-1 form-group ">
+                                                            <p>Esta De acuerdo Con nuestra politica
+                                                               de tratamiento de datos
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            class="custom-control custom-radio custom-control-inline mt-3">
+                                                            <input type="radio" id="customRadioPoliticas"
+                                                                name="customRadioPoliticas"
+                                                                class="custom-control-input">
+                                                            <label class="custom-control-label"
+                                                                (click)="AsigPolitica($event.target.value)"
+                                                                for="customRadioPoliticas">Si</label>
+                                                        </div>
+                                                        <div class="aa col-12 col-md-6 d-md-flex justify-content-md-end">
+                                                            <button type="button" class="btn-link">
+                                                              <a href="assets/Documentos/POLITICA-DE-TRATAMIENTO-DE-DATOS-2020.pdf"
+
+                                                                target="_blank"
+                                                                download="POLITICA-DE-TRATAMIENTO-DE-DATOS-2020.pdf"
+                                                                >  Política de
+                                                                Tratamiento de
+                                                                datos "Habeas-Data"</a>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5 ">
+                                                        <div class="btn-group " role="group ">
+                                                            <div><button class="btn-atrafinalizar"
+                                                                    (click)="atras(3)">Atras</button></div>
+                                                            <div><button id="btnfinventa" type="submit" class="btn-finalizarventa"
+                                                                    (click)="CrearVenta()">Finalizar venta</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="ProcedimientosChequeoyExamenes">
+    <div class="modal-dialog">
+        <div class="modal-content3">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Agregar Servicios</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mt-2" style="text-align: center;">
+                            <div class="custom-control custom-radio custom-control-inline2">
+                                <input type="radio" id="radioCheq" name="customRadioInline3"
+                                    class="custom-control-input" (click)="VerModalOption(1)">
+                                <label class="custom-control-label" for="radioCheq"
+                                    (click)='cargarInformacion(1)'>Chequeo</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline2">
+                                <input type="radio" id="radioExam" name="customRadioInline3"
+                                    class="custom-control-input" (click)="VerModalOption(2)">
+                                <label class="custom-control-label" for="radioExam"
+                                    (click)='cargarInformacion(2)'>Examen</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body" *ngIf="Verchequeo">
+                    <div class="col-12 col-md-12-mb-3">
+                        <div class="row m-0">
+                            <h2>Seleccione sus chequeos</h2>
+                            <div class="connecting-line2 mb-3"></div>
+                            <div class="col-12  col-md-6 mb-2 ">
+                                <label> Categoría <sup class="auth">*</sup></label>
+                                <select class="form-control" id="SelCat"
+                                    (change)='ChequeoCategoria($event.target.value)'>
+                                    <option value="" selected="">Seleccione la categoria...</option>
+                                    <option *ngFor="let categorias of DataCategoria" value="{{categorias.Id}}">
+                                        {{categorias.Nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col-12  col-md-6 mb-2">
+                                <label> Chequeo <sup class="auth">*</sup></label>
+                                <select class="form-control" id="SelChe"
+                                    (change)='ConsultaDatosCh($event.target.value);SelectChequeo($event.target.value,1)'>
+                                    <option value="" selected="">Seleccione el Chequeo...</option>
+                                    <option *ngFor="let chequeos of ArrayChequeos" value="{{chequeos.idProcedimiento}}">
+                                        {{chequeos.NombreProcedimiento}}</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-12 mt-2" *ngIf="detalleChequeo">
+                                <div class="row">
+                                    <div class="col-4 col-md-4 ">
+                                        <label class="titulo"> Código:</label>
+                                        <label> {{codigoProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-4">
+                                        <label class="titulo"> Procedimiento:</label>
+                                        <label> {{NombreProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-4">
+                                        <label class="titulo"> Precio:</label>
+                                        <label> {{ValorChequeo |currency:'COP $':'symbol':'4.0-0'}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-12">
+                                        <label> Recomendación:</label>
+                                        <label> {{Recomendacion}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-1">
+                        <form class="col-12">
+                            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 col-md-offset-6 col-xs-6 text-center ">
+                                        <button type="button" class="btnCancelar2"
+                                            (click)="CerrarModalChequeos()">Cerrar</button>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-6 col-xs-6 text-center">
+                                        <button type="submit" class="btn" (click)="AgregarChequeo(item,1)"> +
+                                            Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-body" *ngIf="VerExamen">
+                    <div class="col-12 col-md-12-mb-3">
+                        <div class="row m-0">
+                            <div class="col-4  col-md-8 mb-2 ">
+                                <h2>Seleccione sus examenes</h2>
+                                <div class="connecting-line2 mb-3"></div>
+                                <label> Buscar examen <sup class="auth">*</sup> </label>
+                                <div class="col-4  col-md-4  mb-2">
+                                    <div class="ng-autocomplete">
+                                        <ng-autocomplete #auto [data]="ArrayExamenes" [searchKeyword]="keyword"
+                                            (selected)='SelectExam($event,2)' [itemTemplate]="itemTemplate"
+                                            id="ExamAutocomplete" [notFoundTemplate]="notFoundTemplate"
+                                            placeholder="Buscar Examenes ...">
+                                        </ng-autocomplete>
+                                        <ng-template #itemTemplate let-item>
+                                            <a [innerHTML]="item.NombreProcedimiento"></a>
+                                        </ng-template>
+                                        <ng-template #notFoundTemplate let-notFound>
+                                            <div [innerHTML]="notFound"></div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 mt-2 mb-2" *ngIf="detalleExam">
+                                <div class="row">
+                                    <div class="col-4 col-md-4">
+                                        <label class="titulo"> Código:</label>
+                                        <label> {{codigoProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-4">
+                                        <label class="titulo"> Procedimiento:</label>
+                                        <label> {{NombreProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-4">
+                                        <label class="titulo"> Precio:</label>
+                                        <label> {{ValorExamen |currency:'COP $':'symbol':'4.0-0'}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-1">
+                        <form class="col-12">
+                            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 col-md-offset-6 col-xs-6 text-center ">
+                                        <button type="button" class="btnCancelar2" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-6 col-xs-6 text-center">
+                                        <button type="submit" class="btn" (click)="AgregarExamen()"> + Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--modal ir a factuacion -->
+<div class="modal fade" id="irfacturacion" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title " id="exampleModalLabel1"></p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mb-3">
+                            <i id="IconoSuccess" class="fas fa-check-circle">
+                            </i>
+                        </div>
+                        <div class="col-12 col-md-12 mb-3">
+                            <p id="parrafoTexto">
+                                Venta realizada exitosamente
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-12 mb-3">
+                            <p id="parrafoFactuacion">
+                                ¿Desea continuar a facturación?
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 mt-1">
+                            <button type="button" class="btn14" data-dismiss="modal">no</button>
+                        </div>
+                        <div class="col-12 col-md-6 mt-1">
+                            <button (click)="irFacturacion()" type="button" class="btn13">si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalTransaccion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-contentTran">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación de transacción</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-5">
+                        <img class="img-datafono" src="../../../assets/images/datafono.png">
+                    </div>
+                    <div class="col-8 mt-5">
+                        <p>Ingresa el siguiente número de transacción en el datafono para continuar con el proceso de
+                            venta.</p>
+                        <div class="row">
+                            <div class="col-11 mt-5">
+                                <h5 style="text-align: center;font-size: 30px;font-weight: bold;">{{idTransaccion}}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div *ngIf="VerAlerta" class="col-12 mt-4">
+                                <div class="alert alert-danger" role="alert">
+                                    {{NotificacionError}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row mx-md-n5 mb-1">
+                    <div class="col px-md-5">
+                        <h5 style="text-align: center;">{{idTransaccion}}</h5>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p>Ingresa el siguiente número de transacción en el datafono para continuar con el proceso de venta.</p>
+                </div>
+                <div *ngIf="VerAlerta"  class="col-12 mt-4">
+                    <div class="alert alert-danger" role="alert">
+                        {{NotificacionError}}
+                    </div>
+                </div> -->
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12 col-md-offset-12 col-xs-12 text-center">
+                    <div class="btn-group " role="group ">
+                        <div><button class="btn-atrafinalizar" (click)="AlertaProceso()">Cancelar</button></div>
+                        <div><button type="button" class="btn-finalizarventa"
+                                (click)="ConfirmarPago()">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="FormularioCovid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-form-covid">
+
+          <div class="modal-header">
+            <h5 mat-dialog-title class="modal-title">Formulario Covid</h5>
+            <button type="button" class="close x" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <mat-dialog-content class="mat-typography">
+            <form  [formGroup]="formularioCovid">
+              <section >
+                <div class="row around-xs posicion--circulos">
+                  <div class="wizard col-10">
+                    <div>
+                      <div class="connecting-line-modal-covid" style="top: 19%;"></div>
+                      <ul class="topp nav-tabs2 row" role="tablist">
+                          <li role="presentation" class="active" id="Lidatosbasicos">
+                              <a href="#registrobasico" data-toggle="tab"
+                                  aria-controls="Datos Basicos" role="tab" title="Datos Basicos"
+                                  id="tabDatosBasicos">
+                                  <span class="round-tab num_tab_formularioCovid">
+                                      <i class="glyphicon glyphicon-folder-open">{{paso1}}</i>
+                                      <label class="titulo1" style="font-size: 14px; width: 84px; margin-left: -16px;">Datos básicos</label>
+                                  </span>
+                              </a>
+                          </li>
+                          <li role="presentation" class="disabled" id="Lidatossecundarios">
+                              <a href="#datosSecundarios" data-toggle="tab"
+                                  aria-controls="Datos Secundarios" role="tab"
+                                  title="Datos Secundarios" id="tabdatossecundarios">
+                                  <span class="round-tab num_tab_formularioCovid">
+                                      <i class="glyphicon glyphicon-pencil">{{paso2}}</i>
+                                      <label class="titulo1" style="font-size: 14px; width: 84px; margin-left: -16px;">Datos viajero</label>
+                                  </span>
+                              </a>
+                          </li>
+                          <li role="presentation" class="disabled" id="LidatosMuestra">
+                              <a href="#datosMuestra" data-toggle="tab" aria-controls="Datos Muestra"
+                                  role="tab" title="Datos Muestra" id="tabdatosMuestra">
+                                  <span class="round-tab num_tab_formularioCovid">
+                                      <i class="glyphicon glyphicon-pencil">{{paso3}}</i>
+                                      <label class="titulo1" style="font-size: 14px; width: 102px; margin-left: -19px;">Datos muestra</label>
+                                  </span>
+                              </a>
+                          </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="wizard col-11">
+                    <div class="tab-content">
+                      <div class="tab-pane2 active" role="tabpanel" id="registrobasico">
+                        <div>
+                          <div class="grid_formulario_covid">
+                            <div >
+                              <label>Fecha de diligenciamiento</label>
+                              <input type="date" class="input-control"
+                                  [formControl]="FechaFormuCovid" readonly>
+                            </div>
+                            <div >
+                              <label>Nacionalidad Paciente<sup class="auth">*</sup></label>
+                              <div class="ng-autocomplete-Covid">
+                                  <ng-autocomplete #covid [data]="ArrayPaises"
+                                      [searchKeyword]="keywordPaises"
+                                      [itemTemplate]="itemTemplateNacionalidad"
+                                      [notFoundTemplate]="notFoundTemplate"
+                                      placeholder="Buscar Nacionalidad ..." id="autcovid"
+                                      [formControl]="nacionalidad">
+                                  </ng-autocomplete>
+                                  <ng-template #itemTemplateNacionalidad let-item>
+                                      <a [innerHTML]="item.pais"></a>
+                                  </ng-template>
+                                  <ng-template #notFoundTemplate let-notFound>
+                                      <div [innerHTML]="notFound"></div>
+                                  </ng-template>
+                              </div>
+                           </div>
+                           <div >
+                              <label>EPS<sup class="auth">*</sup></label>
+                              <div class="ng-autocomplete-Covid">
+                                  <ng-autocomplete #covid1 [data]="ArrayEps"
+                                      [searchKeyword]="keywordEps"
+                                      [itemTemplate]="itemTemplateEps"
+                                      [notFoundTemplate]="notFoundTemplate"
+                                      placeholder="Buscar Eps ..." id="autcovid"
+                                      [formControl]="eps"
+                                      >
+                                  </ng-autocomplete>
+                                  <ng-template #itemTemplateEps let-item>
+                                      <a [innerHTML]="item.eps"></a>
+                                  </ng-template>
+                                  <ng-template #notFoundTemplate let-notFound>
+                                      <div [innerHTML]="notFound"></div>
+                                  </ng-template>
+                              </div>
+                            </div>
+                            <div >
+                              <label>País Residencia<sup class="auth">*</sup></label>
+                              <div class="ng-autocomplete-Covid">
+                                  <ng-autocomplete #covid2 [data]="ArrayPaises"
+                                      [searchKeyword]="keywordPaises"
+                                      [itemTemplate]="itemTemplatePais"
+                                      [notFoundTemplate]="notFoundTemplate"
+                                      placeholder="Buscar País ..." id="autcovid"
+                                      [formControl]="pais">
+                                  </ng-autocomplete>
+                                  <ng-template #itemTemplatePais let-item>
+                                      <a [innerHTML]="item.pais"></a>
+                                  </ng-template>
+                                  <ng-template #notFoundTemplate let-notFound>
+                                      <div [innerHTML]="notFound"></div>
+                                  </ng-template>
+                              </div>
+                            </div>
+                            <div >
+                              <label>Regimen Paciente</label>
+                              <select class="custom-select form-control" formControlName="regimen">
+                                  <option value="0">Seleccione Regimen</option>
+
+                                      <option value="1">Contributivo</option>
+                                      <option value="2">Especial</option>
+                                      <option value="3">Subsidiado</option>
+                              </select>
+
+                           </div>
+                           <div>
+                              <label>Trabajador de la Salud</label>
+                              <select class="custom-select form-control"
+                                  formControlName="trabajadorSalud">
+                                  <option value="0">Seleccione opcion</option>
+                                  <option *ngFor="let item of ArrayDesicion"
+                                      value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                              </select>
+                            </div>
+                            <div >
+                              <label>Contacto con Caso Confirmado</label>
+                              <select class="custom-select form-control"
+                                  formControlName="contacto_confirmado">
+                                  <option value="0">Seleccione opcion</option>
+                                  <option *ngFor="let item of ArrayDesicion"
+                                      value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                              </select>
+                            </div>
+                            <div >
+                              <label>Fecha Inicio de Sintomas</label>
+                              <input type="date" class="input-control"
+                                  formControlName="fechasintomas" [max]="hoy">
+                            </div>
+                            <div >
+                              <label>Ocupación</label>
+                              <input type="text" appOnly="Letters" class="input-control"
+                                  formControlName="ocupacion">
+                            </div>
+                            <div >
+                              <label>Cliente Remitente<sup class="auth">*</sup></label>
+                              <input type="text" appOnly="Letters" class="input-control"
+                                  formControlName="cliente_remitente">
+                            </div>
+
+
+                            <div *ngIf="VerPCR">
+                              <label>Primera Vez o Control</label>
+                              <input type="text" class="input-control"
+                                  formControlName="primeraVez_Control">
+                            </div>
+                            <div *ngIf="VerPCR">
+                              <label>¿Ha tenido Sintomas?<sup class="auth">*</sup></label>
+                              <select class="custom-select form-control"
+                                  formControlName="sintomas">
+                                  <option value="0">Seleccione opción</option>
+                                  <option *ngFor="let item of ArrayDesicion"
+                                      value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                              </select>
+                            </div>
+
+                            <div *ngIf="VerPCR">
+                              <label>Condición final<sup class="auth">*</sup></label>
+                              <select class="custom-select form-control"
+                                  formControlName="condicion" (change)="validarCondicion($event.target.value)">
+                                  <option value="0">Seleccione opción</option>
+                                  <option *ngFor="let item of ArrayCondicion"
+                                      value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                              </select>
+                            </div>
+
+                            <div *ngIf="VerPCR">
+                              <div *ngIf="muerte">
+                                <label>Fecha de muerte</label>
+                                <input type="date" class="input-control" formControlName="fechamuerte" [max]="hoy">
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5">
+                            <div class="hero" role="group">
+                              <div class="col-xs">
+                                <button mat-button type="button" class="btn-atra" (click)="CerrarFormularioCovid()">Cancelar</button>
+                              </div>
+                              <div class="col-xs">
+                                <button mat-button type="button" class="btn-sig1" (click)="SiguienteCovid(1)">Siguiente</button>
+                              </div>
+                            </div>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane2 mobile2" role="tabpanel" id="datosSecundarios">
+                  <div class="col-12 col-md-12 mt-2">
+                    <div class="row m-0 d-flex justify-content-center" *ngIf="VerPCR">
+                      <div class="grid_formulario_covid2">
+                        <div >
+                          <label>Tipo Viajero</label>
+                          <select class="custom-select form-control"
+                            formControlName="viajero">
+                            <option value="0">Seleccione opcion</option>
+                            <option value="1">Nacional</option>
+                            <option value="2">Internacional</option>
+                          </select>
+                        </div>
+                       <div *ngIf="formularioCovid.value.viajero==1">
+                         <label>Municipio de viaje</label>
+                         <div class="ng-autocomplete-Covid">
+                           <ng-autocomplete #covid3 [data]="ArrayCiudades"
+                              [searchKeyword]="keywordCiudades"
+                              [itemTemplate]="itemTemplateCiudad"
+                              [notFoundTemplate]="notFoundTemplate"
+                              placeholder="Buscar Municipio ..." id="autcovid"
+                              [formControl]="ciudad_viaje">
+                           </ng-autocomplete>
+                           <ng-template #itemTemplateCiudad let-item>
+                               <a [innerHTML]="item.ciudad"></a>
+                           </ng-template>
+                           <ng-template #notFoundTemplate let-notFound>
+                               <div [innerHTML]="notFound"></div>
+                           </ng-template>
+                         </div>
+                       </div>
+                       <div *ngIf="formularioCovid.value.viajero==2">
+                        <label>País de procedencia</label>
+                        <div class="ng-autocomplete-Covid">
+                          <ng-autocomplete #covid4 [data]="ArrayPaises"
+                            [searchKeyword]="keywordPaises"
+                            [itemTemplate]="itemTemplatePais"
+                            [notFoundTemplate]="notFoundTemplate"
+                            placeholder="Buscar País ..." id="autcovid"
+                            [formControl]="pais_procedencia">
+                          </ng-autocomplete>
+                          <ng-template #itemTemplatePais let-item>
+                              <a [innerHTML]="item.pais"></a>
+                          </ng-template>
+                          <ng-template #notFoundTemplate let-notFound>
+                              <div [innerHTML]="notFound"></div>
+                          </ng-template>
+                        </div>
+                      </div>
+                       <div>
+                        <label for="">Fecha</label>
+                         <input type="date" class="input-control"
+                           placeholder="dd/mm/yyyy" formControlName="fechallegada">
+                       </div>
+                       </div>
+                     </div>
+                     <div class="row m-0 d-flex justify-content-center" *ngIf="VerAntigeno">
+                        <div class="grid_formulario_covid">
+                            <div>
+                                <label>Primera vez o control</label>
+                                <input type="text" class="input-control"
+                                    formControlName="primeraVez_Control">
+                            </div>
+                            <div>
+                                <label>¿Ha tenido Sintomas?<sup class="auth">*</sup></label>
+                                <select class="custom-select form-control"
+                                    formControlName="sintomas">
+                                    <option value="0">Seleccione opcion</option>
+                                    <option *ngFor="let item of ArrayDesicion"
+                                        value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Pos Sintomático</label>
+                                <select class="custom-select form-control"
+                                    formControlName="PosSintomatico">
+                                    <option value="0">Seleccione opcion</option>
+                                    <option *ngFor="let item of ArrayDesicion"
+                                    value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Tipo de Prueba<sup class="auth">*</sup></label>
+                                <select class="custom-select form-control"
+                                    formControlName="Tipo_Prueba">
+                                    <option value="0">Seleccione opcion</option>
+                                    <option *ngFor="let item of ArrayPrueba"
+                                        value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Condición Final</label>
+                                <select class="custom-select form-control"
+                                    formControlName="condicion" (change)="validarCondicion($event.target.value)">
+                                    <option value="0">Seleccione opcion</option>
+                                    <option *ngFor="let item of ArrayCondicion"
+                                        value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                                </select>
+                            </div>
+                            <div *ngIf="muerte">
+                              <label>Fecha de Muerte</label>
+                              <input type="date" class="input-control"
+                                    placeholder="dd/mm/yyyy" formControlName="fechamuerte">
+                            </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5">
+                        <div class="buttonDs" role="group">
+                            <div><button type="button" class="btn-atra"
+                                    (click)="RetrocederCovid(1)">Atras</button></div>
+                            <div><button type="button" class="btn-sig1"
+                                    (click)="SiguienteCovid(2)">Siguiente</button>
+                            </div>
+                        </div>
+                     </div>
+                 </div>
+               </div>
+
+              <div class="tab-pane2 mobile3" role="tabpanel" id="datosMuestra">
+                  <div class="col-12 col-md-12 mt-2">
+                      <div class="row m-0 d-flex justify-content-center" *ngIf="VerPCR">
+                          <div class="grid_formulario_covid">
+                              <div >
+                                  <label>Municipio de Procedencia Muestra<sup class="auth">*</sup></label>
+                                  <div class="ng-autocomplete-Covid">
+                                      <ng-autocomplete #covid5 [data]="ArrayCiudades"
+                                          [searchKeyword]="keywordCiudadMuestra"
+                                          [itemTemplate]="itemTemplateCiudadMuestra"
+                                          [notFoundTemplate]="notFoundTemplate"
+                                          placeholder="Buscar Municipio.." id="autcovid"
+                                          [formControl]="ciudad_muestra">
+                                      </ng-autocomplete>
+                                      <ng-template #itemTemplateCiudadMuestra let-item>
+                                          <a [innerHTML]="item.ciudad"></a>
+                                      </ng-template>
+                                      <ng-template #notFoundTemplate let-notFound>
+                                          <div [innerHTML]="notFound"></div>
+                                      </ng-template>
+                                  </div>
+                              </div>
+                              <div >
+                                  <label>Código Tomo Muestra</label>
+                                  <div class="ng-autocomplete-Covid">
+                                      <ng-autocomplete #covid6 [data]="Codigos"
+                                          [searchKeyword]="keywordCodigos"
+                                          [itemTemplate]="itemTemplateCodigos"
+                                          [notFoundTemplate]="notFoundTemplate"
+                                          placeholder="Buscar Codigos ..." id="autcovid"
+                                          [formControl]="codigo_muestra">
+                                      </ng-autocomplete>
+                                      <ng-template #itemTemplateCodigos let-item>
+                                          <a [innerHTML]="item.id+' - '+item.descripcion"></a>
+                                      </ng-template>
+                                      <ng-template #notFoundTemplate let-notFound>
+                                          <div [innerHTML]="notFound"></div>
+                                      </ng-template>
+                                  </div>
+                              </div>
+                              <div>
+                                  <label>Fecha Toma de Muestra <sup class="auth">*</sup></label>
+                                  <input type="date" class="input-control"
+                                      placeholder="dd/mm/yyyy" formControlName="fechamuestra">
+                              </div>
+                              <div >
+                                  <label>Fecha Recepción <sup class="auth">*</sup></label>
+                                  <input type="date" class="input-control"
+                                       placeholder="dd/mm/yyyy"
+                                       formControlName="fecharecepcion">
+                               </div>
+                               <div>
+                                   <label>Número Orden Central Muestras (INS)</label>
+                                   <input type="text" class="input-control"
+                                       formControlName="numeroorden">
+                               </div>
+                               <div >
+                                   <label>Tipo de Muestra<sup class="auth">*</sup></label>
+                                   <select class="custom-select form-control"
+                                       formControlName="tipoMuestra">
+                                       <option value="0">Seleccione opcion</option>
+                                       <option *ngFor="let item of ArrayMuestra"
+                                           value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                                   </select>
+                               </div>
+
+                               <div >
+                                   <label>Código Interno GVI<sup class="auth">*</sup></label>
+                                   <input type="text" class="input-control"
+                                       formControlName="codigoGVI">
+
+                               </div>
+                               <div >
+                                   <label>Tipo Estrategia <sup class="auth">*</sup></label>
+                                   <select class="custom-select form-control"
+                                       formControlName="estrategia">
+                                       <option value="0">Seleccione opcion</option>
+                                       <option *ngFor="let item of ArrayEstrategia"
+                                           value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="row m-0 d-flex justify-content-center" *ngIf="VerAntigeno">
+                           <div class="grid_formulario_covid">
+                               <div >
+                                   <label>Municipio de Procedencia Muestra<sup class="auth">*</sup></label>
+                                   <div class="ng-autocomplete-Covid">
+                                       <ng-autocomplete #covid7 [data]="ArrayCiudades"
+                                           [searchKeyword]="keywordCiudadMuestra"
+                                           [itemTemplate]="itemTemplateCiudadMuestra"
+                                           [notFoundTemplate]="notFoundTemplate"
+                                           placeholder="Buscar Municipio.." id="autcovid"
+                                           [formControl]="ciudad_muestra"
+                                           >
+                                       </ng-autocomplete>
+                                       <ng-template #itemTemplateCiudadMuestra let-item>
+                                           <a [innerHTML]="item.ciudad"></a>
+                                       </ng-template>
+                                       <ng-template #notFoundTemplate let-notFound>
+                                           <div [innerHTML]="notFound"></div>
+                                       </ng-template>
+                                   </div>
+                               </div>
+                               <div >
+                                 <label>Código Tomo Muestra</label>
+                                 <div class="ng-autocomplete-Covid">
+                                     <ng-autocomplete #covid8 [data]="Codigos"
+                                     [searchKeyword]="keywordCodigos"
+                                         [itemTemplate]="itemTemplateEps"
+                                         [notFoundTemplate]="notFoundTemplate"
+                                         placeholder="Buscar Codigos ..." id="autcovid"
+                                         [formControl]="codigo_muestra">
+                                     </ng-autocomplete>
+                                     <ng-template #itemTemplateEps let-item>
+                                         <a [innerHTML]="item.id+' - '+item.descripcion"></a>
+                                     </ng-template>
+                                     <ng-template #notFoundTemplate let-notFound>
+                                         <div [innerHTML]="notFound"></div>
+                                     </ng-template>
+                                 </div>
+                                </div>
+                                <div >
+                                    <label>Fecha Toma de Muestra</label>
+                                    <input type="date" class="input-control"
+                                        placeholder="dd/mm/yyyy" formControlName="fechamuestra">
+                                </div>
+                                <div >
+                                    <label>Fecha Recepción</label>
+                                    <input type="date" class="input-control"
+                                        placeholder="dd/mm/yyyy"
+                                        formControlName="fecharecepcion">
+                                </div>
+                                <div >
+                                    <label>Número Orden Central Muestras (INS)</label>
+                                    <input type="text" class="input-control"
+                                        formControlName="numeroorden">
+                                </div>
+                                <div >
+                                    <label>Código Interno GVI<sup class="auth">*</sup></label>
+                                    <input type="text" class="input-control"
+                                        formControlName="codigoGVI">
+                                </div>
+                                <div >
+                                    <label>Tipo de Estrategia</label>
+                                    <select class="custom-select form-control"
+                                        formControlName="estrategia">
+                                        <option value="0">Seleccione opcion</option>
+                                        <option *ngFor="let item of ArrayEstrategia"
+                                            value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5">
+                            <div class="buttonDs" role="group">
+                                <div><button type="button" class="btn-atra"
+                                        (click)="RetrocederCovid(2)">Atras</button></div>
+                                <div><button type="button" class="btn-sig1"
+                                        (click)="GuardarFormularioCovid()">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </section>
+            </form>
+          </mat-dialog-content>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal " id="ModalCovidPR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-form-covid">
+        <div class="modal-header">
+          <h5 class="modal-title">Formulario Covid</h5>
+          <button type="button" class="close x" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formularioCovid">
+            <div class="col-12 col-md-12 mt-2 modalCovidPR">
+                <div class="row m-0 d-flex justify-content-center">
+                    <div class="grid_formulario_covid">
+                        <div >
+                            <label>Fecha de diligenciamiento</label>
+                            <input type="date" class="input-control"
+                                [formControl]="FechaFormuCovid" readonly>
+                        </div>
+                        <div >
+                            <label>Cerco Epidemiologico<sup class="auth">*</sup></label>
+                            <select class="custom-select form-control" formControlName="cercoepodemiologico">
+                                <option value="0">Seleccione Cerco</option>
+                                <option *ngFor="let cerco of ArrayDesicion"
+                                    value="{{cerco.IdOpc}}">
+                                    {{cerco.Opcion}}</option>
+                            </select>
+
+                        </div>
+                        <div >
+                            <label>Trabajador de la Salud<sup class="auth">*</sup></label>
+                            <select class="custom-select form-control"
+                                formControlName="trabajadorSalud">
+                                <option value="0">Seleccione opcion</option>
+                                <option *ngFor="let item of ArrayDesicion"
+                                    value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                            </select>
+                        </div>
+                        <div >
+                            <label>Sintomas Previos</label>
+                            <select class="custom-select form-control"
+                                formControlName="sintomas_previos">
+                                <option value="0">Seleccione opcion</option>
+                                <option *ngFor="let item of ArrayDesicion"
+                                    value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                            </select>
+                        </div>
+
+
+                        <div >
+                            <label>EPS<sup class="auth">*</sup></label>
+                            <div class="ng-autocomplete-Covid">
+                                <ng-autocomplete #covid [data]="ArrayEps"
+                                    [searchKeyword]="keywordEps"
+                                    [itemTemplate]="itemTemplateEps"
+                                    [notFoundTemplate]="notFoundTemplate"
+                                    placeholder="Buscar Eps ..." id="autcovid"
+                                    [formControl]="eps">
+                                </ng-autocomplete>
+                                <ng-template #itemTemplateEps let-item>
+                                    <a [innerHTML]="item.eps"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div >
+                            <label>Fecha Toma de Muestra</label>
+                            <input type="date" class="input-control" formControlName="fechamuestra">
+                        </div>
+
+                        <div >
+                            <label>¿Ha tenido Sintomas?<sup class="auth">*</sup></label>
+                            <select class="custom-select form-control"
+                                formControlName="sintomas">
+                                <option value="0">Seleccione opcion</option>
+                                <option *ngFor="let item of ArrayDesicion"
+                                    value="{{item.IdOpc}}">{{item.Opcion}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-3">
+                <div class="buttonDs" role="group">
+                    <div><button type="button" class="btn-atra"
+                        (click)="CerrarFormularioCovid()">Cancelar</button>
+                    </div>
+                    <div><button type="button" class="btn-sig1"
+                        (click)="GuardarFormularioCovid()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal" id="AlertaCovid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Atención</h5>
+        </div>
+        <div class="modal-body">
+            <div class="d-flex justify-content-center mt-3">
+                <i id="fasAlert" class="fas fa-6x"></i>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <p class="text-center col-9 Alert-p-Covid">{{textoAlertaCovid}}</p>
+            </div>
+            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-3">
+                <div class="" role="group">
+                  <div *ngIf="banderaAlerta == false"><button type="button" class="btn-sig" (click)="limpiarFormCovid()" >Aceptar</button></div>
+                  <div  *ngIf="banderaAlerta == true"><button type="button" class="btn-sig"  data-dismiss="modal">Aceptar</button></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

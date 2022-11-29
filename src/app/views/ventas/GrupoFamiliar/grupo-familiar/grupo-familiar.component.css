@@ -1,0 +1,1553 @@
+.Inicio{
+    margin: auto;
+    margin-left: 8.5em;
+}
+
+.pacientesP{
+    max-width: 34%;
+    margin-left: -1%;
+}
+
+.pacientesnum{max-width: 9%;}
+
+#pacientesTitle{margin-left: 7%;}
+
+#pacientesLine{width: 78%;}
+
+.BtnUsar{
+    margin-left: 1em;
+}
+
+#btnacu{
+    position: absolute;
+    left: 67%;
+    margin-top: -8%; 
+}
+.connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 52%;
+    margin: 1px 113px;
+    left: 14%;
+    right: 5%;
+    top: 35%;
+    z-index: 0;
+}
+
+.scrollModal{
+    overflow: auto !important;
+}
+
+.scrollModal::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+#ProgressPacientes{
+    margin-left: 8%;
+    max-width: 20%;
+}
+
+.anchoModal{
+    width: 158% !important;
+    margin-left: -9em !important;
+}
+
+#divProgreso{
+    margin-left: 4em;
+    max-width: 21%;
+}
+
+.procedimientos{
+    padding-right: 16%;
+}
+
+.Rounded{
+    border-radius: 1rem !important;
+}
+.RoundedHeader{
+    border-top-left-radius: 0.9em;
+    border-top-right-radius: 0.9em;
+}
+
+.lineModal{
+    width: 100% !important;
+}
+
+.connecting-line-modal-paciente{
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 39%;
+    margin: 1px 113px;
+    left: 17%;
+    right: 5%;
+    top: 30%;
+    z-index: 0;
+}
+
+.connecting-line-modal-paciente2 {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 90%;
+    margin: 0px 81px;
+    left: -8%;
+    right: 5%;
+    top: 6%;
+    z-index: 0;
+}
+.DatosBasicos{
+    justify-content: left;
+    margin-left: -3%;
+}
+
+.DatosBasicos1{
+    justify-content: left;
+    margin-left: 2%;
+}
+
+.connecting-line-modal-paciente3 {
+    height: 2px;
+    background: #e0e0e0;
+    position: relative;
+    width: 125%;
+    margin: 0px auto;
+    left: 0%;
+    right: -5%;
+    bottom: 2%;
+    /*z-index: 0;*/
+}
+
+.connecting-line2 {
+    height: 2px;
+    background: #e0e0e0;
+    width: 76%;
+    z-index: 0;
+}
+
+.linePago{
+    width: 76%;
+}
+
+.lineaResponsable{
+    width: 87%;
+}
+
+.connecting-line2A{
+    height: 2px;
+    background: #e0e0e0;
+    width: 75%;
+    z-index: 0;
+}
+
+.connecting-line3 {
+height: 2px;
+background: #e0e0e0;
+width: 68%;
+margin-left: 8%;
+z-index: 0;
+}
+
+.connecting-line3-vermas{
+    height: 2px;
+    background: #e0e0e0;
+    width: 99%;
+    z-index: 0;
+}
+
+
+.connecting-line4 {
+    height: 2px;
+    background: #e0e0e0;
+    width: 99%;
+    z-index: 0;
+}
+
+.div-progress, .div-progressPacientes{
+    background-color: #B7DBE8;
+    /* width: 24%; */
+    width: 240px;
+    height: 45px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.progress-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    color: #fff !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    background-color: #8E4B9A !important;
+    transition: width .6s ease !important;
+}
+
+.progress-examenes{
+    display: flex;
+    height: 20%;
+    width: 68%;
+    margin-left: 3em;
+    overflow: hidden;
+    line-height: 0;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+.wizard {
+    margin: 20px auto;
+    background: #fff;
+}
+.wizard .nav-tabs {
+    position: relative;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-bottom: 0;
+    border-bottom-color: #e0e0e0;
+    width: 100%;
+}
+
+.wizard>div.wizard-inner {
+    position: relative;
+}
+
+span.round-tab {
+    width: 47px;
+    height: 47px;
+    line-height: 45px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 999;
+    margin-left: 192px;
+    margin-right: 192px;
+    text-align: center;
+    font-size: 27px;
+}
+
+span.round-tab i {
+    color: #0084b3;
+}
+
+.wizard li.active span.round-tab {
+    background: #0084b3;
+    border: 2px solid #0084b3;
+}
+
+.wizard li.active span.round-tab i {
+    color: #ffffff;
+}
+
+span.round-tab:hover {
+    color: #0084b3;
+    border: 2px solid #0084b3;
+}
+
+.wizard .nav-tabs>li {
+    width: 17%;
+    pointer-events: none;
+}
+
+.wizard .nav-tabs2>li {
+    width: 45%;
+    pointer-events: none;
+}
+
+.wizard li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #0084b3;
+    transition: 0.1s ease-in-out;
+}
+
+.nav-tabs {
+ border-bottom: 0px solid #dee2e6 !important; 
+}
+
+.wizard .nav-tabs>li a {
+    width: 70px;
+    height: 70px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+.wizard .nav-tabs>li a:hover {
+    background: transparent;
+}
+
+.wizard .tab-pane {
+    position: relative;
+    padding-top: 14px;
+}
+#Asociar.tab-pane{
+    margin-left: 10%;
+    margin-right: -1%;
+}
+
+.wizard .tab-pane1 {
+    position: relative;
+    padding-top: 14px;
+}
+
+.tab-content>.tab-pane1 {
+    display: none;
+}
+
+
+
+/* .wizard .tab-pane3 {
+    position: relative;
+    padding-top: 14px;
+}
+*/
+/* .tab-content>.tab-pane3 {
+    display: none;
+}  */
+
+.ml-1 {
+    margin-left:202px !important;
+  }
+
+  .ml-2, .mx-2 {
+    margin-left: 8.5rem!important;
+}
+
+.ml-modal-paciente {
+    margin-left:140px !important;
+}
+
+  .btn-sig {
+    background-color: #0084b3 !important;
+    border-color: #0084b3;
+    color: white !important;
+    width: 110px;
+    height: 43px;
+    border: none !important;
+    border-radius: 10px !important;
+    margin-left: -30%;
+    margin-right: -28%;
+}
+
+.ng-autocompletePlan{
+    width: 420px !important;
+}
+
+.ng-autocompleteExamenes{
+    width: 158% !important;
+}
+
+.ng-autocompleteChequeos{
+    width: 158% !important;
+}
+
+.input-width{
+    width: 83%;
+}
+
+.table-responsiveVentas {
+    display: block !important;
+    width: 80% !important;
+    overflow-x: auto !important;
+    font-size: 13px !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+#TdCant{
+    width: 10%;
+}
+
+.modalTable{
+    width: 100% !important;
+}
+
+.table-responsivPacientes{
+    display: block !important;
+    width: 70% !important;
+    overflow-x: auto !important;
+    font-size: 13px !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-left: 8%;
+}
+.table-responsivPacientesVerMas{
+    display: block !important;
+    width: 90% !important;
+    overflow-x: auto !important;
+    font-size: 13px !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-left: 8%;
+}
+
+.input-control {
+    background-color: transparent;
+    border: none;
+    width: 105%;
+    text-align: center;
+}
+.formPacientes-control{
+    border-radius: 10px;
+    border: 1px solid #0084b3;
+    width: 120%;
+}
+
+.terceros{
+    width: 65%;
+}
+.input-control-total {
+    background-color: transparent;
+    border: none;
+    width: 19%;
+    color: #808080db;
+    padding: 12px;
+    margin-left: 1%;
+    margin-right: -4%;
+    margin-top: -14px;
+    font-size: 19px;
+}
+
+.bt-eliminar{
+    border: 0px solid #0084b3;
+    border: none;
+    color: #0084b3;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.btn-siguiente {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 110px;
+    height: 36px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.btn-atras {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    background-color: #ef7d2200 !important;
+    color: #0084b3 !important;
+    border-color: #0084b3 !important;
+    width: 110px;
+    height: 36px;
+    border: 1px solid !important;
+    border-radius: 10px !important;
+    margin-left: -58%;
+    margin-right: 0%;
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+.btn-agregar-paciente{
+    background-color: #8E4B9A !important;
+    color: white !important;
+    width: 150px;
+    height: 40px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+#buttonmas {
+    color: #0084b3;
+    cursor: pointer;
+}
+#botonCambiar{
+    padding-left: 2% !important;
+    padding-right: 1% !important;
+    text-align: center !important;
+}
+
+.col-medioPago {
+    flex: 0 0 27%;
+    max-width: 27%;
+}
+
+.MedioPago{
+    max-width: 95%;
+}
+
+.card-body {
+    border-radius: 14px;
+    border: 1px solid #0084b3;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px -2px rgb(0 0 0 / 16%);
+    height: auto;
+    width: 100%;
+}
+.card-bodyPago{
+    border-radius: 14px;
+    border: 1px solid #0084b3;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px -2px rgb(0 0 0 / 16%);
+    height: 100%;
+    width: 100%;
+}
+
+.card-title {
+    font-size: 91% !important;
+    padding-left: 15% !important;
+}
+
+.card-Resumen {
+    width: 100%;
+    padding: 15px;
+}
+.ml-card-Resumen{
+    margin-left: 1.3rem!important;
+}
+
+.col-medioPago-resume {
+    flex: 0 0 27%;
+    max-width: 50%;
+    margin-left: 8%;
+    margin-top: 3% !important;
+}
+
+
+.card-bodyResumen {
+    border-radius: 14px;
+    border: 1px solid #0084b3;
+    background-color: #EBFCFB;
+    -webkit-box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.16);
+    box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.16);
+    height: auto;
+    width: 84%;
+    margin-left: 20%;
+}
+
+.img-resumenPago {
+    width: 70%;
+    height: auto;
+    margin-left: 15%;
+    margin-right: 24%;
+    margin-top: -5%;
+}
+
+.th-resumen {
+    text-align: inherit;
+    text-align: -webkit-match-parent;
+    background-color: #EBFCFB !important;
+}
+
+.textConfirm{
+    font-size: larger;
+}
+
+.btn-link {
+    color: #0084b3 !important;
+    text-align: end;
+    width: 66% !important;
+    -webkit-user-select: none;
+    user-select: none;
+    text-decoration: underline;
+    background-color: #fff!important;
+    border: 1px solid #fff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.btn-link2 {
+    color: #0084b3 !important;
+    text-align: left;
+    width: 100% !important;
+    -webkit-user-select: none;
+    user-select: none;
+    text-decoration: underline;
+    background-color: #fff!important;
+    border: 1px solid #fff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.MediosPago{
+    padding: 1rem;
+}
+.img-bono{
+    width: 90%;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 24%;
+    margin-top: -5%; 
+}
+
+.img-efectivo {
+    width: 90%;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 24%;
+    margin-top: -5%;
+}
+.img-pse {
+    width: 90%;
+    height: auto;
+    margin-left: 1em;
+    margin-top: -5%;
+    vertical-align: middle;
+    position: relative;
+}
+
+.img-transferencia{
+    width: 90%;
+    height: auto;
+    margin-left: 1em;
+    margin-top: -1%;
+    vertical-align: middle;
+    position: relative;
+}
+
+.img-tarjeta {
+    width: 90%;
+    height: auto;
+    margin-left: 1em;
+    margin-top: -3%;
+    vertical-align: middle;
+    position: relative;
+}
+
+
+
+.img-EfNacional{
+    width: 90%;
+    height: auto;
+    margin-left: 1em;
+    margin-top: -5%;
+    vertical-align: middle;
+    position: relative;
+}
+
+
+
+.dropzone {
+    width: 50%;
+    height: 83%;
+    padding: 2rem;
+    text-align: center;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px dashed #0164da4f;
+    border-radius: 16px;
+}
+
+.label-dropzone{
+    font-size: 15px;
+    font-weight: bold;
+    color: #0084b3;
+}
+
+#fileDropRef {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#Colum {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.fontTitulo{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-content2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 195%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 10px;
+    margin-left: -40%;
+    margin-top: 28%;
+}
+
+.modal-content1crear {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 102%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 19px;
+}
+
+.modal-content2crear {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 170%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 10px;
+    left: -35%;
+    margin-top: 5%;
+}
+
+.modal-content3crear{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 155%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 20px;
+    margin-left: -28%;
+    margin-top: 22%;
+}
+
+#parrafo {
+    font-size: 19px !important;
+    color: #0084b3;
+    text-align: center;
+}
+
+.btn-actualizar-paciente {
+    background-color: #Ef7d22 !important;
+    color: white !important;
+    width: 110px;
+    height: 36px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.btn-editar-paciente{
+
+    background-color: #Ef7d22 !important;
+    color: white !important;
+    width: 110px;
+    height: 36px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+    margin-left: -30%;
+}
+#IconoEditar{
+    color:#0084b3;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.btn-firma {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 126px;
+    height: 36px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+#menorAlert{
+    margin-top: 35%;
+}
+
+
+.margen-resumen{
+    margin-left: -3%;
+}
+
+.col-9 {
+    flex: 0 0 80%;
+    max-width: 80%;
+}
+
+
+.modal-contentTran {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* pointer-events: auto; */
+    background-color: #fff;
+    background-clip: padding-box;
+    /* border: 1px solid rgba(0, 0, 0, 0.2); */
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+.btn-finalizarventa {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 110px;
+    height: 43px;
+    border: none !important;
+    border-radius: 10px !important;
+    margin-left: 24%;
+    margin-right: 24%;
+}
+
+.btn-atrafinalizar {
+    background-color: #ef7d22!important;
+    color: #ffffff!important;
+    border-color: #ef7d22 !important;
+    width: 110px;
+    height: 43px;
+    border: 1px solid !important;
+    border-radius: 10px !important;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+/*#region ajustes visuales */
+
+#IconoSuccess {
+    margin-left: 40%;
+    margin-right: 40%;
+    font-size: 90px;
+    color: #0084b3;
+}
+
+#parrafoTexto {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 8px;
+    color: black;
+}
+
+#parrafoFactuacion {
+    text-align: center;
+    font-size: 22px;
+    color: #0084b3;
+    margin-top: 10px;
+    margin-bottom: -7%;
+}
+
+.btn13 {
+    background-color: #0084b3 !important;
+    padding: 7px;
+    color: #ffffff !important;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    outline: none !important;
+}
+
+.btn14 {
+    background-color: #ffffff !important;
+    padding: 7px;
+    color: #0084b3 !important;
+    width: 100% !important;
+    border: 1px solid #0084b3;
+    border-radius: 10px !important;
+    outline: none !important;
+}
+
+.colTercero2{
+    flex: 0 0 75%;
+    max-width: 72%;
+    margin-left: 9%;
+}
+
+#CTFormOtro{
+    margin-left: -5%;
+}
+
+.row-resumen {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -46px;
+    margin-left: -40px;
+    margin-top: 15px;
+}
+.row-resumen2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -46px;
+    margin-left: -35px;
+    /*margin-top: 15px;*/
+}
+
+#MaxNo{
+    position: absolute;
+    margin-left: 70%;
+    margin-top: -24.1%;
+}
+
+#ColBoton{margin-left: 10%;}
+
+.resumenAcudiente{
+    width: 51em;
+    margin-left: 2.5em;
+}
+
+#lineAcudiente{
+    left: -6%;
+    width: 88%;
+}
+
+#rowBtnVincular1{
+    width: 39em;
+    margin-top: 2%;
+}
+.emailAcudiente{
+    margin-left: 0.5%;
+    max-width: 100%;
+}
+
+#groupPagos{
+    margin-left: 10%;
+}
+
+.img-cardResumen{
+
+    width: 50%;
+    height: auto;
+    margin-left: 25%;
+    margin-top: -6%;
+    vertical-align: middle;
+    position: relative;
+}
+
+.CTConfirmacion{
+    margin-left: 14%;
+    max-width: 93%;
+}
+
+.CardTitle{
+    flex: 1 0 50%;
+    max-width: 100%;
+    text-align: initial;
+}
+
+#ResumenTitle{ max-width: 95%;}
+
+#confirmacionTitle{max-width: 95%;}
+
+#LblDatosFacturacion{
+    margin-left: 9%;
+    padding: 5px;
+}
+
+.detall-control {
+    background-color: transparent;
+    border: none;
+    width: 100% !important;
+    padding: 0px !important;
+}
+
+.detall-control .placeholder {
+    color: black;
+}
+
+.detall-control {
+    background-color: transparent;
+    border: none;
+    width: 43%;
+}
+
+.detall-control1 {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    color: #808080db;
+}
+
+
+/*#endregion  */
+
+@media screen and (max-width: 1366px) {
+    .Inicio{
+        margin: auto;
+        margin-left: 3em;
+        max-width: 97.666667%;
+    }
+    .pacientesP{
+        max-width: 38.5%;
+        margin-left: 0%;
+    }
+    .pacientesnum{max-width: 10%;}
+
+    #pacientesLine{width: 78%;}
+
+    #ProgressPacientes{
+        max-width: 25%;
+        margin-left: 7%;
+    }
+
+    #divProgreso{
+        margin-left: 1em;
+        max-width: 27%;
+    }
+
+    .MedioPago{
+        max-width: 88%;
+    }
+
+
+    .planes{
+        padding: inherit;
+    }
+    .connecting-line {
+        width: 52.5%;
+        left: 8%;
+        right: 6%;
+    }
+    .connecting-line2 {
+        width: 84%;
+    }
+    .linePago{
+        width: 75%;
+    }
+    .connecting-line3 {
+        width: 70%;
+    }
+    .table-responsiveVentas {
+        width: 79% !important;
+    }
+    #TdCant{
+        width: 14%;
+    }
+    
+    .procedimientos{
+        padding-right: 1%;
+    }
+    .img-pse {
+        width: 100%;
+        height: auto;
+        margin-left: 0.5%;
+        margin-right: 24%;
+        margin-top: -15%;
+    }
+    .img-efectivo {
+        width: 100%;
+        height: auto;
+        margin-left: 10%;
+        margin-right: 24%;
+        margin-top: -5%;
+    }
+    .img-bono{
+        width: 100%;
+        height: auto;
+        margin-left: 10%;
+        margin-right: 24%;
+        margin-top: -5%;
+    }
+    .terceros{
+        width: 80%;
+    }
+    .MediosPago{
+        padding: 1rem;
+    }
+    .btnCancelar1 {
+        width: 27% !important;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 10px !important;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .img-resumenPago {
+        width: 70%;
+        height: auto;
+        margin-left: 15%;
+        margin-right: 24%;
+        margin-top: -5%;
+    }
+
+    .wizard .nav-tabs {
+        margin-left: -1%;
+        }
+
+    .Subtotal{
+        margin-left: 15%;
+    }
+    .Total{
+        margin-left: 3%;
+        max-width: 70.666667%;
+        flex: 1 0 66.666667%;
+    }
+    .modalTable{
+        width: 100% !important;
+    }
+
+    #MaxNo{margin-top: -29.1%;}
+
+    #ResumenTitle{ 
+        max-width: 88%;
+        margin-left: 13% !important;
+    }
+
+    .img-cardResumen{
+        width: 55%;
+        height: auto;
+        margin-left: 25%;
+        margin-top: -6%;
+        vertical-align: middle;
+        position: relative;
+    }
+
+    #confirmacionTitle{
+        max-width: 88%;
+        margin-left: 13% !important;
+    }
+
+    #LblDatosFacturacion{
+        margin-left: 4%;
+        padding: 5px;
+    }
+
+    #CTFormotro{
+        margin-left: -3%;
+    }
+
+}
+
+
+/* Dispositivo xl */
+
+@media screen and (max-width: 1199px) {
+    .wizard .nav-tabs {
+        position: relative;
+        margin-left: -15%;
+        margin-right: 15%;
+        margin-bottom: 0;
+        border-bottom-color: #e0e0e0;
+    }
+    .connecting-line {
+        height: 2px;
+        background: #e0e0e0;
+        position: absolute;
+        width: 78%;
+        margin: 1px 113px;
+        left: -6%;
+        right: 5%;
+        top: 31%;
+        z-index: 0;
+    }
+    .modal-content3 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 268%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.3rem;
+        outline: 0;
+        border-radius: 10px;
+        margin-top: -50%;
+        margin-left: -100%;
+        margin-right: 100%;
+    }
+    .btn-Guard {
+        margin-top: 10%;
+    }
+    .card4 {
+        width: 15rem;
+    }
+    #resumentitul {
+        padding-left: 17px;
+    }
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        width: 137%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.3rem;
+        outline: 0;
+        border-radius: 10px;
+        margin-left: auto;
+        margin-right: 0%;
+    }
+}
+
+@media screen and (max-width: 600px){
+    ::ng-deep #AutoPlanes>.autocomplete-container{
+        width: 93%
+    }
+    ::ng-deep #AutoPlanes>.autocomplete-container>.input-container>input {
+        width: 103% !important;        
+    }
+    ::ng-deep #AutoPlanes>.autocomplete-container>.suggestions-container {
+        margin-left: -3%;
+        width: 95% !important;
+    }
+    ::ng-deep #ChequeoAutocomplete>.autocomplete-container>.input-container>input {
+        width: 103% !important;        
+    }
+    ::ng-deep #ExamAutocomplete>.autocomplete-container>.input-container>input {
+        width: 103% !important;        
+    }
+    
+    .wizard-inner{
+        width: 100%;
+        margin-left: -4%;  
+    }
+    .connecting-line{
+        width: 55%;
+        left: 1%;
+    }
+    .Inicio{
+        margin-left: 0em;
+    }
+    .BtnUsar{
+        margin-left: -1em;
+        flex: 1 0 9.666667%;
+        max-width: 53.666667%;
+    }
+    .pacientesP{
+        max-width: 50.5%;
+    }
+    .pacientesnum{
+        max-width: 17%;
+    }
+
+    .connecting-line2{
+        width: 94%;
+    }
+    #selopciones{
+        width: 95%;
+        margin-bottom: 2%;
+    }
+    .input-controlMB{
+        width: 70%;
+    }
+    .input-control-total{
+        width: 50%;
+    }
+    #DivTipoProc, #DivProc{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .table-responsiveVentas{
+        width: 100% !important;
+    }
+    #CompleteProcedimientos{
+        flex: 0 0 83.333333%;
+        max-width: 66.333333%;
+    }
+    #LabelProcedimientos{
+        margin-left: -5%;
+    }
+    .RowPacientes{
+        display: block;
+        margin-top: 1% !important;
+    } 
+    .RowTratamiento{
+        display: block;
+    }
+    
+    .div-progress{
+        left: 21%;
+        position: absolute;
+        max-width: 55%;
+        top: -43%;
+    }
+    .div-progressPacientes{
+        left: 21%;
+        position: absolute;
+        max-width: 55%;
+        top: -72%;
+    }
+    #ProgressPacientes{
+        max-width: 45%;
+        margin-left: -2%;
+    }
+    #divProgreso{
+        max-width: 45%;
+        margin-left: -2%;
+    }
+    .nav-tabs2{
+        margin-left: -20%;
+    }
+    .wizard .nav-tabs2>li {
+        width: 35%;
+        pointer-events: none;
+    }
+    .div-progress-mobile{
+        top:-20%;
+    }
+    .div-progressPacientes-mobile{
+        top: -45%;
+    }
+    .btn-agregar-paciente{
+        width: 251%;
+        margin-left: -16%;
+    }
+    .BtnAgregarPaciente{
+        position: absolute;
+        top: -14%;
+        left: 15%;
+    }
+
+    .connecting-line-modal-paciente2 {
+        height: 2px;
+        background: #e0e0e0;
+        position: absolute;
+        width: 84%;
+        margin: 0px 81px;
+        left: -16%;
+        right: 5%;
+        top: 3%;
+        z-index: 0;
+    }
+    .table-responsivPacientes{
+        width: 75% !important;
+    }
+    .ContentTable{margin-top: 30%;}
+
+    #Asociar.tab-pane{margin-top: 30%;}
+
+    #MedioPagoTitle,#ResumenTitle,#confirmacionTitle{margin-left: 0% !important;}
+
+    #MultimediosPago{display: block;}
+
+    #Max2{
+        max-width: 100%;
+        position: relative;
+        left: -23%;
+        margin-top: -4%;
+        margin-bottom: -5%;
+    }
+    #MaxSi{
+        position: relative;
+        left: 34%;
+        margin-top: 4% !important;
+        margin-bottom: -8%;
+    }
+    #MaxNo{
+        margin-left: 150%;
+        margin-top: -62.1%;
+        position: absolute;
+    }
+    .MediosPago{
+        display: block;
+        padding-top: 10%;
+    }
+    .col-medioPago{max-width: 100% !important;}
+
+    .img-mobile{
+        width: 25%;
+        margin-left: 70%;
+        margin-top: -23%;
+    }
+
+    .img-mobile2{
+        width: 70%;
+        margin-left: 18%;
+        margin-top: -5%;
+    }
+    
+    .img-bono{margin-top: -18% !important;}
+
+    .input-mobile{max-width: 30%;}
+
+    .Subtotal{ margin-left: 3%;}
+
+    #ResponsableTitle{margin-left: 5% !important;}
+
+    #responsableRow{display: block;}
+
+    #responsableTxt{
+        max-width: 100% !important;
+        margin-left: 4% !important;
+        margin-top: -3%;
+    }
+    #responsableSel{
+        max-width: 100% !important;
+        margin-left: 2em;
+    }
+    #facturacionTxt{
+        max-width: 100%;
+        margin-left: 2% !important;
+        margin-top: 0.5%;
+        flex: 100% !important;
+    }
+    .TerceroRowForm{display: grid;}
+
+    .colTercero{
+        max-width: 86.333333%;
+        margin-left: 1em;
+    }
+    .colTercero2{max-width: 98%; margin-left: 1em;}
+
+    .ml-card-Resumen{
+        margin-left: 0% !important;
+        padding-bottom: 2%;
+    }
+    .card-bodyResumen{
+        width: 90%;
+        margin-left: 3%;
+    }
+    .col-medioPago-resume{
+        max-width: 90%;
+        margin-left: 3%;
+    }
+    .card-title{
+        font-size: 100% !important;
+        padding-left: 14% !important;
+        padding-top: 5%;
+    }
+    .img-resumenPago{
+        width: 25%;
+        margin-left: 75%;
+        margin-top: -16%;
+    }
+
+    #LineResumenCompra{
+        width: 115%;
+    }
+
+    .connecting-line2A{width: 110%;}
+
+    #confEmail,#observaciones{
+        width: 140%;
+        margin-left: -5%;
+    }
+    #labelConf,#labelObs{margin-left: -5% !important;}
+
+    #politicaTxt{
+        max-width: 100% !important;
+        margin-left: -25%;
+    }
+
+    #p-politica{text-align: center;}
+
+
+    #TratNo{
+        position: absolute;
+        top: 57.5%;
+        left: 51%;
+    }
+    #HabeasData{
+        max-width: 100%;
+        margin-left: -8%;
+        margin-left: 4rem!important;
+    }
+    .btn-link{margin-left: -35%;}
+
+    .modal-content{
+        width: 89%;
+        margin-left: -4%;
+    }
+
+    .wizardMb{width: 100%;}
+    
+    .wi-mobile{
+        width: 135%;
+        margin-left: -10%;
+        margin-top: -6%;
+    }
+    #pacientesLine{display: none;}
+
+    .ml-modal-paciente{
+        width: 100%;
+    left: 10.5%;
+        max-width: 100%;
+    }
+    .btn-buscar{
+        width: 100%;
+        margin-top: 12%;
+        height: 90%;
+        margin-left: 57%;
+    }
+
+    .btn-escanear{
+        width: 100%;
+        margin-top: 12%;
+        height: 90%;
+        margin-left: 57%;  
+    }
+
+    .BuscarMobile{max-width: 40%;}
+
+    .EscanearMobile{max-width: 35%;}
+
+    .margen-resumen{
+        margin-left: -3%;
+    }
+
+    .connecting-line-modal-paciente{
+        width: 33%;
+        left: 4.5%;
+        top: 29%;
+    }
+
+    .Resumen{
+        margin-left: -10%;
+        width: 120%;
+    }
+
+    .CTConfirmacion{
+        margin-left: 5%;
+        max-width: 100%;
+    }
+    .DBasicos{margin-left: -20%;}
+
+    .connecting-line-modal-paciente3{width: 135%;}
+
+    .IconEditar{margin-left: 2%;}
+
+    .modal-content1crear{
+        width: 70%;
+        margin-left: 2%;
+    }
+}
+

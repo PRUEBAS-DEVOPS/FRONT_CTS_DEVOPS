@@ -1,0 +1,250 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Anulación</h1>
+        </div>
+        <div class="container">
+            <div class="row m-0 justify-content-md-center">
+              <div class="col col-lg-3">
+                <label>Número Factura </label>
+                <input type="text" class="form-control" id="numfac">
+              </div>
+              <div class="col col-lg-3">
+                <label>Fecha</label>
+                <input placeholder="Inicial" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechaIni" [max]="hoy" (change)="validarFecha($event.target.value,1)">
+              </div>
+              <div class="col col-lg-3">
+                <label>Fecha</label>
+                <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechafin" [max]="hoy" (change)="validarFecha($event.target.value,2)">
+              </div>
+            </div>
+            <div class="row mt-3 m-0 justify-content-md-center">
+              <div class="col col-lg-3">
+                <label>Documento</label>
+                <input type="text" class="form-control" id="documento" >
+              </div>
+              <div class="col col-lg-3">
+                <label>Medio de pago</label>
+                    <select class="form-control" id="selMedioPa">
+                        <option value="0">Seleccionar</option>
+                        <option *ngFor="let Med of MediosPago" value="{{Med.id}}">{{Med.medioPago}}
+                        </option>
+                    </select>
+              </div>
+              <div class="col col-lg-3">
+                <label>Estado</label>
+                <select class="form-control" id="SelEstado">
+                    <option value="0">Seleccionar</option>
+                    <option *ngFor="let Est of LtsEstad" value="{{Est.id}}">{{Est.estado}}
+                    </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-3">
+                <div class="btn-group" role="group">
+                    <div> <button type="button" class="btn3 form-control" (click)='consultar()'><i class="fa fa-search"
+                        aria-hidden="true"></i> Filtrar
+                </button>
+                    </div>
+                    <div> <button type="button" class="btn4 form-control"><i class="fas fa-broom"
+                        aria-hidden="true"></i>
+                </button>
+                    </div>
+                </div>
+            </div>
+          </div>
+     <div class="table-responsive mt-3" *ngIf="show">
+            <table class="table ">
+                <tr>
+                    <th>Documento</th>
+                    <th id="colum">Nombre</th>
+                    <th>Fac Athenea</th>
+                    <th>ID Solicitud</th>
+                    <th>ID Transaccion.</th>
+                    <th>Tipo servicio</th>
+                    <th>Fecha Creacion</th>
+                    <th>Numero Transaccion</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr *ngFor="let DataFac of DataFacturacion | paginate: {id:'PaginationFactu',  itemsPerPage: 5, currentPage: paginaFacturacion, totalItems: totalRecords}">
+                    <td>{{DataFac.Documento}}</td>
+                    <td>{{DataFac.NombreCompleto}}</td>
+                    <td>{{DataFac.NoFactura}}</td>
+                    <td>{{DataFac.IdSolicitudAthenea}}</td>
+                    <td>{{DataFac.IdTransaccion}}</td>
+                    <td>{{DataFac.TipoServicio}}</td>
+                    <td>{{DataFac.FechaFacturacion}}</td>
+                    <td>{{DataFac.Num_Transaccion}}</td>
+                    <td>{{DataFac.Estado}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                Elegir
+                            </button>
+                            <div class="dropdown-menu">
+                                <a id="{{Opc.Opcion}}{{DataFac.IdVenta}}" class="dropdown-item" *ngFor="let Opc of LtsOpc2" (click)='AccionClick(Opc.IdOpc,DataFac.IdVenta)'><i id="Iconos" class="{{Opc.Icono}}"></i>{{Opc.Opcion}}</a>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+            <pagination-controls id="PaginationFactu" (pageChange)="Paginar($event)" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="VerDetalles" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content1">
+            <div class="modal-header ">
+                <p class="modal-title " id="exampleModalLabel1">Detalles facturación</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div *ngFor="let DetalleVenta of DetallVenta" class="row m-0">
+                        <div class="col-12 col-md-12 mb-3">
+                            <input type="text " id="principal" class="detall-control" value="{{DetalleVenta.NombreCompleto}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 ">
+                            <i id="iconosDetalle" class="fas fa-id-card-alt"></i>
+                            <label id="Texto-principal">Tipo Documento</label>
+                            <input type="text " class="detall-control1" value="{{DetalleVenta.TipoDoc}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 ">
+                            <i id="iconosDetalle" class="fas fa-id-card"></i>
+                            <label id="Texto-principal">Numero Documento</label>
+                            <input type="number " class="detall-control1" placeholder=" " value="{{DetalleVenta.Documento}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-credit-card"></i>
+                            <label>Medio De Pago</label>
+                            <input type="text " class="detall-control1" placeholder=" " value="{{DetalleVenta.MedioPago}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-calendar-day"></i>
+                            <label id="Texto-principal">Fecha de Generacion</label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="{{DetalleVenta.FechaVenta}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-calendar"></i>
+                            <label id="Texto-principal">Fecha de Transaccion </label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-calendar"></i>
+                            <label id="Texto-principal">Tipo de servicio</label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="{{DetalleVenta.TipoServicio}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-12 mb-3 ">
+                            <i id="iconosDetalle" class="fas fa-sticky-note"></i>
+                            <label id="Texto-principal">Observaciones</label>
+                            <p class="detall-control0"> {{DetalleVenta.Observacion}}</p>
+                        </div>
+                        <!-- <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-book-open"></i>
+                            <label id="Texto-principal">Estado</label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="" disabled>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 mb-3">
+                    <input type="text " id="principal2" class="detall-control3" value="Procedimientos facturados:" disabled>
+                </div>
+                <table class="col-12 col-md-12 mb-3  table-responsive1 ">
+                    <div class="table1">
+                        <tr>
+                            <th id="celda-1">Código</th>
+                            <th id="celda-2">Servicio</th>
+                            <th id="celda-3">Valor</th>
+
+                        </tr>
+                        <tr *ngFor="let ProcedureSales of DetallProcedureVenta">
+                            <td>{{ProcedureSales.CodAthenea}}</td>
+                            <td>{{ProcedureSales.NombreExamen}}</td>
+                            <td>{{ProcedureSales.Valor |currency:'$':'symbol':'4.0-0'}}</td>
+                        </tr>
+
+                    </div>
+                </table>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="m-0 d-flex justify-content-center" *ngFor="let DetalleVenta of DetallVenta">
+                <div class="col-4 col-md-6 mb-3 text-center">
+                    <label id="Texto-principal2" class="footdow">Valor total Servicios</label>
+                </div>
+                <div class="col-5 col-md-6 mb-3 text-center">
+                    <input type="text " class="footdowp detall-control2" placeholder=" " value="{{DetalleVenta.TotalVenta |currency:'$':'symbol':'4.0-0'}}" disabled>
+                </div>
+            </div>
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mt-1">
+                            <button type="button" class="btn9" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--modal anular pago-->
+<div class="modal fade" id="FacturaAnularpago" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+            <div class="modal-header ">
+                <p class="modal-title " id="exampleModalLabel1">Anular pago</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                        <span aria-hidden="true ">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mb-3">
+                            <i id="Iconoanular" class="fas fa-exclamation-circle">
+                                </i>
+                        </div>
+                        <div class="col-12 col-md-12 mb-3">
+                            <p class="parrafoAnular">
+                                ¿Esta seguro que desea anular el pago de la factura?
+                            </p>
+                            <!-- <p class="parrafoAnular">
+                                Recuerda ingresar el siguiente número de transacción en el datafono
+                                {{this.GlobalIdVenta}}
+                            </p> -->
+
+                        </div>
+                        <div class="col-12 col-md-12 mb-1">
+                            <label>Motivo por el cual anula el pago</label>
+                            <textarea class="form-control" rows="2" id="txtmotivo"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <form>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 mt-1">
+                                <button (click)="guardarAnulacion()" type="submit" class="btn11">Aceptar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

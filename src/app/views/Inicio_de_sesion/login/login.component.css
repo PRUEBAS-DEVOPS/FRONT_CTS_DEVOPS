@@ -1,0 +1,232 @@
+/*estilos del cuerpo */
+
+.contenedor {
+    width: 100%;
+    background-image: url("/assets/images/backgroud.png");
+    height: 100vh;
+    overflow: hidden;
+    box-shadow: 0 0 3pt 2pt;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/* estilo logo*/
+
+.logo {
+    width: auto;
+    height: auto;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.form-control {
+    border: 1px solid #8E4B9A;
+}
+
+
+/* estilos del login */
+
+.center {
+    border: 1px solid #ced4da;
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 300px;
+}
+
+
+/* estilos del form, el contenedor del login */
+
+.center form {
+    padding: 5%;
+}
+
+
+/*estilos del boton de login*/
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    margin-left: 25%;
+    margin-right: 25%;
+    color: #fff !important;
+    text-align: center;
+    width: 50% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #8E4B9A !important;
+    border: 1px solid #8E4B9A;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+/* estilos de los iconos */
+
+@media screen and (max-width:1199px) {
+    .center {
+        border: 1px solid #ced4da;
+        margin: auto;
+        width: 70%;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .center form {
+        padding: 20px;
+    }
+    .contenedor {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-image: url("/assets/images/backgroud.png");
+        height: 100vh;
+        overflow: hidden;
+        box-shadow: 0 0 3pt 2pt;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .center {
+        border: 1px solid #ced4da;
+        margin: auto;
+        width: 90%;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .center form {
+        padding: 0 10px;
+    }
+    .contenedor {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-image: url("/assets/images/backgroud.png");
+        height: 100vh;
+        overflow: hidden;
+        box-shadow: 0 0 3pt 2pt;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .btn {
+        display: inline-block;
+        font-weight: 400;
+        margin-left: 0%;
+        margin-right: 0%;
+        color: #fff !important;
+        text-align: center;
+        width: 100% !important;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        user-select: none;
+        background-color: #00a496 !important;
+        border: 1px solid #00a496;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 10px !important;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+}
+
+.fondo-icono {
+    background-color: white;
+    border-radius: 100%;
+    width: 8%;
+}
+
+.fondo-icono i {
+    color: rgb(71, 70, 70);
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/*Footer*/
+
+.titulo-footer {
+    transform: translate(-38px, 41px);
+    width: 400px;
+}
+
+.fondo-icono {
+    background-color: white;
+    border-radius: 100%;
+    width: 13%;
+}
+
+
+/*#region mediasquery  */
+
+@media (min-width: 768px) {
+    .p-md-5 {
+        padding: 3rem !important;
+    }
+    .fondo-icono {
+        width: 8% !important;
+    }
+}
+
+
+/* Dispositivo xl */
+
+@media screen and (max-width: 1199px) {
+    .fondo-icono {
+        width: 5% !important;
+    }
+}
+
+
+/* Dispositivo lg */
+
+@media screen and (max-width: 991px) {
+    .fondo-icono {
+        width: 8% !important;
+    }
+}
+
+
+/* Dispositivo md */
+
+@media screen and (max-width: 767px) {
+    .fondo-icono {
+        width: 13% !important;
+    }
+}
+
+
+/* Dispositivo sm */
+
+@media screen and (max-width:575px) {
+    .fondo-icono {
+        width: 16% !important;
+    }
+}
+
+
+/* Dispositivo xs */
+
+@media screen and (max-width: 400px) {
+    .fondo-icono {
+        width: 13% !important;
+    }
+}
+
+@media screen and (max-width: 1366px) {}
+
+
+/*#endregion  */

@@ -1,0 +1,133 @@
+<div class="container">
+
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-11 col-md-11 mb-3">
+            <h1>Log de resultados</h1>
+        </div>
+        <div class="col-1 col-md-1 mb-3 ayuda ">
+            <i class="far fa-question-circle" (click)="ayuda()"></i>
+        </div>
+
+        <div class="col-12 mt-3">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-3 mb-2">
+                        <label >Fecha Recepción </label>
+                        <input placeholder="Inicio" type="text" onfocus="(this.type = 'date')" class="form-control" id="txtFechaIniRecep" [max]="hoy" (change)="validarFecha($event.target.value,1)">
+                    </div>
+                    <div class="col-12 col-md-3 mb-2 mt-2">
+                        <label> </label>
+                        <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="txtFechaFinRecep" [max]="hoy" (change)="validarFecha($event.target.value,2)">
+                    </div>
+                    <div class="col-12 col-md-3 mt-2">
+                        <label class="mb-1"></label>
+                        <select class="form-control" id="SelTipoDoc">
+                            <option value="0">Seleccione Tipo Documento</option>
+                            <option *ngFor="let tipo of ArrayTipoDoc" value="{{tipo.id}}">{{tipo.tipodocumento}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-3 mb-2 mt-2">
+                        <label></label>
+                        <input type="number" placeholder="Número De Documento" class="form-control" id="txtdocumento">
+                    </div>
+
+                    <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-2">
+                        <div class="btn-group" role="group">
+                            <div> <button type="button" class="bt3 form-control" (click)="Consultar()"><i
+                                class="fa fa-search" aria-hidden="true"></i> Filtrar
+                        </button>
+                            </div>
+                            <div> <button type="submit" class="bt4 form-control" (click)="LimpiarFormulario()"><i class="fas fa-broom"
+                                aria-hidden="true"></i>
+                        </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="VisualizarDiv">
+    <div class="Table">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Resultados</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th id="Colum">Cod.Solicitud</th>
+                                <th id="Colum">Estado</th>
+                                <th id="Colum">Fecha Solicitud</th>
+                                <th id="Colum">Fecha Recepeción</th>
+
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let ListaResult of ArrayData | paginate: { id:'paginadorListar' , itemsPerPage: 7, currentPage: paginador}">
+                            <tr>
+                                <td id="Colum">{{ListaResult.IdSolicitudAthenea}} </td>
+                                <td id="Colum"> {{ListaResult.EstadoResultado}}</td>
+                                <td id="Colum"> {{ListaResult.FechaVenta}}</td>
+                                <td id="Colum"> {{ListaResult.FechaCreacion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginadorListar" (pageChange)="paginador = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade " id="ayuda" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Log de resultados</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row m-0 mb-2">
+                        <div class="col-12 col-md-12 mb-4" id="img1">
+                            <img src="/assets/images/ayuda.png" alt="ayuda">
+                            <p class="parrafo1">¡Alerta!</p>
+                        </div>
+                        <div class="col-12 col-md-12 mb-2">
+                            <p class="parrafo2">En este modulo se mostraran los resultados que no se lograron adicionar a una solicitud por alguna de las siguientes razones:</p>
+                        </div>
+                        <div class="col-12 col-md-12 mb-2">
+                            <ul class="parrafo3" type=”A”>
+                                <li>El código del examen no existe se debe crear </li>
+                                <li>No está asociado a un perfil</li>
+                                <li>El código de el examen está mal escrito</li>
+                                <li>El analito que ingreso no existe</li>
+                                <li>Tiene analitos pendientes por ingresar</li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <p class="parrafo4">Verifique y corrija la información para validar los exámenes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12">
+                            <button type="button" class="btcancel" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,186 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Clientes</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 mt-2 mb-3">
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <input type="text" class="form-control3" id="filterclien" name="filterclien" placeholder="Buscar..." [(ngModel)]="filterclien" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4" *ngIf="IdRol!=6">
+                        <button class="btn1" type="button" (click)="modalcrearCliente()"><i id="iconomas" class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- esta parte es para la lista de los modulos -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion clientes</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th id="Colum">Cliente</th>
+                                <th id="Colum">Correo electrónico</th>
+                                <th id="Colum">NIT</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let ListCli of ListClient| filterClientes:filterclien | paginate: { id:'paginalistarcliente' , itemsPerPage: 7, currentPage: paginalistarCliente}">
+                            <tr>
+                                <td id="Colum">{{ListCli.razonsocial}} </td>
+                                <td id="Colum"> {{ListCli.correo}}</td>
+                                <td id="Colum"> {{ListCli.nit}}</td>
+                                <!-- Boton de editar -->
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="Editarcategoria(ListCli.id, ListCli)" data-toggle="modal"><i class="fas fa-edit"></i></button></td>
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock">
+                                    <!-- Boton activar e inactivar -->
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{ListCli.id}}" (change)="inactivarCliente(ListCli.id,ListCli,$event.target.checked)" [checked]="ListCli.NomEstado" />
+                                        <label class="custom-control-label" for="{{ListCli.id}}"></label>
+                                    </div>
+                                </td>
+
+                                <ng-template #elseBlock>
+                                    <td id="Colum">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginalistarcliente" (pageChange)="paginalistarCliente = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar clientes -->
+<div class="modal fade " id="EdiarClientes" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de Clientes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="Actualizar()" [formGroup]="editFormClientes">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-6 mb-3 ">
+                                <label>Razón social</label>
+                                <input type="text" class=" form-control" formControlName="razonsocial">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 ">
+                                <label>Correo electrónico</label>
+                                <input type="text" class=" form-control" formControlName="correo">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 ">
+                                <label>NIT</label>
+                                <input type="text" class=" form-control" formControlName="nit">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 ">
+                                <label>Teléfono</label>
+                                <input type="text" class=" form-control" formControlName="telefono">
+                            </div>
+                            <div class="col-12 col-md-12 mb-3 form-group ">
+                                <label>Dirección</label>
+                                <textarea type="text " class="form-control " formControlName="direccion"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal creacion de clientes -->
+<div class="modal fade " id="Crearclientes" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Cliente</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="CrearClientes()" [formGroup]="FormClientes">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Razón social <sup class="auth">*</sup>
+                                 </label>
+                                <input type="text" class="form-control" formControlName="razonsocial">
+                                <span *ngIf="submit && f.razonsocial.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Correo electrónico <sup class="auth">*</sup>
+                                 </label>
+                                <input type="email" class="form-control" formControlName="correo" id="TxtCorreo" (change)="ValidarEmail($event.target.value)">
+                                <span *ngIf="submit && f.correo.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>NIT <sup class="auth">*</sup>
+                                 </label>
+                                <input type="text" class="form-control" formControlName="nit">
+                                <span *ngIf="submit && f.nit.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Teléfono <sup class="auth">*</sup>
+                                 </label>
+                                <input type="text" class="form-control" formControlName="telefono">
+                                <span *ngIf="submit && f.telefono.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Dirección <sup class="auth">*</sup>
+                                 </label>
+                                <textarea type="text" class="form-control" formControlName="direccion"></textarea>
+                                <span *ngIf="submit && f.direccion.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

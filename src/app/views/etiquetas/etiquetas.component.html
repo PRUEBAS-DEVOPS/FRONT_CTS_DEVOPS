@@ -1,0 +1,284 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Impresión de etiquetas</h1>
+        </div>
+        <div class="container">
+            <div class="row m-0 justify-content-md-center">
+                <div class="col col-lg-3">
+                    <label>Fecha de creación</label>
+                    <input placeholder="Inicial" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechaIni">
+                </div>
+                <div class="col col-lg-3">
+                    <label style="color: white;">-</label>
+                    <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechafin">
+                </div>
+                <div class="col col-lg-3">
+                    <label>No. de solicitud </label>
+                    <input type="text" class="form-control" id="numSolicitud">
+                </div>
+                <div class="col col-lg-3">
+                    <label>No. de Factura </label>
+                    <input type="text" class="form-control" id="numFac">
+                </div>
+            </div>
+            <div class="row mt-3 m-0 justify-content-md-center">
+                <div class="col col-lg-6">
+                    <label>Tipo de documento</label>
+                    <select class="form-control" id="tipoDoc">
+                        <option value="0">Seleccionar</option>
+                        <option *ngFor="let Doc of listTipoDoc" value="{{Doc.id}}">{{Doc.tipodocumento}}</option>
+                    </select>
+                </div>
+                <div class="col col-lg-4">
+                    <label>No. de documento</label>
+                    <input type="text" class="form-control" id="numDoc">
+                </div>
+                <div class="col col-lg-2 pt-4 d-flex justify-content-around">
+                    <button type="button" class="btn_filtro mx-1" (click)='consultar()'><i class="fa fa-search"
+                    aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn_filtro mx-1" (click)="limpiar()"><i class="fas fa-broom"
+                        aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive mt-5" *ngIf="show">
+            <table class="table ">
+                <tr>
+                    <th>Documento</th>
+                    <th id="colum">Nombre</th>
+                    <th>No. Solicitud</th>
+                    <th>No. factura</th>
+                    <th>Detalle</th>
+                    <th>Etiquetas</th>
+                </tr>
+                <tr *ngFor="let DataFac of dataImpresiones | paginate: {id:'PaginationResult',  itemsPerPage: 5, currentPage: paginaFacturacion, totalItems: totalRecords}">
+                    <td>{{DataFac.Documento}}</td>
+                    <td>{{DataFac.NombreCompleto}}</td>
+                    <td>{{DataFac.NumSolicitud}}</td>
+                    <td>{{DataFac.NoFactura}}</td>
+                    <td>
+                        <a class="ver_mas" (click)="verDetalle(DataFac.IdVenta)"> Ver más</a>
+                    </td>
+                    <td>
+                      <a class="ver_mas" (click)="generarEtiqueta(DataFac.IdVenta, DataFac.NumSolicitud, DataFac.NombreCompleto, DataFac.Sexo, DataFac.Edad, DataFac.CodPlan, DataFac.IdAthenea, DataFac.FechaRecepcionSolicitud,DataFac.Documento,DataFac.Proceso)"> Generar</a>
+                    </td>
+                </tr>
+            </table>
+            <pagination-controls id="PaginationResult" (pageChange)="Paginar($event)" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<!--ver detalle de Solicitud-->
+<div class="modal fade" id="VerDetalleDeSolicitud" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <p class="modal-title" id="exampleModalLabel1">Detalle de Solicitud</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div  class="modal-body">
+                <table  class="col-11 mx-auto mt-3 border-bottom  table-responsive1 dt-responsive">
+                    <div class="table">
+                        <tr>
+                            <th id="celda-01">Código Athenea</th>
+                            <th id="celda-2">Nombre de examen</th>
+                        </tr>
+                        <tr *ngFor="let item of DetallVenta | paginate: {id:'PaginationResultSolicitud',  itemsPerPage: 3, currentPage: paginaSolicitud}">
+                            <td>{{item.CodAthenea}}</td>
+                            <td>{{item.NombreExamen}}</td>
+                        </tr>
+                    </div>
+                </table>
+                <pagination-controls id="PaginationResultSolicitud" (pageChange)="paginarSolicitud($event)" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+            </div>
+
+            <div class="modal-footer mt-1">
+                <button type="button" class="btn9" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Etiquetaa -->
+<div id="EnviarImprimirEtiqueta" style="display: none;" >
+  <div id="sticker" *ngFor="let et of Procedimientos; let i = index"  style="font-size: 10px !important; font-family: 'Segoe UI'; font-weight: 500; color:black; position: relative;" >
+      <div style="display: flex; justify-content: space-between; margin-left: 1.5em; margin-right: 1.5em; z-index: 20;position: relative">
+          <p style="width: 75%; text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important; margin-right: 0.2em;"> {{nombreCompleto}} </p>
+          <p style="margin: 0 !important; text-overflow:clip; overflow: hidden; white-space: nowrap;"> {{edad}} / {{sexo}} </p>
+      </div>
+      <div style="margin-left: 1.5em; margin-right: 1.5em; position: relative; z-index: 20;">
+        <p style="width: 100%; text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important;">{{et.Procedimientos}}</p>
+      </div>
+      <div style="width: 100%; position: relative; top: -10px; margin: 0 !important; margin-left: 0.6em !important;">
+        <ngx-barcode  [bc-value]="getNumBarras(et.IdMuestra)" [bc-display-value]="true" [bc-width]="1.3"[bc-font-size]="13" [bc-margin-top]="0" [bc-height]="40">
+        </ngx-barcode>
+      </div>
+      <div style="position: relative; top:-20px; margin-left: 1.5em; margin-right: 1.5em;">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 60%; text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important; margin-right: 0.2em !important;">H.C:{{Ndocumento+"  "}}</div>
+            <div style="text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important;">{{DetallVenta[i].Nombre_TipoMuestra}}</div>
+        </div>
+          <div style="display: flex; justify-content: space-between; margin: 0 !important;" >
+              <div style="margin: 0 !important; width: 80%; text-overflow:clip; overflow: hidden; white-space: nowrap;">{{fechaRecepSolicitud}}</div>
+              <div style="margin: 0 !important; text-overflow:clip; overflow: hidden; white-space: nowrap;">
+                  R: {{codPlan}}
+              </div>
+          </div>
+          <div style="display: flex ; justify-content: space-between; margin: 0 !important">
+              <div style="margin: 0 !important; width: 45%; text-overflow:clip; overflow: hidden; white-space: nowrap;">COLCAN LTDA .</div>
+              <div style="margin: 0 !important; text-overflow:clip; overflow: hidden; white-space: nowrap;">Sede: {{codAthenea}}</div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ErrorEtiqueta" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel1">Error etiqueta</p>
+        <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+          <span aria-hidden="true ">&times;</span>
+        </button>
+      </div>
+      <div  class="modal-body">
+        <span>No hay muestras asociadas</span>
+      </div>
+      <div class="modal-footer mt-1">
+        <button type="button" class="btn9" data-dismiss="modal" (click)="cerrarErrorEtiqueta()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Generar Etiqueta
+<div class="modal fade" id="GenerarEtiqueta" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <p class="modal-title" id="exampleModalLabel1">Generar etiqueta</p>
+              <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                  <span aria-hidden="true ">&times;</span>
+              </button>
+          </div>
+          <div  class="modal-body">
+              <table  class="col-11 mx-auto mt-3 border-bottom  table-responsive1 dt-responsive">
+                  <div class="table">
+                      <tr>
+                          <th id="celda-1">Tipo de muestra</th>
+                          <th id="celda-2">Código de etiqueta</th>
+                          <th id="celda-3">Impresión</th>
+                      </tr>
+                      <tr *ngFor="let item of DetallVenta | paginate: {id:'PaginationResultEtiqueta',  itemsPerPage: 3, currentPage: paginaSolicitud}">
+                        <td>{{item.Nombre_TipoMuestra}}</td>
+                          <td>{{solicitud}}-{{item.IdTipoMuestra}}</td>
+                          <td class=" d-flex justify-content-center">
+                            <div class="btn_print" (click)="modalImprimir(solicitud, item.IdTipoMuestra, item.Nombre_TipoMuestra)">
+                                <i class="fa fa-barcode" aria-hidden="true"></i>
+                            </div>
+                          </td>
+                      </tr>
+                  </div>
+              </table>
+              <pagination-controls id="PaginationResultEtiqueta" (pageChange)="paginarSolicitud($event)" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+          </div>
+
+          <div class="modal-footer mt-1">
+              <button type="button" class="btn9" data-dismiss="modal">Aceptar</button>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+<!--modal -->
+<!-- <div class="modal fade" id="imprimirEtiqueta" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header ">
+                <p class="modal-title " id="exampleModalLabel1">Impresión de etiqueta</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex justify-content-center">
+                <div class="col-11 d-flex flex-wrap bg_modal_print p-3 mt-3">
+                    <div class="col-6 m-0 bg_code_bar p-3" style="font-size: 9.5px;" id="etiqueta">
+                      <div style="display: flex ; justify-content: space-between;">
+                          <div class="col-xs-8"> {{nombreCompleto}} </div>
+                          <div> {{edad}} / {{sexo}}</div>
+                      </div>
+                      <div>
+                        <p>{{this.Procedimientos}}</p>
+                      </div>
+                      <div class="row" style="width: 100%;">
+                        <ngx-barcode  [bc-value]="numeroDeBarras" [bc-display-value]="true" [bc-width]="1.3"[bc-font-size]="13" [bc-margin-top]="20" [bc-height]="60">
+                        </ngx-barcode>
+                    </div>
+                        <div class="text-center">{{nombreMuestra}}</div>
+                        <div>{{fechaRecepSolicitud}}</div>
+                        <div style="display: flex ; justify-content: space-between;" >
+                          <div>H.C:</div>
+                          <div>
+                            R: {{codPlan}}
+                          </div>
+                        </div>
+                        <div style="display: flex ; justify-content: space-between;">
+                          <div>COLCAN LTDA .</div>
+                          <div>Sede: {{codAthenea}}</div>
+                         </div>
+                    </div>
+                    <div class="col-6 m-0 p-3">
+                        <p class="text-center h6">Para imprmir el número de solicitud, haga clic aqui.</p>
+                        <p class="text-center my-3 "><i class="fa fa-angle-double-down fa-2x" aria-hidden="true"></i></p>
+                        <button class="btn m-auto" (click)="imprimir()">Descargar</button>
+                    </div>
+                    <div class="col-12 text-center mt-4">
+                        El número de solicitud es: {{solicitudnum}}
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-6 m-0 bg_code_bar p-3" style="font-size: 6.8px !important;  display:none; font-weight: 800; max-width: 22em; font-family: 'Segoe UI'; position: relative; top: -9px;" id="etiquetaPrint">
+                <div style="display: flex ; margin-left: 1.3em;">
+                    <div class="col-xs-8"> {{nombreCompleto}} </div>
+                    <div style="margin-inline-start: 4em;"> {{edad}} / {{sexo}} </div>
+                </div>
+                <div style="margin-left: 1.3em; position: relative; z-index: 10;">
+                  <div>{{this.Procedimientos}}</div>
+                </div>
+                <div class="row" style="width: 100%; position: relative; top: -10px;">
+                  <ngx-barcode  [bc-value]="numeroDeBarras" [bc-display-value]="true" [bc-width]="1.3"[bc-font-size]="12" [bc-margin-top]="0" [bc-height]="40">
+                  </ngx-barcode>
+                </div>
+                <div style="position: relative; top:-20px;">
+                    <div style="width: 100%; text-align: left !important; margin-left: 1.3em;">{{nombreMuestra}}</div>
+                    <div style="width: 100%; text-align: left !important; margin-left: 1.3em;">{{fechaRecepSolicitud}}</div>
+                    <div style="display: flex ; margin-left: 1.3em;" >
+                    <div>H.C:</div>
+                    <div style="margin-inline-start: 9.5em;">
+                        R: {{codPlan}}
+                    </div>
+                    </div>
+                    <div style="display: flex ; margin-left: 1.3em;">
+                    <div>COLCAN LTDA .</div>
+                    <div style="margin-inline-start: 8.5em;">Sede: {{codAthenea}}</div>
+                    </div>
+                </div>
+              </div>
+
+            -Footer Valor Total
+            <div class="modal-footer">
+            <div class="col-12 col-md-12 ">
+              <button type="button" class="btn9" data-dismiss="modal">Aceptar</button>
+               </div>
+            </div>
+        </div>
+    </div>
+</div> -->

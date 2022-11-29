@@ -1,0 +1,194 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Planes</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 mt-2 mb-3">
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <input type="text" class="form-control3" id="filterPlan" name="filterPlan" placeholder="Buscar..." [(ngModel)]="filterPlan" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4" *ngIf="IdRol!=6">
+                        <button class="btn1" type="button" (click)="modalcrearCliente()"><i id="iconomas" class="fas fa-plus"></i>
+                            Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- esta parte es para la lista de los modulos -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion planes</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th id="Colum">Cod.</th>
+                                <th id="Colum">Nombre del plan</th>
+                                <th id="Colum">Cliente</th>
+                                <th id="Colum">Fecha creación</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let LisPlan of listPlan | filterPlanes:filterPlan| paginate: { id:'paginaListarPlan' , itemsPerPage: 7, currentPage: paginaPlan}">
+                            <tr>
+                                <td id="Colum">{{LisPlan.CodPlan}} </td>
+                                <td id="Colum"> {{LisPlan.NombrePlan}}</td>
+                                <td id="Colum"> {{LisPlan.RazonSocial}}</td>
+                                <td id="Colum"> {{LisPlan.Fechacreacion}}</td>
+                                <!-- Boton de editar -->
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="EditarPlanes(LisPlan.Id, LisPlan)" data-toggle="modal"><i class="fas fa-edit"></i></button></td>
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock">
+                                    <!-- Boton activar e inactivar -->
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{LisPlan.Id}}" (change)="inactivarPlanes(LisPlan.Id,LisPlan,$event.target.checked)" [checked]="LisPlan.NomEstado" />
+                                        <label class="custom-control-label" for="{{LisPlan.Id}}"></label>
+                                    </div>
+                                </td>
+                                <ng-template #elseBlock>
+                                    <td id="Colum">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginaListarPlan" (pageChange)="paginaPlan = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar planes -->
+<div class="modal fade " id="EdiarPlanes" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de Planes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="Actualizar()" [formGroup]="editFormPlanes">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Código del plan  </label>
+                                <input type="text" class="form-control" formControlName="CodPlan">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Nombre del plan  </label>
+                                <input type="text" class="form-control" formControlName="NombrePlan">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Cliente  </label>
+                                <select class="form-control" formControlName="IdCliente">
+                                    <option value="" selected="">Seleccione El cliente...</option>
+                                    <option *ngFor="let ListClient of GetClient" value="{{ListClient.id}}">
+                                        {{ListClient.razonsocial}}</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Tarifa  </label>
+                                <select class="form-control" formControlName="IdTarifa">
+                                    <option value="" selected>Seleccione Tarifa</option>
+                                    <option *ngFor="let tarifas of LtsTarifas" value="{{tarifas.IdTarifa}}">
+                                        {{tarifas.CodTarifa}} - {{tarifas.NombreTarifa}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal crear planes -->
+<div class="modal fade " id="CrearPlanes" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Planes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="CrearPlan()" [formGroup]="FormPlan">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Código del plan <sup class="auth">*</sup> </label>
+                                <input type="text" class="form-control" formControlName="CodPlan">
+                                <span *ngIf="submit && f.CodPlan.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Nombre del plan <sup class="auth">*</sup> </label>
+                                <input type="text" class="form-control" formControlName="NombrePlan">
+                                <span *ngIf="submit && f.NombrePlan.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Cliente <sup class="auth">*</sup> </label>
+                                <select class="form-control" formControlName="IdCliente">
+                                    <option value="" selected="">Seleccione El cliente...</option>
+                                    <option *ngFor="let ListClient of GetClient" value="{{ListClient.id}}">
+                                        {{ListClient.razonsocial}}</option>
+                                </select>
+                                <span *ngIf="submit && f.IdCliente.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Tarifa <sup class="auth">*</sup> </label>
+                                <select class="form-control" formControlName="IdTarifa">
+                                    <option value="" selected>Seleccione Tarifa</option>
+                                    <option *ngFor="let tarifas of LtsTarifas" value="{{tarifas.IdTarifa}}">
+                                        {{tarifas.CodTarifa}} - {{tarifas.NombreTarifa}}</option>
+                                </select>
+                                <span *ngIf="submit && f.Idplan.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

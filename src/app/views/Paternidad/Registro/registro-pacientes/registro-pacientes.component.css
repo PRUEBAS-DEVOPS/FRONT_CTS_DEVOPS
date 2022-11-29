@@ -1,0 +1,1688 @@
+
+.connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 70%;
+    margin: 1px 34px;
+    left: 22%;
+    right: 5%;
+    top: 37%;
+    z-index: 0;
+}
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 20px;
+    padding-top: 1%;
+}
+
+.wizarMedioResponsive{
+    margin-left: -4.5em !important;
+}
+
+.wizardTabPanel{
+    margin-left: 0em !important;
+}
+
+.sizePaciente{
+    margin-left: 1.5em !important;
+}
+
+.tamañoDetalle{
+    margin: auto; width: 124%; margin-top: 7em;
+}
+
+.fontTitulo1{
+    font-size: 20px;   
+}
+
+.verdetalle {
+    color: #0084b3;
+    cursor: pointer;
+}
+
+.form-group1{
+    display: flex;
+    font-size: 18px;
+}
+
+.connecting-line-modal-paciente3 {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 90%;
+    margin: 0px 39px;
+    left: -1.7%;
+    right: 5%;
+    top: 9%;
+    z-index: 0;
+}
+
+.margen{
+    margin-bottom: .2em !important;
+}
+
+.glyphicon{
+    font-style: normal !important;
+}
+
+.btn-buscar {
+    background: #0084b3;
+    color: white;
+    width: 180%;
+    border-radius: 7px;
+    margin-top: -2%;
+    border-color: #0084b3;
+    border: none;
+    height: 94%;
+    padding-top: 6%;
+}
+
+.fa-barcode{
+    font-size: 28px !important;
+}
+
+.fa-search{
+    font-size: 24px !important;
+}
+
+.connecting-line-modal-paciente{
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 50%;
+    margin: 1px 51px;
+    left: -1.5%;
+    right: 5%;
+    top: 25%;
+    z-index: 0;
+}
+
+.labelBarras{   
+    width: 20em;
+    margin-left: 0em;
+    border: 2px solid #0084b3;
+    border-radius: 10px;
+    height: 2em;
+    margin-top: -2em;
+}
+
+.colorForm1{
+    border: 1px solid #0084b3 !important;
+}
+
+.colorInputError{
+    border: 1px solid #b31500 !important;
+}
+
+/* .close{    
+    float: right !important;
+    font-size: 3.5rem !important;
+    line-height: 1 !important;
+    color: #fff !important;
+    opacity: 1 !important;
+    margin-top: -0.6em !important;
+} */
+
+.colorForm2{
+    border: 1px solid #0084b3 !important;
+    width: 18.5em;
+}
+
+.margenCantidad{
+    margin-left: 2.2em !important;
+    width: 170px !important;
+}
+
+.sizeAgregar{
+    margin-left: 6em;
+}
+
+.colorFormPago{
+    border: 1px solid #0084b3 !important;
+    width: 160%;
+}
+
+.colorFormCorreo{
+    border: 1px solid #0084b3 !important;
+    width: 29em;
+}
+
+.modal-titleTamaño{
+    font-size: 1.3em;
+}
+
+.modal-datosBasicos{
+    width: 110%;
+    margin-left: -2.8em !important;
+}
+
+.label-politicas{
+    padding: 16px 48px 0px;
+    margin-left: -2em;
+    margin-right: -2em;
+}
+
+.formPacientes-control{
+    border-radius: 10px;
+    border: 1px solid #0084b3;
+    width: 120%;
+}
+
+.modal-puntoEntrega{
+    margin-left: 2.6em !important;
+    width: 114%;
+}
+
+.modal-correo{
+    margin-left: 1.2em !important;
+    text-align: center;
+    width: 109%;
+    font-size: 19px !important;
+}
+.fa-tamaño{
+    color: #0084b3;
+    margin: 0.3em 11em;
+    width: 93px;
+}
+
+.modal-planesDisponibles{
+    width: 113%;
+    margin-left: -9.8em !important;
+}
+
+
+.connecting-line-modal-paciente2 {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 101%;
+    margin: 0px 39px;
+    left: -8%;
+    right: 5%;
+    top: 6%;
+    z-index: 0;
+}
+
+.DatosBasicos{
+    justify-content: left;
+    margin-left: -8%;
+}
+.connecting-line-modal-paciente3 {
+    height: 2px;
+    background: #e0e0e0;
+    position: relative;
+    width: 122%;
+    margin: 0px auto;
+    left: 0%;
+    right: -5%;
+    bottom: 2%;
+    /*z-index: 0;*/
+}
+
+.connecting-line-modal-paciente4 {
+    height: 2px;
+    background: #e0e0e0;
+    position: relative;
+    width: 100%;
+    margin: 0px auto;
+    left: 0%;
+    right: -5%;
+    bottom: 2%;
+    /*z-index: 0;*/
+}
+
+#IconoEditar{
+    color:#0084b3;
+    margin-left: 1rem;
+    cursor: pointer;
+    margin-top: .3em;
+}
+
+.row-resumen {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -46px;
+    margin-left: -35px;
+    margin-top: 15px;
+}
+
+.row-resumen2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -46px;
+    margin-left: -35px;
+    /*margin-top: 15px;*/
+}
+
+.connecting-line-modal-firma {
+height: 2px;
+background: #e0e0e0;
+position: absolute;
+width: 100%;
+margin: 0px 81px;
+left: -16%;
+right: 5%;
+top: 12%;
+z-index: 0;
+}
+.connecting-line2 {
+    height: 2px;
+    background: #e0e0e0;
+    width: 108%;
+    z-index: 0;
+}
+
+.connecting-line2A {
+    height: 2px;
+    background: #e0e0e0;
+    width: 87%;
+    z-index: 0;
+}
+
+.connecting-line2B {
+    height: 2px;
+    background: #e0e0e0;
+    width: 75%;
+    z-index: 0;
+}
+
+.connecting-line3 {
+height: 2px;
+background: #e0e0e0;
+width: 60%;
+z-index: 0;
+}
+
+.connecting-line4 {
+    height: 2px;
+    background: #e0e0e0;
+    width: 99%;
+    z-index: 0;
+    }
+
+.connecting-line5{
+    height: 2px;
+    background: #e0e0e0;
+    width: 100%;
+    z-index: 0;
+}
+
+.connecting-line6{
+    height: 1px;
+    background: #0084b3;
+    width: 107%;
+    z-index: 0;
+}
+.connecting-line6A{
+    height: 1px;
+    background: #0084b3;
+    width: 100%;
+    z-index: 0;
+}
+.connecting-line7{
+    height: 2px;
+    background: #e0e0e0;
+    width: 83%;
+    z-index: 0;
+}
+
+.wizard {
+    margin: 20px auto;
+    background: #fff;
+}
+.wizard .nav-tabs {
+    position: relative;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-bottom: 0;
+    border-bottom-color: #e0e0e0;
+}
+
+.wizard>div.wizard-inner {
+    position: relative;
+    width: 100%;
+    margin-left: -8em;
+}
+.wizard>div.wizard-inner2 {
+    position: relative;
+    width: 100%;
+    margin-left: 8em;
+}
+
+.margenWizardTab{
+    width: 104% !important;
+    margin-left: 2em !important;
+}
+
+span.round-tab {
+    width: 47px;
+    height: 47px;
+    line-height: 45px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 999;
+    margin-left: 192px;
+    margin-right: 192px;
+    text-align: center;
+    font-size: 27px;
+}
+
+span.round-tab i {
+    color: #e0e0e0;
+}
+
+.wizard li.active span.round-tab {
+    background: #0084b3;
+    border: 2px solid #0084b3;
+}
+
+.wizard li.active span.round-tab i {
+    color: #ffffff;
+}
+
+span.round-tab:hover {
+    color: #0084b3;
+    border: 2px solid #0084b3;
+}
+
+.wizard .nav-tabs>li {
+    width: 20%;
+    pointer-events: none;
+}
+
+.wizard .nav-tabs2>li {
+    width: 42%;
+}
+
+.wizard .nav-tabs2 {
+    margin-left: -40%;
+}
+
+#Lipaciente{
+    margin-left: 6em;
+    width: 40% !important;
+}
+
+.wizard li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #0084b3;
+    transition: 0.1s ease-in-out;
+}
+
+.nav-tabs {
+ border-bottom: 0px solid #dee2e6 !important; 
+}
+
+.wizard .nav-tabs>li a {
+    width: 70px;
+    height: 70px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+.wizard .nav-tabs>li a:hover {
+    background: transparent;
+}
+
+.wizard .tab-pane {
+    position: relative;
+    padding-top: 27px;
+    width: 98%;
+    margin-left: 6em;
+}
+
+.wizard .tab-pane1 {
+    position: relative;
+    padding-top: 14px;
+}
+
+.tab-content>.tab-pane1 {
+    display: none;
+}
+
+/* .wizard .tab-pane3 {
+    position: relative;
+    padding-top: 14px;
+}
+*/
+/* .tab-content>.tab-pane3 {
+    display: none;
+}  */
+
+.tamañoLabel{
+    font-size: 1.3em;
+}
+
+.tamañoLabelWord{
+    font-size: 1.3em;
+    padding-top: 1.5em;
+}
+
+.ml-1 {
+    margin-left:202px !important;
+  }
+
+  .ml-mediospago{
+    margin-left: 8.4em !important;
+    width: 109%;
+  }
+  .ml-2, .mx-2 {
+    margin-left: 8.5rem!important;
+}
+
+.ml-modal-paciente {
+    margin-left:140px !important;
+}
+
+  .btn-sig {
+    background-color: #0084b3 !important;
+    border-color: #0084b3;
+    color: white !important;
+    width: 110px;
+    height: 43px;
+    border: none !important;
+    border-radius: 10px !important;
+    margin-left: -30%;
+    margin-right: -28%;
+}
+
+.ng-autocompletePlan{
+    width: 32em !important;
+}
+
+.modal-Examenes{
+    width: 100%;
+    margin-left: -10.5em;
+}
+
+.autocomplete-container .input-container input{
+    border: 3px solid #0084b3 !important;
+}
+
+.ng-autocompleteExamenes{
+    width: 54em !important;
+}
+
+.input-width{
+    width: 83%;
+}
+
+.modal-BuscarExamenes{
+    margin-left: -0.9em !important;
+}
+
+.table-responsiveVentas {
+    display: block !important;
+    width: 100% !important;
+    font-size: 13px !important;
+    text-align: center;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+.table-responsivPacientes{
+    display: block !important;
+    width: 70% !important;
+    overflow-x: auto !important;
+    font-size: 13px !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-left: 8%;
+}
+
+.input-control {
+    background-color: transparent;
+    border: none;
+    width: 105%;
+    text-align: center;
+}
+
+.input-control1 {    
+    text-align: left !important;
+}
+
+.custom-control1{
+    margin-left: 0.8em !important;
+}
+
+.input-control-total {
+    background-color: transparent;
+    border: none;
+    width: 19%;
+    color: #808080db;
+    padding: 12px;
+    margin-left: 1%;
+    margin-right: -4%;
+    margin-top: -14px;
+    font-size: 19px;
+}
+
+.bt-eliminar{
+    border: 0px solid #0084b3;
+    border: none;
+    color: #0084b3;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.btn-siguiente {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 110px;
+    height: 36px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.btn-atras {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    background-color: #ef7d2200 !important;
+    color: #0084b3 !important;
+    border-color: #0084b3 !important;
+    width: 110px;
+    height: 36px;
+    border: 1px solid !important;
+    border-radius: 10px !important;
+    margin-left: -58%;
+    margin-right: 0%;
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+.btn-agregar-paciente{
+    background-color: #8E4B9A !important;
+    color: white !important;
+    width: 150px;
+    height: 40px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.buttons-plan {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff !important;
+    text-align: center;
+    width: 71% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #0084b3 !important;
+    border: 1px solid #0084b3;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.mr-input{
+    margin-right: -60px!important;
+}
+
+#buttonmas {
+    color: #0084b3;
+    cursor: pointer;
+}
+
+.col-medioPago {
+    flex: 0 0 27%;
+    max-width: 27%;
+}
+
+.card-body {
+    border-radius: 14px;
+    border: 1px solid #0084b3;
+    background-color: #EBFCFB;
+    box-shadow: 5px 5px 10px -2px rgb(0 0 0 / 16%);
+    height: auto;
+    width: 100%;
+   
+}
+
+.card-body1 {
+    border-radius: 14px;
+    border: 1px solid #0084b3;
+    background-color: #EBFCFB;
+    box-shadow: 5px 5px 10px -2px rgb(0 0 0 / 16%);
+    height: auto;
+    width: 71%;
+    margin-left: 12vh;
+}
+
+.card-Resumen {
+    width: 100%;
+    padding: 15px;
+}
+
+
+.card-bodyResumen {
+    border-radius: 14px;
+    border: 1px solid #0084b3;
+    background-color: #EBFCFB;
+    -webkit-box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.16);
+    box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.16);
+    height: auto;
+    width: 88%;
+    margin-left: 11%;
+}
+
+
+
+
+.table-responsive-Resumen {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    font-size: 90% !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+.resumentitulo {
+    padding-left: 17px;
+    font-weight: normal;
+}
+
+.resumentitulo1 {
+    padding-left: 15px;
+    font-weight: normal;
+    color: rgba(44, 43, 44, 0.829) !important;
+
+}
+
+.col-medioPago-resume {
+    flex: 0 0 30%;
+    max-width: 65%;
+    margin-left: -9%;
+}
+
+.card-title {
+    font-size: 100% !important;
+}
+
+.card-title1 {
+    font-size: 131% !important;
+}
+
+.th-resumen {
+    text-align: center;
+    background-color: #EBFCFB !important;
+    font-weight: normal;
+    font-size: 17px;
+    border-top: #0084b3 !important;
+}
+
+.th-resumen1 {
+    text-align: center;
+    border-bottom: #e0e0e0 !important;
+}
+
+.input-total-resumen {
+    background-color: transparent;
+    border: none;
+    width: 19%;
+    color: #808080db;
+    padding: 12px;
+    margin-left: 3%;
+    margin-right: -2%;
+    margin-top: -12px;
+}
+
+.ml-card-Resumen{
+    margin-left: 3.3rem!important;
+}
+
+.mx-3 {
+    margin-left: 5rem!important;
+}
+
+.ml-5 {
+    margin-left: 8rem!important;
+}
+
+.ml-politica {
+    margin-left: 88px!important;
+}
+
+.btn-link {
+    color: #0084b3 !important;
+    text-align: center;
+    width: 50% !important;
+    -webkit-user-select: none;
+    user-select: none;
+    text-decoration: underline;
+    background-color: #fff!important;
+    border: 1px solid #fff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+.btn-link2 {
+    color: #0084b3 !important;
+    text-align: left;
+    width: 100% !important;
+    -webkit-user-select: none;
+    user-select: none;
+    text-decoration: underline;
+    background-color: #fff!important;
+    border: 1px solid #fff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.sizeResponsiveBoton{
+    margin-left: 8em;
+}
+
+.img-pse {
+    width: 100%;
+    height: auto;
+    margin-left: 131%;
+    margin-top: -98%;
+    vertical-align: middle;
+    position: relative;
+}
+
+.img-pse1 {
+    width: 71%;
+    height: auto;
+    margin: 0px 16% 4%;
+    vertical-align: middle;
+}
+
+.img-tarjeta {
+    width: 100%;
+    height: auto;
+    margin-left: 131%;
+    margin-top: -98%;
+    vertical-align: middle;
+    position: relative;
+}
+
+.img-tarjeta1 {
+    width: 71%;
+    height: auto;
+    margin: 0px 16% 4%;
+    vertical-align: middle;
+}
+
+.img-efectivo {
+    width: 100%;
+    height: auto;
+    margin-left: 131%;
+    margin-top: -98%;
+    vertical-align: middle;
+    position: relative;
+}
+
+.img-efectivo1 {
+    width: 71%;
+    height: auto;
+    margin: 0px 16% 4%;
+    vertical-align: middle;
+}
+
+.dropzone {
+    width: 50%;
+    height: 83%;
+    padding: 2rem;
+    text-align: center;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 5px dashed #0164da4f;
+    border-radius: 16px;
+    margin-left: 7.5em !important;
+}
+
+.dropzoneConsentimiento {
+    width: 28em;
+    height: 88%;
+    padding: 2rem;
+    text-align: center;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 5px dashed #0164da4f;
+    border-radius: 16px;
+    margin-left: 0.5em !important;
+}
+
+.label-dropzone{
+    font-size: 15px;
+    font-weight: bold;
+    color: #0084b3;
+}
+
+#fileDropRef {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#Colum {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.fontTitulo{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.Rounded{
+    border-radius: 1rem !important;
+}
+
+.modal-content1crear {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 102%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 18px;
+}
+#parrafo {
+    font-size: 19px !important;
+    color: #0084b3;
+}
+
+.btn-actualizar-paciente {
+    background-color: #Ef7d22 !important;
+    color: white !important;
+    width: 110px;
+    height: 36px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.btn-firma {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 157px;
+    height: 36px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.top-card-text{
+    margin-top: 5px;
+}
+
+.card-body-registro{
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px -2px rgb(0 0 0 / 16%);
+    height: 35px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+}
+.card-header-registro{
+    background-color: #B7DBE8;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.card-registro {
+    position: relative !important;  
+    flex-direction: column !important;    
+    word-wrap: break-word !important;
+    background-color: #fff !important;
+    background-clip: border-box !important;
+    border: 1px solid rgba(0,0,0,.125) !important;
+    border-radius: 0.25rem  !important;
+    width: 20% !important;
+    display: inline-flex !important;
+    vertical-align: middle !important;
+}
+
+.modal-content3 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 268%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    border-radius: 10px;
+    margin-top: -50%;
+    margin-left: -100%;
+    margin-right: 100%;
+}
+
+.parrafo1{
+    text-align: center;
+    font-size: 20px;
+    color: #0084b3;
+    margin-top: 10px;
+    margin-bottom: -7%;
+}
+
+.parrafo2{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 8px;
+    color: black;
+}
+
+.parrafo3{
+    text-align: center;
+    font-size: 32px;
+    margin-top: 8px;
+    color: black;
+}
+
+.parrafo4{
+    text-align: center;
+    font-size: 22px;
+    margin-top: 8px;
+    color: #0084b3;
+}
+
+.progress {
+    display: inline-flex !important;
+    height: 17%!important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+    font-size: .75rem !important;
+    background-color: #B7DBE8 !important;
+    border-radius: 0.25rem !important;
+    width: 72% !important;
+    border: 1px solid rgba(128, 128, 128, 0.863);
+}
+
+.progress-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    color: #fff !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    background-color: #8E4B9A !important;
+    transition: width .6s ease !important;
+}
+
+.div-progress{
+    background-color: #B7DBE8;
+    /* width: 24%; */
+    width: 240px;
+    height: 40px;
+    border: none !important;
+    border-radius: 10px !important;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4em;
+    color: rgba(0, 0, 0, 0.782);
+}
+
+.ml-progress {
+    margin-left: 4rem!important;
+}
+
+.eliminar{
+    border: none;
+    color: #0084b3;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.tamañoLetra{
+    padding-top: 2%;
+    font-size: 1.4em;
+}
+
+.subtotal{
+    font-weight: bold;
+    font-size: larger;
+}
+
+.total{
+    font-weight: bolder;
+    font-size: small;
+    color: #0084b3;
+}
+
+.card-body-totales{
+    border-radius: 14px;
+    border: 1px solid #0084b3;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px -2px rgb(0 0 0 / 16%);
+    height: 86%;
+    width: 100%;
+}
+
+.ml-responsable {
+    margin-left: 152px !important;
+}
+
+.ml-responsable1{
+    margin-left: 7.5em !important;
+    width: 107%;
+}
+
+.btn-guardar-resposanble {
+    background-color: #0084b3 !important;
+    color: white !important;
+    width: 20%;
+    margin-top: 8%;
+    height: 37px;
+    border: none !important;
+    border-radius: 10px !important;
+}
+/*#region ajustes visuales */
+
+#IconoSuccess {
+    margin-left: 40%;
+    margin-right: 40%;
+    font-size: 90px;
+    color: #0084b3;
+}
+
+#parrafoTexto {
+    text-align: center;
+    font-size: 28px;
+    margin-top: 8px;
+    color: #000000;
+}
+
+#parrafoFactuacion {
+    text-align: center;
+    font-size: 22px;
+    color: #0084b3;
+    margin-top: 10px;
+    margin-bottom: -7%;
+}
+
+.BtnPlanes{margin-left: 22%;}
+
+.TableProc{
+    width: 107%;
+}
+
+.btn13 {
+    background-color: #0084b3 !important;
+    padding: 7px;
+    color: #ffffff !important;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    outline: none !important;
+    font-size: 18px;
+}
+
+.btn14 {
+    background-color: #ffffff !important;
+    padding: 7px;
+    color: #0084b3 !important;
+    width: 100% !important;
+    border: 1px solid #0084b3;
+    border-radius: 10px !important;
+    outline: none !important;
+}
+
+
+@media screen and (max-width: 1366px) {
+    .wizard>div.wizard-inner {
+        position: relative;
+        width: 96%;
+        margin-left: -11em;
+    }
+
+    #IconoEditar{
+        margin-top: 0.3em;
+    }
+
+    .colorFormPago {
+        width: 160% !important;
+    }
+
+    .botonAtraSiguiente{
+        margin-left: 7em;
+        }
+        
+    .botonAtraSiguiente1{
+        margin-left: 6em;
+    }
+    
+    
+    .wizardTabPanel{
+        width: 104% !important;
+    }
+        
+
+    .wizard .tab-pane {
+        position: relative;
+        padding-top: 27px;
+        width: 90%;
+        margin-left: 3em;
+    }
+
+    .sizeResponsiveBoton{
+        margin-left: 0em;
+    }
+
+
+    .ml-mediospago{
+        margin-left: 9.4em !important;
+        width: 87% !important;
+    }
+
+    .tituloResponsive{
+        margin-left: -6em;
+    }
+
+    .margenCantidad{
+        width: 29vh !important;
+    }
+
+    .ng-autocompletePlan{
+        width: 26em !important;
+    }
+
+    .BtnPlanes{
+        margin-left: 27%;
+    }
+
+    .ng-autocompleteExamenes{
+        width: 45em !important;
+    }
+
+    .connecting-line2 {
+        height: 2px;
+        background: #e0e0e0;
+        width: 114%;
+        z-index: 0;
+    }
+
+    .connecting-line2A {
+        height: 2px;
+        background: #e0e0e0;
+        width: 87%;
+        z-index: 0;
+    }
+
+    .TableProc{
+        width: 121%;
+    }
+
+    .col-medioPago {
+        flex: 1 0 25%;
+        max-width: 31%;
+    }
+
+    .img-pse {
+        width: auto;
+        height: auto;
+        margin-left: 133%;
+        margin-right: 24%;
+        margin-top: -7em;
+    }
+    .img-efectivo {
+        width: auto;
+        height: auto;
+        margin-left: 133%;
+        margin-right: 24%;
+        margin-top: -7em;
+    }
+    .btnCancelar1 {
+        width: 27% !important;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 10px !important;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .btn-link{
+        width: 69% !important;
+    }
+
+    .wizarMedioResponsive{
+        margin-left: -5.5em !important;
+    }
+
+    .dropzone {
+        margin-left: 9.5em !important;
+    }
+
+    .div-progress{
+        margin-left: 0em !important;
+    }
+
+    .wizardResponsive{
+        margin-left: 1.5em !important;
+    }
+
+    .connecting-line5{
+        width: 103% !important;
+    }
+
+    .sizePaciente{
+        margin-left: 2.5em !important;
+    }
+
+    .sizeAgregar{
+        margin-left: 2em;
+    }
+
+    .table-responsiveVentas{
+        width: 95% !important;
+    }
+
+    .connecting-line6{
+        width: 121% !important;
+    }
+
+    .wizardTabPanel{
+        margin-left: -4em !important;
+    }
+    
+}
+
+
+/* Dispositivo xl */
+
+/* @media screen and (max-width: 1199px) {
+    .wizard .nav-tabs {
+        position: relative;
+        margin-left: -15%;
+        margin-right: 15%;
+        margin-bottom: 0;
+        border-bottom-color: #e0e0e0;
+    }
+    .connecting-line {
+        height: 2px;
+        background: #e0e0e0;
+        position: absolute;
+        width: 78%;
+        margin: 1px 113px;
+        left: -6%;
+        right: 5%;
+        top: 31%;
+        z-index: 0;
+    }
+    .modal-content3 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 268%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.3rem;
+        outline: 0;
+        border-radius: 10px;
+        margin-top: -50%;
+        margin-left: -100%;
+        margin-right: 100%;
+    }
+    .btn-Guard {
+        margin-top: 10%;
+    }
+    .card4 {
+        width: 15rem;
+    }
+    #resumentitul {
+        padding-left: 17px;
+    }
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        width: 137%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.3rem;
+        outline: 0;
+        border-radius: 10px;
+        margin-top: -50%;
+        margin-left: -4%;
+        margin-right: 0%;
+    }
+} */
+
+
+@media screen and (max-width: 1400px){
+    .margenWizardTab{
+        margin-left: -0.5em !important;
+    }
+
+    .connecting-line5{   
+        width: 88%; 
+    }
+
+    .connecting-line7{   
+        width: 84%; 
+    }
+
+    .colorFormPago{
+        width: 132%;
+    }
+
+    .ml-responsable1{
+        width: 96%;
+    }
+
+    .colorFormCorreo{
+        width: 25.5em;
+    }
+
+    .connecting-line{
+        left: 14em;
+    }
+
+    .scrollDiv{
+        overflow: scroll !important;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .wizard .nav-tabs {
+        margin-left: 18%;
+        margin-right: 0%;
+    }
+
+    .container {
+        margin-left: -3em;
+        position: relative;
+    }
+
+    .connecting-line {
+        width: 37em;
+        left: 22em;
+    }
+
+    .margenCantidad{
+        margin-left: 0.5em !important;
+        width: 17vh !important;
+    }
+
+    .colorForm2 {
+        border: 1px solid #0084b3 !important;
+        width: 24vh;
+    }
+
+    .margenGrupo{
+        margin-left: 9vh !important;
+    }
+
+    .tamañoLetra {
+        margin-top: -8%;
+    }
+
+    .div-progress{
+        margin-left: -1vh;
+    }
+
+    .btn-agregar-paciente {
+        width: 15vh;
+        margin-left: -14vh;
+    }
+
+    .margenWizardTab {
+        margin-left: 2vh !important;
+    }
+
+    .margenAgregar{
+        margin-right: -9vh;
+        margin-left: 5vh;
+    }
+
+    .modal-datosBasicos {
+        margin-left: 1vh !important;
+    }
+
+    .buttons-plan {
+        
+        width: 67% !important;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.7rem;
+        height: 5vh;
+        margin-left: 4vh !important;
+    }
+
+}
+
+@media screen and (max-width: 960px) {
+    .colorForm2 {
+        width: 27vh !important;
+    }
+    
+    .tab-pane{
+        width: 131% !important;
+    }
+    
+    .connecting-line {
+        width: 75%;
+        left: 19em;
+    }
+    
+    .nav-tabs {
+        margin-left: 13%;
+        width: 100% !important;
+    }
+
+    .wizardResponsive{
+        width: 95% !important;
+        
+    }
+
+    h1{
+        margin-left: 4.5em;
+    }
+
+    .margenGrupo{
+        margin-left: 4vh !important;
+    }
+
+    #Lipaciente{
+        margin-left: 3.2em;
+    }
+    
+    .margenTamañoResponsive{
+        margin-left: 3em;
+    }
+
+    .margenWizardTab{
+        margin-left: -3vh !important;
+    }
+
+    .modal-content {
+        width: 87vh;
+        margin-left: -12vh;
+    }
+
+    .connecting-line-modal-paciente {
+        width: 48%;
+        left: -1.7vh;
+    }
+
+    .connecting-line2{
+        width: 98%;
+    }
+
+    
+    .inputOpcion{
+        flex: 0 0 41.666667% !important;
+        max-width: 41.666667% !important;
+    }
+
+    .tamañoLetra{
+        margin-top: 0%;
+    }
+
+    .table-responsiveVentas {
+        width: 77% !important;
+    }
+    
+    .margenGrupo{
+        width: 173%;
+    }
+
+    .ml-mediospago{
+        margin-left: 8.4em !important;
+        width: 83%;
+    }
+    
+    .connecting-line2A{
+        width: 73%;
+    }
+
+    .connecting-line5 {
+        width: 108%;
+    }
+
+    .btn-group1{
+        margin-left: 8em;
+    }
+
+    .BtnPlanes {
+        margin-left: 11%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .wizard .tab-pane{
+        margin-left: 7em;
+    }
+
+    .connecting-line-modal-paciente{
+        width: 48%;
+        left: -0.7vh;
+    }
+
+    .connecting-line-modal-paciente2 {
+        left: -1%;
+    }
+
+    .btn-agregar-paciente{
+        width: 20vh;
+        margin-left: -17vh;
+    }
+
+    .margenTamañoResponsive {
+        margin-left: -1em;
+    }
+
+    .tamañoDetalle{
+        margin-left: -6em; 
+    }
+
+    .tabIngreso{
+        margin-left: 2em !important;
+    }
+
+    .modalAgregarResponsive{
+        width: 117vh;
+        margin-left: -51vh;
+    }
+
+    .margenPagos{
+        margin-left: 2em;
+    }
+
+    .modalMargenResponsive{
+        margin-left: -13em;
+    }
+}
+
+
+@media screen and (max-width: 680px){
+    
+
+    .container {
+        margin-left: -5em;
+    }
+
+    h1{
+        margin-left: 15vh;
+    }
+
+    .modal-content{
+        width: 64vh;
+        margin-left: 0vh;
+    }
+    
+    .margenGrupo{
+        margin-left: 18vh !important;
+        margin-right: -3vh !important;
+    }
+    
+    .margenWizardTab{
+        margin-left: 7vh !important;
+    }
+
+    .wizard-inner{
+        margin-left: -2vh; 
+    }
+
+    .connecting-line-modal-paciente {
+        width: 36%;
+        left: 21.5vh;
+    }
+
+    .margenDatos{
+        margin-right: -7em !important;
+        margin-left: 7vh !important;
+    }
+
+    .margenDocumen{
+        margin-left: -6vh;
+    }
+
+    .btn-buscar { 
+        width: 18%;
+        margin-top: -1%;
+        padding: 1% 0%;
+    }
+
+}
+

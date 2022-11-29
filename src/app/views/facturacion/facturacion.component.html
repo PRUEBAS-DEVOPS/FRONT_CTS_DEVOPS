@@ -1,0 +1,388 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Facturación</h1>
+        </div>
+        <div class="mt-1 col-12 mb-3">
+            <div class="row m-0">
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>N° Solicitud Athenea </label>
+                    <input type="text" class="form-control" id="idsolicitudAth">
+                </div>
+<!--
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>ID Trans. domicilio </label>
+                    <input type="text" class="form-control" id="idsolicitudAth">
+                </div> -->
+
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Fecha</label>
+                    <input placeholder="Inicial" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechaIni" [max]="hoy" (change)="validarFecha($event.target.value,1)">
+                </div>
+
+                <div class="col-12 col-md-3 mt-2 form-group">
+                    <label></label>
+                    <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechafin" [max]="hoy" (change)="validarFecha($event.target.value,2)">
+                </div>
+
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Documento</label>
+                    <input type="text" class="form-control" id="documento" value="{{DocumentoPaciente}}">
+                </div>
+
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Estado</label>
+                    <select class="form-control" id="SelEstado">
+                        <option value="0">Seleccionar</option>
+                        <option *ngFor="let Est of LtsEstad" value="{{Est.id}}">{{Est.estado}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Medio de pago</label>
+                    <select class="form-control" id="selMedioPa" >
+                        <option value="0">Seleccionar</option>
+                        <option *ngFor="let Med of MediosPago" value="{{Med.id}}">{{Med.medioPago}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Tipo Servicio</label>
+                    <select class="form-control" id="selTipoSer" (change)="selectTipoServicio()">
+                        <option value="0">Seleccionar</option>
+                        <option *ngFor="let tipSer of LtsTipoServ" value="{{tipSer.IdTipoServ}}">{{tipSer.TipoServicio}}
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-3 mb-3 form-group" *ngIf="mostrarNSolicitudCTS">
+                    <label>N° de Solicitud CTS</label>
+                    <input type="text" class="form-control" id="numSolicitud" value="{{nSolicitud}}">
+                  </div>
+
+                
+
+                <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-2">
+                    <div class="btn-group" role="group">
+                        <div> <button type="submit" class="btn3 form-control" (click)="consultar()"><i class="fa fa-search"
+                            aria-hidden="true"></i> Filtrar
+                    </button>
+                        </div>
+                        <div> <button type="submit" class="btn4 form-control" (click)="LimpiarFormulario()"><i class="fas fa-broom"
+                            aria-hidden="true"></i>
+                    </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--Tabla con evento keyup-->
+        <div class="table-responsive" *ngIf="show ">
+            <table class="table ">
+                <tr>
+                    <th>Documento</th>
+                    <th id="colum">Nombre</th>
+                    <th>Fac Athenea</th>
+                    <th>No. Solicitud</th>
+                    <th>ID Transaccion.</th>
+                    <th>Tipo servicio</th>
+                    <th>Fecha Creacion</th>
+                    <th>Numero Transaccion</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr *ngFor="let DataFac of DataFacturacion | paginate: {id:'PaginationFactu',  itemsPerPage: 5, currentPage: paginaFacturacion, totalItems: totalRecords}">
+                    <td>{{DataFac.Documento}}</td>
+                    <td>{{DataFac.NombreCompleto}}</td>
+                    <td>{{DataFac.NoFactura}}</td>
+                    <td>{{DataFac.NumSolicitudAthenea}}</td>
+                    <td>{{DataFac.IdTransaccion}}</td>
+                    <td>{{DataFac.TipoServicio}}</td>
+                    <td>{{DataFac.FechaFacturacion}}</td>
+                    <td>{{DataFac.Num_Transaccion}}</td>
+                    <td>{{DataFac.Estado}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                Elegir
+                            </button>
+                            <div class="dropdown-menu">
+                                <a id="{{Opc.Opcion}}{{DataFac.IdVenta}}" class="dropdown-item" *ngFor="let Opc of LtsOpc2" (click)='AccionClick(Opc.IdOpc,DataFac.IdVenta,DataFac.Documento,DataFac.Proceso,DataFac.IdVentaCentralizada, DataFac.NumSolicitudAthenea)'><i id="Iconos" class="{{Opc.Icono}}"></i>{{Opc.Opcion}}</a>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+            <pagination-controls id="PaginationFactu" (pageChange)="Paginar($event)" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<!--modal detalle-->
+<div class="modal fade" id="VerDetalles" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title " id="exampleModalLabel1">Detalles facturación</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div *ngFor="let DetalleVenta of DetallVenta" class="row m-0">
+                        <div class="col-12 col-md-12 mb-3">
+                            <input type="text " id="principal" class="detall-control" value="{{DetalleVenta.NombreCompleto}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 ">
+                            <i id="iconosDetalle" class="fas fa-id-card-alt"></i>
+                            <label id="Texto-principal">Tipo Documento</label>
+                            <input type="text " class="detall-control1" value="{{DetalleVenta.TipoDoc}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 ">
+                            <i id="iconosDetalle" class="fas fa-id-card"></i>
+                            <label id="Texto-principal">Numero Documento</label>
+                            <input type="number " class="detall-control1" placeholder=" " value="{{DetalleVenta.Documento}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-credit-card"></i>
+                            <label>Medio De Pago</label>
+                            <input type="text " class="detall-control1" placeholder=" " value="{{DetalleVenta.MedioPago}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-calendar-day"></i>
+                            <label id="Texto-principal">Fecha de Generacion</label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="{{DetalleVenta.FechaVenta}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-calendar"></i>
+                            <label id="Texto-principal">Fecha de Transaccion </label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="{{DetalleVenta.FechaTransaccion}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-calendar"></i>
+                            <label id="Texto-principal">Tipo de servicio</label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="{{DetalleVenta.TipoServicio}}" disabled>
+                        </div>
+                        <div class="col-12 col-md-12 mb-3 ">
+                            <i id="iconosDetalle" class="fas fa-sticky-note"></i>
+                            <label id="Texto-principal">Observaciones</label>
+                            <p class="detall-control0"> {{DetalleVenta.Observacion}}</p>
+                        </div>
+                        <!-- <div class="col-12 col-md-4 mb-3 form-group ">
+                            <i id="iconosDetalle" class="fas fa-book-open"></i>
+                            <label id="Texto-principal">Estado</label>
+                            <input type="text " formcontrolname="fechanacimiento " class="detall-control1" value="" disabled>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 mb-3">
+                    <input type="text " id="principal2" class="detall-control3" value="Procedimientos facturados:" disabled>
+                </div>
+                <table class="col-12 col-md-12 mb-3  table-responsive1 ">
+                    <div class="table1">
+                        <tr>
+                            <th id="celda-1">Código</th>
+                            <th id="celda-2">Servicio</th>
+                            <th id="celda-3">Valor</th>
+
+                        </tr>
+                        <tr *ngFor="let ProcedureSales of DetallProcedureVenta">
+                            <td>{{ProcedureSales.CodAthenea}}</td>
+                            <td>{{ProcedureSales.NombreExamen}}</td>
+                            <td>{{ProcedureSales.Valor |currency:'$':'symbol':'4.0-0'}}</td>
+                        </tr>
+
+                    </div>
+                </table>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="m-0 d-flex justify-content-center">
+                <div class="col-4 col-md-6 mb-3 text-center">
+                    <label id="Texto-principal2" class="footdow">Valor total Servicios</label>
+                </div>
+                <div class="col-5 col-md-6 mb-3 text-center">
+                    <input type="text " class="footdowp detall-control2" placeholder=" " value="{{valorTotalVenta |currency:'$':'symbol':'4.0-0'}}" disabled>
+                </div>
+            </div>
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mt-1">
+                            <button type="button" class="btn9" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--modal Factura Manual-->
+<div class="modal fade" id="FacturaManual" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <p class="modal-title " id="exampleModalLabel1">Facturación</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mb-3">
+                            <label>Factura athenea</label>
+                            <input type="text " class=" form-control " placeholder=" " value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 mt-1">
+                            <button type="button" class="btn btn13" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        <div class="col-12 col-md-6 mt-1">
+                            <button type="button" class="btn btn12" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--modal anular pago-->
+<div class="modal fade" id="FacturaAnularpago" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+            <div class="modal-header ">
+                <p class="modal-title " id="exampleModalLabel1">Anular pago</p>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+                        <span aria-hidden="true ">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mb-3">
+                            <i id="Iconoanular" class="fas fa-exclamation-circle">
+                                </i>
+                        </div>
+                        <div class="col-12 col-md-12 mb-3">
+                            <p class="parrafoAnular">
+                                ¿Esta seguro que desea anular el pago de la factura?
+                            </p>
+                            <!-- <p class="parrafoAnular">
+                                Recuerda ingresar el siguiente número de transacción en el datafono
+                                {{this.GlobalIdVenta}}
+                            </p> -->
+
+                        </div>
+                        <div class="col-12 col-md-12 mb-1">
+                            <label>Motivo por el cual anula el pago</label>
+                            <textarea class="form-control" rows="2" id="txtmotivo"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <form>
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 mt-1">
+                                <button (click)="guardarAnulacion()" type="submit" class="btn11">Aceptar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="AlertaConfirmacion" tabindex="-1 " data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title " id="exampleModalLabel1"></p>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-6-mb-3">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mb-3">
+                                <i id="IconoSuccess" class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="col-12 col-md-12 mb-3">
+                            <p class="parrafo1">
+                              ¿Estas seguro que deseas facturar el servicio?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---Footer Valor Total-->
+            <div class="modal-footer mt-1">
+                <div class="col-12 col-md-12 ">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-6 mt-1">
+                            <button type="button" class="btn14" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        <div class="col-12 col-md-6 mt-1">
+                            <button  type="button" class="btn13" data-dismiss="modal" (click)="Pagar()">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Etiquetaa -->
+<div id="etiquetaPrint" class="content-eti" >
+    <div id="sticker" *ngFor="let et of procedimientos ; let i = index"  style="font-size: 10px !important; font-family: 'Segoe UI'; font-weight: 500; color:black; position: relative;" >
+        <div style="display: flex; justify-content: space-between; margin-left: 1.5em; margin-right: 1.5em; z-index: 20;position: relative">
+            <p style="width: 75%; text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important; margin-right: 0.2em;"> {{infoEtiquetas.NombreCompleto}} </p>
+            <p style="margin: 0 !important; text-overflow:clip; overflow: hidden; white-space: nowrap;"> {{infoEtiquetas.Edad}} / {{infoEtiquetas.Sexo}} </p>
+        </div>
+        <div style="margin-left: 1.5em; margin-right: 1.5em; position: relative; z-index: 20;">
+          <p style="width: 100%; text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important;">{{et.Procedimientos}}</p>
+        </div>
+        <div style="width: 100%; position: relative; top: -10px; margin: 0 !important; margin-left: 0.6em !important;">
+            <ngx-barcode  [bc-value]="getNumBarras(et.IdMuestra)" [bc-display-value]="true" [bc-width]="1.3" [bc-font-size]="13" [bc-margin-top]="0" [bc-height]="40">
+            </ngx-barcode>
+            <!-- <div style="position: absolute; bottom: -7px; margin-left: 0.6em; font-size: 13px; font-weight: 600; color: black;">{{getNumBarras(et.IdMuestra)}}</div> -->
+        </div>
+
+        <div style="position: relative; top:-20px; margin-left: 1.5em; margin-right: 1.5em;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 60%; text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important; margin-right: 0.2em !important;">H.C:{{infoEtiquetas.Documento+"  "}}</div>
+                <div style="text-overflow:clip; overflow: hidden; white-space: nowrap; margin: 0 !important;">{{muestras[i].Nombre_TipoMuestra}}</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin: 0 !important;" >
+                <div style="margin: 0 !important; width: 80%; text-overflow:clip; overflow: hidden; white-space: nowrap;">{{infoEtiquetas.FechaRecepcionSolicitud}}</div>
+                <div style="margin: 0 !important; text-overflow:clip; overflow: hidden; white-space: nowrap;">
+                    R: {{infoEtiquetas.CodPlan}}
+                </div>
+            </div>
+            <div style="display: flex ; justify-content: space-between; margin: 0 !important">
+                <div style="margin: 0 !important; width: 45%; text-overflow:clip; overflow: hidden; white-space: nowrap;">COLCAN LTDA .</div>
+                <div style="margin: 0 !important; text-overflow:clip; overflow: hidden; white-space: nowrap;">Sede: {{infoEtiquetas.IdAthenea}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+

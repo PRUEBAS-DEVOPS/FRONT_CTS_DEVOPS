@@ -1,0 +1,96 @@
+<!-- esta parte es para la lista de los modulos -->
+<div class="container">
+    <h1>Sub-Modulos</h1>
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-4">
+            <h2>Sub-Modulos creados</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th>Sub-Módulo</th>
+                                <th>Módulo</th>
+                                <th>Descripción</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let submodel of GetSubModel | paginate: {itemsPerPage: 7, currentPage: PaginationSubModulo}">
+                            <tr>
+                                <td>{{submodel.Nombre}}</td>
+                                <td>{{submodel.nombreModulo}} </td>
+                                <td> {{submodel.Descripcion}}</td>
+                                <!-- Boton de editar -->
+                                <td id="Colum"><button class="btn-primary" (click)="Editarinformacion(submodel.id, submodel)"><i class="fas fa-edit"></i></button></td>
+                                <!-- Boton activar e inactivar -->
+                                <td id="Colum">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{submodel.id}}" (change)="inactivarSubmodulo(submodel.id,submodel,$event.target.checked)" [checked]="submodel.EstadoBool" />
+                                        <label class="custom-control-label" for="{{submodel.id}}"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="PaginationSubModulo = $event" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar usuario -->
+    <div class="modal fade " id="EditarSubmodulo" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content1">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel1">Actualizacion de Sub-Modulos</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 col-md-12-mb-3">
+                        <div *ngFor="let editar of informacionEdit" class="row m-0">
+                            <form (ngSubmit)="Guardar()" [formGroup]="form">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mb-3 ">
+                                        <label>Nombre SubModulo</label>
+                                        <input type="text" class=" form-control" formControlName="Nombre" value="{{editar.Nombre}}">
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3 form-group ">
+                                        <label>Modulo</label>
+                                        <select formControlName="IdModulo" class="sedes form-control">
+                                            <option value="" disabled selected> seleccione el modulo</option>
+                                            <option *ngFor="let model of gesModel" value="{{model.id}}">{{model.modulo}}</option>                               
+                                        </select>
+                                        <!-- <input type="text " class="form-control " formControlName="IdModulo" value="{{editar.IdModulo}}"> -->
+                                    </div>
+                                    <div class="col-12 col-md-12 mb-3 form-group ">
+                                        <label>Descripcion</label>
+                                        <input type="text " class="form-control " formControlName="Descripcion" value="{{editar.Descripcion}}">
+                                    </div>
+                                </div>
+                                <div class="modal-footer mt-1">
+                                    <div class="col-12 col-md-12 ">
+                                        <div class="row m-0">
+                                            <div class="col-12 col-md-6 mt-1">
+                                                <button type="submit" class="btn10">Actualizar</button>
+                                            </div>
+                                            <div class="col-12 col-md-6 mt-1">
+                                                <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

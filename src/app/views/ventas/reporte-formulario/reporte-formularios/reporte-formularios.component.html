@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12">
+            <h1>Reporte Formularios COVID</h1>
+        </div>
+        <div class="mt-1 col-12 mb-3">
+            <div class="row">
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label>Fecha Inicio</label>
+                    <input placeholder="Inicial" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechaIni" [max]="hoy" (change)="validarFecha($event.target.value,1)">
+                </div>
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label class="fechala1">Fecha fin</label>
+                    <input placeholder="Final" type="text" onfocus="(this.type = 'date')" class="form-control" id="fechafin" [max]="hoy" (change)="validarFecha($event.target.value,2)">
+                </div>
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label class="fechala1">Tipo Formulario</label>
+                    <select class="form-control" id="selTipoFormulario">
+                        <option value="0">Seleccione</option>
+                        <option value="1">PCR</option>
+                        <option value="2">PR</option>
+                        <option value="3">Antigeno</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3 mb-3 form-group">
+                    <label class="fechala1">Sedes</label>
+                    <select class="form-control" id="selSede">
+                        <option value="0">Seleccione</option>
+                        <option *ngFor="let item of ArraySedes"   value={{item.id}}>{{item.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-2">
+                <div class="btn-group" role="group">
+                    <div><button type="button" class="bt4" (click)="GenerarExcel()"></button></div>
+                    <!-- <div><button type="button" class="bt5" (click)="GenerarPDF()"></button></div> -->
+                </div>
+            </div>
+        </div>
+  </div>

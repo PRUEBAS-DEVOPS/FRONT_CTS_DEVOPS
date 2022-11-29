@@ -1,0 +1,294 @@
+/* Estilos de los col de la tabla de permisos */
+
+#Col1 {
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+#Col2 {
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+#Col3 {
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+
+/* estilos tabla general */
+
+#Colum {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+
+/* Estilo del id prueba  */
+
+#preuba {
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 32.1%;
+    position: fixed;
+}
+
+
+/* estilo de los radios Button */
+
+.radiosPermitir {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(71px, 0px);
+}
+
+.radiosDenegar {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(360px, 0px);
+}
+
+.ModuloPermitir {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(38px, 0px);
+}
+
+.ModuloDenegar {
+    width: 4%;
+    cursor: pointer;
+    transform: translate(33px, 0px);
+}
+
+
+/* estilo de los botones */
+
+
+/* estilo boton aceptar */
+
+.btn11 {
+    background: #00a496 !important;
+    color: #f8f9fa !important;
+    border-radius: 10px !important;
+    height: 100% !important;
+    margin-left: 132px;
+    margin-right: 132px;
+    border: none;
+    width: 34%;
+    font-size: 23px;
+}
+
+
+/* estilo para mover */
+
+
+/* estilo de las imagenes */
+
+.imagen-linea {
+    position: fixed;
+    margin-left: 23%;
+    margin-right: 23%;
+    margin-top: 4%;
+}
+
+#mover {
+    margin-left: 15px;
+}
+
+
+/* boton primario */
+
+.btn-primary {
+    background: #00a496;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    width: 50%;
+    text-align: center;
+}
+
+
+/* Estilo de los control dentro del ver detalle */
+
+.detall-control {
+    background-color: transparent;
+    border: none;
+    width: 43%;
+}
+
+.detall-control .placeholder {
+    color: black;
+}
+
+
+/* estilo de los iconos  */
+
+#icon {
+    color: #21252999;
+    padding: 6px;
+}
+
+
+/* estilo de los titulos de la carta */
+
+#titulo {
+    padding: 3px;
+    color: #7a7c7f;
+}
+
+
+/* color fecha final */
+
+#fin {
+    color: #8080807a;
+    padding: 5px;
+}
+
+
+/* estilo de los margin-button solo cuando sea 1 */
+
+.mb-1,
+.my-1 {
+    margin-bottom: -0.15rem!important;
+}
+
+
+/* estilo de los margin-button solo cuando sea 4 */
+
+.mt-4,
+.my-4 {
+    margin-top: 2.5rem!important;
+}
+
+
+/* estilo del nombre de usario */
+
+#principal {
+    font-size: 25px;
+    color: #00a496;
+    width: 50%;
+}
+
+
+/* estilo del boton de ver mas  */
+
+#buttonmas {
+    color: #00A496;
+    cursor: pointer;
+}
+
+
+/* estilos del header de los modales */
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    background-color: #E52180;
+    color: white;
+}
+
+
+/* estilos del contenedor del modal */
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 195%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+.modal-content1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 134%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    border-radius: 10px;
+}
+
+
+/* estilo de los modales */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    outline: 0;
+    left: -4%;
+}
+
+
+/* estilo del form-control */
+
+
+/* ------------------- */
+
+.divSedes {
+    overflow-y: scroll;
+    height: 15rem;
+    width: 27rem;
+}
+
+.btnSedes {
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff !important;
+    text-align: center;
+    width: 100% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #00a496 !important;
+    border: 1px solid #00a496;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 100%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}

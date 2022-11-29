@@ -1,0 +1,157 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Módulos</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-8 ">
+                        <input type="text" class="form-control3" id="filterModul" name="filterModul" placeholder="Buscar..." [(ngModel)]="filterModul" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4" *ngIf="IdRol!=6">
+                        <button class="btn1" type="button" (click)="modalCrearModulo()"><i id="iconomas" class="fas fa-plus"></i>
+                            Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- esta parte es para la lista de los modulos -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion módulos</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th>Módulo</th>
+                                <th>Descripción</th>
+                                <th>Editar</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of gesModel | filterModulos:filterModul | paginate: {itemsPerPage: 7, currentPage: paginaModulo}">
+                            <tr>
+                                <td>{{item.modulo}} </td>
+                                <td> {{item.descripcion}}</td>
+                                <!-- Boton de editar -->
+                                <td *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="Editarinformacion(item.id, item)"><i
+                                            class="fas fa-edit"></i></button></td>
+                                <!-- Boton activar e inactivar -->
+                                <td *ngIf="IdRol!=6 ; else elseBlock">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{item.id}}" (change)="inactivarModulo(item.id,item,$event.target.checked)" [checked]="item.EstadoBool" />
+                                        <label class="custom-control-label" for="{{item.id}}"></label>
+                                    </div>
+                                </td>
+                                <ng-template #elseBlock>
+                                    <td id="Colum">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="paginaModulo = $event" maxSize="5" previousLabel="" nextLabel="">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Crear modulos -->
+<div class="modal fade " id="CrearModulos" tabindex="-1" data-backdrop="static" data-keyboard="false">>
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Modulos</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <form (ngSubmit)="CrearModulos()" [formGroup]="form">
+                        <div class="row m-0">
+                            <!--Campo para ingresar el nombre del modulo-->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Nombre Modulo <sup class="auth">*</sup></label>
+                                <input type="text" class="form-control" formControlName="modulo">
+                                <span *ngIf="submit && f.modulo.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                            <!--Campo nombre de Observaciones-->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Descripción <sup class="auth">*</sup></label>
+                                <textarea type="text" class="form-control" formControlName="descripcion"> </textarea>
+                                <span *ngIf="submit && f.descripcion.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar modulos -->
+<div class="modal fade " id="EditarModulos" tabindex="-1" data-backdrop="static" data-keyboard="false">>
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de Modulos</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <div *ngFor="let editar of informacionEdit" class="row m-0">
+                        <form (ngSubmit)="Guardar()" [formGroup]="editform">
+                            <div class="row m-0">
+                                <div class="col-12 col-md-12 mb-3 ">
+                                    <label>Nombre Modulo</label>
+                                    <input type="text" class=" form-control" formControlName="modulo" value="{{editar.modulo}}">
+                                </div>
+                                <div class="col-12 col-md-12 mb-3 form-group ">
+                                    <label>Descripcion</label>
+                                    <textarea type="text " class="form-control " formControlName="descripcion" value="{{editar.descripcion}}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer mt-1">
+                                <div class="col-12 col-md-12 ">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="submit" class="btn10">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+img {
+    width: 100%;
+}
+
+#Dashboard {
+    margin-top: 50px;
+}
+
+h3 {
+    color: #4D595F;
+    font-size: 20px;
+}
+
+p {
+    color: #D2D0D0;
+    font-size: 16px;
+    font-family: 'gidole';
+}

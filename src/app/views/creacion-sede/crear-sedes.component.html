@@ -1,0 +1,216 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Sedes</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-8 ">
+                        <input type="text" class="form-control3" id="filterSede" name="filterSede"
+                            placeholder="Buscar..." [(ngModel)]="filterSede" [ngModelOptions]="{standalone: true}"><i
+                            id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4" *ngIf="IdRol!=6">
+                        <button class="btn1" type="button" (click)="modalCrearSedes()"><i id="iconomas"
+                                class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- esta parte es para la lista de los modulos -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion sedes</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th id="colum1">Nombre Sede</th>
+                                <th id="colum2">Ciudad</th>
+                                <th id="colum3">Editar</th>
+                                <th id="colum4">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody
+                            *ngFor="let item of gesSede | filterSedes:filterSede | paginate: {itemsPerPage:7, currentPage: PaginationSedes} ">
+                            <tr>
+                                <td id="fila1">{{item.nombre}} </td>
+                                <td id="fila2"> {{item.Ciudad}}</td>
+                                <!-- Boton de editar -->
+                                <td id="fila3" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary"
+                                        (click)="Editarinformacion(item)"><i class="fas fa-edit"></i></button>
+                                </td>
+                                <!-- Boton activar e inactivar -->
+                                <td id="fila4" *ngIf="IdRol!=6 ; else elseBlock">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{item.id}}"
+                                            (change)="inactivarSede(item.id,item,$event.target.checked)"
+                                            [checked]="item.EstadoBool" />
+                                        <label class="custom-control-label" for="{{item.id}}"></label>
+                                    </div>
+                                </td>
+                                <ng-template #elseBlock>
+                                    <td id="Colum">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="PaginationSedes = $event" maxSize="5" previousLabel=""
+                        nextLabel="">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Crear Sede -->
+<div class="modal fade " id="CrearSede" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Sedes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <form (ngSubmit)="CrearSede()" [formGroup]="form">
+                        <div class="row m-0">
+                            <!--Campo para ingresar el nombre del modulo-->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Nombre Sede <sup class="auth">*</sup></label>
+                                <input type="text" class="form-control" formControlName="nombre">
+                                <span *ngIf="submit && f.nombre.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <!--Departamento-->
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Departamento <sup class="auth">*</sup></label>
+                                <select class=" form-control" (change)="listarCiudades($event.target.value)">
+                                    <option value="" selected="">Seleccione El departamento...</option>
+                                    <option *ngFor="let depar of Departamento" value="{{depar.id}}">{{depar.depto}}
+                                    </option>
+                                </select>
+
+                            </div>
+                            <!--Campo nombre de Ciudades-->
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Ciudad <sup class="auth">*</sup></label>
+                                <select class=" form-control" formControlName="IdCiudad">
+                                    <option value="" selected="">Seleccione su ciudad...</option>
+                                    <option *ngFor="let ciud of Ciudad" value="{{ciud.id}}">{{ciud.ciudad}}</option>
+                                </select>
+                            </div>
+
+                            <!--CodAthenea-->
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Cod. Id Sede Athenea <sup class="auth">*</sup></label>
+                                <input class=" form-control" formControlName="CodAthenea">
+                                <span *ngIf="submit && f.CodAthenea.errors" class="text-danger animated fadeIn">es
+                                    requerido</span>
+                            </div>
+                            <!--CodCrediBanco-->
+                            <div class="col-12 col-md-6 mb-3 form-group">
+                                <label>Cod. Único Credibanco</label>
+                                <input class=" form-control" formControlName="CodCredibanco">                              
+                            </div>
+                        </div>
+
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Sede -->
+<div class="modal fade " id="EditarSede" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de sedes</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <div class="row m-0">
+                        <form (ngSubmit)="Guardar()" [formGroup]="editform">
+                            <div class="row m-0">
+                                <div class="col-12 col-md-12 mb-3 mt-2 form-group ">
+                                    <label>Nombre Sede</label>
+                                    <input type="text" class="form-control" formControlName="nombre">
+                                </div>
+                                <!--Departamento-->
+                                <div class="col-12 col-md-6 mb-3 form-group">
+                                    <label>Departamento </label>
+                                    <select class=" form-control" (change)="listarCiudades($event.target.value)"
+                                        formControlName="IdDepartamento">
+                                        <option value="" selected="">Seleccione El departamento...</option>
+                                        <option *ngFor="let depar of Departamento" value="{{depar.id}}">{{depar.depto}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <!--Campo nombre de Ciudades-->
+                                <div class="col-12 col-md-6 mb-3 form-group">
+                                    <label>Ciudad </label>
+                                    <select class=" form-control" formControlName="IdCiudad">
+                                        <option value="" selected="">Seleccione su ciudad...</option>
+                                        <option *ngFor="let ciud of Ciudad" value="{{ciud.id}}">{{ciud.ciudad}}</option>
+                                    </select>
+                                </div>
+
+                                <!--CodAthenea-->
+                                <div class="col-12 col-md-6 mb-3 form-group">
+                                    <label>Cod. Id Sede Athenea</label>
+                                    <input class=" form-control" formControlName="CodAthenea" disabled>
+                                </div>
+                                <!--CodCrediBanco-->
+                                <div class="col-12 col-md-6 mb-3 form-group">
+                                    <label>Cod. Único Credibanco</label>
+                                    <input class=" form-control" formControlName="CodCredibanco">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer mt-1">
+                                <div class="col-12 col-md-12 ">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="submit" class="btn10">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,668 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Cotización</h1>
+        </div>
+    </div>
+    <!-- se inicia la creacion del tab -->
+    <div class="container">
+
+        <section>
+            <div class="row" (ngSubmit)="CrearCotizacion()" [formGroup]="crearcotizcion">
+                <div class="wizard">
+                    <div class="wizard-inner ">
+                        <div class="connecting-line"></div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <!-- primer tab -->
+                            <li role="presentation" class="active" id="Li1">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1" id="tab1">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-folder-open">1</i>
+                                        <p class="parrafo1">Datos</p>
+                                    </span>
+
+                                </a>
+                            </li>
+                            <!-- segundo tab -->
+                            <li role="presentation" class="disabled" id="Li2">
+                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2" id="tab2">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-pencil">2</i>
+                                        <p class="parrafo2">Productos</p>
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- tercer tab -->
+                            <li role="presentation" class="disabled" id="Li3">
+                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3" id="tab3">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-picture">3</i>
+                                        <p class="parrafo3">Confirmación</p>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- primer tab -->
+                    <div role="form">
+                        <div class="tab-content col-12 col-md-12">
+                            <div class="tab-pane active" role="tabpanel" id="step1">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-12">
+                                        <h2>Datos Basicos </h2>
+                                    </div>
+                                    <div class="connecting-line1 "></div>
+                                                  <!-- agregamos el campos de primer nombre -->
+                                    <div class="col-12 col-md-6 mt-2 form-group">
+                                        <label class="titulo">Nombres <sup class="auth">*</sup></label>
+                                        <input type="text" class="form-control" formControlName="Nombres">
+                                        <span *ngIf="submit && f.Nombres.errors" class="text-danger animated fadeIn">es
+                                            requerido</span>
+                                    </div>
+                                    <!-- apellidos -->
+                                    <div class="col-12 col-md-6 mt-2 form-group">
+                                        <label class="titulo"> Apellidos <sup class="auth">*</sup></label>
+                                        <input type="text" class="form-control" formControlName="Apellidos">
+                                        <span *ngIf="submit && f.Apellidos.errors" class="text-danger animated fadeIn">es
+                                            requerido</span>
+                                    </div>
+                                    <!-- Tipo de documento -->
+                                    <div class="col-12 col-md-6 mt-2 form-group">
+                                        <label class="titulo"> Tipo de documento <sup class="auth">*</sup></label>
+                                        <select name="documento" class="form-control" formControlName="tipodocumento" id="SelTipDoc">
+                                            <option value="" selected="">Seleccione el tipo de documento...</option>
+                                            <option *ngFor="let Doc of GesDocument" value="{{Doc.id}}">{{Doc.tipodocumento}}</option>
+                                        </select>
+                                    </div>
+                                    <!-- Documento -->
+                                    <div class="col-12 col-md-6 mt-2 form-group">
+                                        <label class="titulo">Documento <sup class="auth">*</sup></label>
+                                        <input type="text" class="form-control" formControlName="Documento">
+                                        <span *ngIf="submit && f.Docuemto.errors" class="text-danger animated fadeIn">es
+                                            requerido</span>
+                                    </div>
+                                    <!-- telefono -->
+                                    <div class="col-12 col-md-6 mt-2 form-group">
+                                        <label class="titulo">Telefono <sup class="auth">*</sup></label>
+                                        <input type="text" class="form-control" formControlName="Telefono">
+                                        <span *ngIf="submit && f.Telefono.errors" class="text-danger animated fadeIn">es
+                                            requerido</span>
+                                    </div>
+                                    <!-- Correo -->
+                                    <div class="col-12 col-md-6 mt-2 form-group">
+                                        <label class="titulo">Correo Electronico <sup class="auth">*</sup></label>
+                                        <input type="email" class="form-control" formControlName="Correo" id="TxtCorreo" (change)="ValidarEmail($event.target.value);asignarEmail($event.target.value)">
+                                        <span *ngIf="submit && f.Correo.errors" class="text-danger animated fadeIn">es
+                                            requerido</span>
+                                    </div>
+                                    <!-- agregamos el campo de la Direccion -->
+                                    <div class="col-12 col-md-12 mt-2 form-group">
+                                        <label class="titulo">Direccion <sup class="auth">*</sup></label>
+                                        <input type="text" class="form-control" formControlName="Direccion">
+                                        <span *ngIf="submit && f.Direccion.errors" class="text-danger animated fadeIn">es
+                                            requerido</span>
+                                    </div>
+                                    <!-- agregamos el campo de edad -->
+                                    <div class="col-12 col-md-12 mt-2 form-group">
+                                        <label class="titulo">Observaciones</label>
+                                        <textarea class="observa1 form-control" formControlName="Observaciones"></textarea>
+
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 col-12 col-md-12 mb-2">
+                                    <div class="row">
+                                        <div class="container col-md-6 col-12" id="centrar">
+                                            <div class="col-12 col-md-12  form-group ">
+                                                <label>¿Desea ser contactado por Vitalea?</label>
+                                                <div>
+                                                    <div class="radiobtn1 custom-control custom-radio custom-control-inline  ">
+                                                        <input type="radio" id="customRadioInline4" name="customRadioInline4" class="custom-control-input">
+                                                        <label class="label5 custom-control-label" for="customRadioInline4" (click)="contactvitalea(1)" style="
+                                                        cursor: pointer;">Si</label>
+                                                    </div>
+                                                    <div class=" radiobtn2  custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline5" name="customRadioInline4" class="custom-control-input">
+                                                        <label class="label5 custom-control-label" for="customRadioInline5" (click)="contactvitalea(0)" style="
+                                                        cursor: pointer;">No</label>
+                                                    </div>
+                                                </div>
+                                                <span *ngIf="submit && f.ContactoVitalea.errors" class="text-danger animated fadeIn">es
+                                                requerido</span>
+                                            </div>
+                                        </div>
+                                        <p class="imagen-linea">
+                                            <img src="../../../assets/images/lineacoti.png" alt="">
+                                        </p>
+                                        <div class="container col-md-6 col-12" id="centrar">
+                                            <div class="col-12 col-md-12 form-group ">
+                                                <label>¿Cotización Via Whatsapp?</label>
+                                                <div>
+                                                    <div class="radiobtn3 custom-control custom-radio custom-control-inline ">
+                                                        <input type="radio" id="customRadioInline9" name="customRadioInline9" class="custom-control-input">
+                                                        <label class="label6 custom-control-label" for="customRadioInline9" (click)="contactowhatsapp(1)" style="
+                                                        cursor: pointer;">Si</label>
+                                                    </div>
+                                                    <div class=" radiobtn4  custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline10" name="customRadioInline9" class="custom-control-input">
+                                                        <label class="label6 custom-control-label" for="customRadioInline10" (click)="contactowhatsapp(0)" style="
+                                                        cursor: pointer;">No</label>
+                                                    </div>
+                                                </div>
+                                                <span *ngIf="submit && f.CotizacionWhatsapp.errors" class="text-danger animated fadeIn">es
+                                                    requerido</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="list-inline text-center mt-2">
+                                    <li><button type="button" class="btn-sig" (click)="siguiente(2)">Siguiente</button></li>
+                                </div>
+                            </div>
+                            <!-- segundo tab -->
+                            <div class="tab-pane" role="tabpanel" id="step2">
+                                <!-- primera linea -->
+                                <div class="col-12 col-md-12">
+                                    <h2>Productos </h2>
+                                </div>
+                                <div class="connecting-line1 "></div>
+                                <div class="row m-0 mt-4">
+                                    <div class="col-12 col-md-12 mt-2">
+                                        <div class="row m-0">
+                                            <div class="col-12 col-md-4 mb-3 form-group">
+                                                <label>Planes Disponibles * </label>
+                                                <div class="ng-autocompletePlan">
+                                                    <ng-autocomplete #autoPlan [data]="DataPlanes" [searchKeyword]="keywordPlan" (selected)='PreselectPlan($event)' [itemTemplate]="itemTemplate" id="PlanesAutocomplete" [notFoundTemplate]="notFoundTemplate" placeholder="Buscar Planes ..." [disabled]=disabled>
+                                                    </ng-autocomplete>
+                                                    <ng-template #itemTemplate let-item>
+                                                        <a [innerHTML]="item.Concatenado"></a>
+                                                    </ng-template>
+                                                    <ng-template #notFoundTemplate let-notFound>
+                                                        <div [innerHTML]="notFound"></div>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3 mb-3 ">
+                                                <label class="mt-5"></label>
+                                                <button type="button" class="btn btn2" id="botonUsar" (click)="SeleccionarPlan(1)">
+                                                   Usar Plan
+                                                </button>
+                                                <button type="button" class="btn btn2" id="botonCambiar" style="display: none;" (click)="SeleccionarPlan(2)">
+                                                Cambiar Plan
+                                            </button>
+                                            </div>
+                                            <!-- <div class="col-12 col-md-3 mb-3 ">
+                                                <label class="mt-5"></label>
+                                                <button type="button" class="btn btn2" (click)="VerProcedimientos()">
+                                                    Agregar Servicio
+                                                </button>
+                                            </div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-12-mb-3" *ngIf="VerRadioOpciones">
+                                        <div class="row m-0">
+                                            <div class="col-12 col-md-12 mt-4">
+                                                <h2 class="p-2 bd-highlight">Agregar exámenes</h2>
+                                                <div class="connecting-line2 mb-3"></div>
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <label> Tipo Procedimiento <sup
+                                                                    class="auth">*</sup></label>
+                                                                <select class="form-control"
+                                                                (change)="VerModalOption($event.target.value);cargarInformacion($event.target.value)"
+                                                                id="selopciones">
+                                                                <option value="0">Seleccione</option>
+                                                                <option value="1">Chequeo</option>
+                                                                <option value="2" selected=" ">Exámenes</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <div *ngIf="Verchequeo">
+                                                                <div class="container">
+                                                                    <div class="row m-0">
+                                                                        <div class="col-6">
+                                                                            <label> Categoría <sup
+                                                                                    class="auth">*</sup></label>
+                                                                            <select class="form-control"
+                                                                                id="SelCat"
+                                                                                (change)='ChequeoCategoria($event.target.value)'>
+                                                                                <option value=""
+                                                                                    selected="">
+                                                                                    Seleccione la
+                                                                                    categoria...
+                                                                                </option>
+                                                                                <option
+                                                                                    *ngFor="let categorias of DataCategoria"
+                                                                                    value="{{categorias.Id}}">
+                                                                                    {{categorias.Nombre}}
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <label> Chequeo <sup
+                                                                                    class="auth">*</sup></label>
+                                                                            <select class="form-control"
+                                                                                id="SelChe"
+                                                                                (change)='ConsultaDatosCh($event.target.value);SelectChequeo($event.target.value,1)'>
+                                                                                <option value=""
+                                                                                    selected="">
+                                                                                    Seleccione el
+                                                                                    Chequeo...</option>
+                                                                                <option
+                                                                                    *ngFor="let chequeos of ArrayChequeos"
+                                                                                    value="{{chequeos.idProcedimiento}}">
+                                                                                    {{chequeos.NombreProcedimiento}}
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="VerExamen">
+                                                                <div class="col-12 col-md-12-mb-3">
+                                                                    <div class="row m-0">
+                                                                        <div
+                                                                            class="col-4  col-md-8 mb-2 ">
+                                                                            <label> Buscar examen <sup
+                                                                                    class="auth">*</sup>
+                                                                            </label>
+                                                                            <div
+                                                                                class="col-4  col-md-4  mb-2">
+                                                                                <div
+                                                                                    class="ng-autocompleteExamenes">
+                                                                                    <ng-autocomplete
+                                                                                        #auto
+                                                                                        [data]="ArrayExamenes"
+                                                                                        [searchKeyword]="keyword"
+                                                                                        (selected)='SelectExam($event,2)'
+                                                                                        [itemTemplate]="itemTemplate"
+                                                                                        id="ExamAutocomplete"
+                                                                                        [notFoundTemplate]="notFoundTemplate"
+                                                                                        placeholder="Buscar Examenes ...">
+                                                                                    </ng-autocomplete>
+                                                                                    <ng-template
+                                                                                        #itemTemplate let-item>
+                                                                                        <a [innerHTML]="item.NombreProcedimiento"></a>
+                                                                                    </ng-template>
+                                                                                    <ng-template
+                                                                                        #notFoundTemplate let-notFound>
+                                                                                        <div
+                                                                                            [innerHTML]="notFound">
+                                                                                        </div>
+                                                                                    </ng-template>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8 col-md-6 mt-2">
+                                        <h2 class="ml-auto bd-highlight">Exámenes cargados</h2>
+                                    </div>
+                                    <div class="col-12 mt-3 table-responsiveVentas">
+                                        <div class="connecting-line2 mb-3"></div>
+                                        <table class=" mb-3  table  TableProc" *ngIf="TablaProcedimientos">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Codigo</th>
+                                                    <th>Servicios</th>
+                                                    <th>Descripción</th>
+                                                    <th>Valor Unitario</th>
+                                                    <th>Cantidad</th>
+                                                    <th style="text-align: center;">SubTotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let procedimientos of ArrayProcedimientos">
+                                                    <td id="Colum"><button class="eliminar" type="button" (click)="EliminarProcedimientosVentas(procedimientos.id,1)"><i
+                                                                class="fas fa-trash-alt"></i></button> </td>
+                                                    <td id="Colum">{{procedimientos.CodAthenea}} </td>
+                                                    <td id="Colum">{{procedimientos.NombreExamen}} </td>
+                                                    <td class="verdetalle" id="Colum" (click)="detalleExamen(procedimientos)" style="padding-left: 2.5%;">ver más</td>
+                                                    <td id="Colum" class="precio_venta{{procedimientos.id}}">{{procedimientos.Valor |currency:'$':'symbol':'4.0-0'}} </td>
+                                                    <td style="width: 10%;"><input type="number" class="form-control txtCantidad{{procedimientos.id}}" (change)="CalcularValorCantidad(procedimientos.id)" value="{{procedimientos.Cantidad}}" formControlArray="Cantidades" min="1"></td>
+
+                                                    <td id="Colum"> <input type="text" class="detall-control1 txtTotal text-center" id="txtTotal{{procedimientos.id}}" disabled value="{{procedimientos.Total_Cantidad  |currency:'$':'symbol':'4.0-0'}}">
+                                                    </td>
+                                            </tbody>
+                                        </table>
+                                        <div class="connecting-line6 mb-3" *ngIf="TablaProcedimientos"></div>
+                                        <div class="col-12 col-md-12 d-md-flex justify-content-md-end" *ngIf="TablaProcedimientos">
+                                            <label>TOTAL:</label>
+                                            <input type="text" class="detall-control6" value="{{TotalFinal |currency:'$':'symbol':'4.0-0'}}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5">
+                                        <div class="btn-group" role="group">
+                                            <div><button type="button" class="btn-atra" (click)="atras(1)">Atras</button></div>
+                                            <div><button type="button" class="btn-sig1" (click)="siguiente(3)">Siguiente</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- tercer y ultimo Tab -->
+                            <div class="tab-pane" role="tabpanel" id="step3">
+                                <!-- primera linea -->
+                                <div class="row m-0 ">
+                                    <h3 class="col-md-12 mt-4">Confirmación</h3>
+                                    <div class="connecting-line4 mb-3"></div>
+
+
+                                    <div class="row m-0" *ngIf="datosusuario !=''">
+                                        <!-- agregamos el campos de primer nombre -->
+                                        <div class="col-12 col-md-4 mb-3 ">
+                                            <label id="titulo">Nombres Completos:</label>
+                                            <input type="text" class="detall-control1" placeholder="{{datosusuario.Nombres}} " disabled>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3 ">
+                                            <label id="titulo">Apellidos Completos:</label>
+                                            <input type="text " class="detall-control1" placeholder="{{datosusuario.Apellidos}}" disabled>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3 ">
+                                            <label id="titulo">Tipo de documento:</label>
+                                            <input type="text " class="detall-control1" placeholder="{{datosusuario.strTipoDoc}}" disabled>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3 ">
+                                            <label id="titulo">Documento:</label>
+                                            <input type="text " class="detall-control1" placeholder="{{datosusuario.Documento}}" disabled>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-1 form-group">
+                                            <label id="titulo">Correo eléctronico </label>
+                                            <input type="text " class="detall-control1" placeholder="{{datosusuario.Correo}}" disabled>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-1 mt-2 form-group">
+                                            <label id="titulo">Teléfono: </label>
+                                            <input type="text " class="detall-control1" placeholder="{{datosusuario.Telefono}}" disabled>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-1 mt-2 form-group">
+                                            <label id="titulo">Dirección: </label>
+                                            <input type="text " class="detall-control1" placeholder="{{datosusuario.Direccion}}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- div segunda linea -->
+
+                                <div class="col-12 col-md-12  form-group ">
+                                    <div class="card4">
+                                        <div class="card-body1">
+                                            <div class="col-12 mt-1 table-responsive">
+                                                <h2 id="resumentitul" class="mt-3">Productos</h2>
+                                                <table class=" mb-3  table" id="TableProcResum">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Servicios</th>
+                                                            <th>Valor</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                        *ngFor="let procedimientos of ArrayProcedimientos">
+                                                        <td id="Colum">
+                                                            {{procedimientos.CodAthenea}}
+                                                        </td>
+                                                        <td id="Colum">
+                                                            {{procedimientos.NombreExamen}}
+                                                        </td>
+                                                        <td id="Colum">
+                                                            {{procedimientos.Valor
+                                                            |currency:'$':'symbol':'4.0-0'}}
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="connecting-line6 mb-3"></div>
+                                                <div class="col-12 col-md-12 d-md-flex justify-content-md-end">
+                                                    <label>TOTAL:</label>
+                                                    <input type="text" class="detall-control2" value="{{TotalFinal |currency:'$':'symbol':'4.0-0'}}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-md-offset-12 col-xs-12 text-center mt-5 ">
+                                    <div class="btn-group " role="group ">
+                                        <div><button class="btn-atrafinalizar" (click)="atras(2)">Atras</button></div>
+                                        <div><button type="submit" class="btn-finalizarventa" (click)="CrearCotizacion()">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<!--#region modal para seleccionar chequeo u examen  -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="ProcedimientosChequeoyExamenes">
+    <div class="modal-dialog">
+        <div class="modal-content3">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Agregar Servicios</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12-mb-3">
+                    <div class="row m-0">
+                        <div class="col-12 col-md-12 mt-2" style="text-align: center;">
+                            <div class="custom-control custom-radio custom-control-inline2">
+                                <input type="radio" id="radioCheq" name="customRadioInline3"
+                                    class="custom-control-input" (click)="VerModalOption(1)">
+                                <label class="custom-control-label" for="radioCheq"
+                                    (click)='cargarInformacion(1)'>Chequeo</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline2">
+                                <input type="radio" id="radioExam" name="customRadioInline3"
+                                    class="custom-control-input" (click)="VerModalOption(2)">
+                                <label class="custom-control-label" for="radioExam"
+                                    (click)='cargarInformacion(2)'>Examen</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body" *ngIf="Verchequeo">
+                    <div class="col-12 col-md-12-mb-3">
+                        <div class="row m-0">
+                            <h2 class="col-12 col-md-12">Seleccione sus chequeos</h2>
+                            <div class="connecting-line2 mb-3"></div>
+                            <div class="col-12  col-md-6 mb-2 ">
+                                <label> Categoría * </label>
+                                <select class="form-control" id="SelCat"
+                                    (change)='ChequeoCategoria($event.target.value)'>
+                                    <option value="" selected="">Seleccione la categoria...</option>
+                                    <option *ngFor="let categorias of DataCategoria" value="{{categorias.Id}}">
+                                        {{categorias.Nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col-12  col-md-6 mb-2">
+                                <label> Chequeo * </label>
+                                <select class="form-control" id="SelChe" (change)='ConsultaDatosCh($event.target.value);SelectChequeo($event.target.value,1)'>
+                                    <option value="" selected="">Seleccione el Chequeo...</option>
+                                    <option *ngFor="let chequeos of ArrayChequeos" value="{{chequeos.idProcedimiento}}">{{chequeos.NombreProcedimiento}}</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-12" *ngIf="detalleChequeo">
+                                <div class="row">
+                                    <div class="col-4 col-md-3">
+                                        <label> Código:</label>
+                                        <label> {{codigoProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-5">
+                                        <label> Procedimiento:</label>
+                                        <label> {{NombreProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-3">
+                                        <label> Precio:</label>
+                                        <label> {{ValorChequeo  |currency:'COP $':'symbol':'4.0-0'}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-12">
+                                        <label> Recomendación:</label>
+                                        <label> {{Recomendacion}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-12 col-md-8 ">
+                                <label> Recomendaciones </label>
+                                    <input type="text" class="detall-control1" value="{{Recomendacion}}" disabled>
+                            </div>
+                            <div class="col-12 col-md-4 ">
+                                <label>Precio </label>
+                                <input  type="text" class="detall-control3" value="{{ValorChequeo  |currency:'COP $':'symbol':'4.0-0'}}" disabled>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-1">
+                        <form class="col-12">
+                            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 col-md-offset-6 col-xs-6 text-center ">
+                                        <button type="button" class="btnCancelar2" (click)="CerrarModalChequeos()">Cerrar</button>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-6 col-xs-6 text-center">
+                                        <button type="submit" class="btn" (click)="AgregarChequeo(item,1)"> +
+                                            Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-body" *ngIf="VerExamen">
+                    <div class="col-12 col-md-12-mb-3">
+                        <div class="row m-0">
+                            <div class="col-4  col-md-8 mb-2 ">
+                                <h2>Seleccione sus examenes</h2>
+                                <div class="connecting-line2 mb-3"></div>
+                                <label> Buscar examen * </label>
+                                <div class="col-4  col-md-4  mb-2">
+                                    <div class="ng-autocomplete">
+                                        <ng-autocomplete #auto [data]="ArrayExamenes" [searchKeyword]="keyword"
+                                            (selected)='SelectExam($event,2)' [itemTemplate]="itemTemplate"
+                                            id="ExamAutocomplete" [notFoundTemplate]="notFoundTemplate"
+                                            placeholder="Buscar Examenes ...">
+                                        </ng-autocomplete>
+                                        <ng-template #itemTemplate let-item>
+                                            <a [innerHTML]="item.NombreProcedimiento"></a>
+                                        </ng-template>
+                                        <ng-template #notFoundTemplate let-notFound>
+                                            <div [innerHTML]="notFound"></div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12" *ngIf="detalleExam">
+                                <div class="row">
+                                    <div class="col-4 col-md-3">
+                                        <label> Código:</label>
+                                        <label> {{codigoProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-5">
+                                        <label> Procedimiento:</label>
+                                        <label> {{NombreProcedimiento}}</label>
+                                    </div>
+                                    <div class="col-4 col-md-3">
+                                        <label> Precio:</label>
+                                        <label> {{ValorExamen  |currency:'COP $':'symbol':'4.0-0'}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-1">
+                        <form class="col-12">
+                            <div class="col-md-12 col-md-offset-12 col-xs-12 text-center">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 col-md-offset-6 col-xs-6 text-center ">
+                                        <button type="button" class="btnCancelar2" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-6 col-xs-6 text-center">
+                                        <button type="submit" class="btn" (click)="AgregarExamen()"> + Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--#region ver detalle  -->
+<div class="modal fade " id="detalleExamenPaciente" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin: auto; width: 124%; margin-top: 7em;">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel1">Detalle examen</p>
+        <button type="button " class="close" data-dismiss="modal" aria-label="Close ">
+            <span aria-hidden="true ">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12 col-md-6-mb-3">
+            <div class="row m-0">
+                <div class="col-12 mt-1 table-responsive-Resumen" style="margin-left: -1.7em !important;">
+                    <table class=" mb-3  table" id="TableProcResum" style="font-size: 16px !important;">
+                        <thead>
+                            <tr>
+                                <th class="th-resumen1">Código ahtenea:</th>
+                                <th class="th-resumen1">Nombre de examen:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="Colum" class="colum">
+                                   {{CodAthenea}}
+                                </td>
+                                <td id="Colum" class="colum">
+                                    {{NombreExamen}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="width: 100%;">
+                    <label id="LabelVer">Descripción :</label>
+                    <p class="styleDescripcion">{{descripcion}} </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+     <!---Footer Valor Total-->
+      <div class="modal-footer mt-1">
+        <div class="col-12 col-md-12 ">
+          <div class="row m-0">
+              <div class="col-12 col-md-12 mt-1">
+                  <button type="submit" class="btnCerrarVentana" data-dismiss="modal">Aceptar</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

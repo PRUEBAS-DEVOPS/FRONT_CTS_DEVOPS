@@ -1,0 +1,154 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Categorias</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-12 mt-2 mb-3">
+
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <input type="text" class="form-control3" id="Categoriafilter" name="Categoriafilter" placeholder="Buscar..." [(ngModel)]="Categoriafilter" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4"  *ngIf="IdRol!=6">
+                        <button class="btn1" type="button" (click)="modalcrearCategoria()"><i id="iconomas" class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- esta parte es para la lista de los modulos -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion categorías</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th id="Colum">Categoría</th>
+                                <th id="Colum">Descripción</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let Categ of gesCategory| filterCategorias:Categoriafilter | paginate: {itemsPerPage: 7, currentPage: paginaCategoria}">
+                            <tr>
+                                <td id="Colum">{{Categ.Nombre}} </td>
+                                <td id="Colum"> {{Categ.descripcion}}</td>
+                                <!-- Boton de editar -->
+                                <td id="Colum"  *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="Editarcategoria(Categ.Id, Categ)"><i class="fas fa-edit"></i></button></td>
+                                <td id="Colum"  *ngIf="IdRol!=6 ; else elseBlock">
+                                    <!-- Boton activar e inactivar -->
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{Categ.Id}}" (change)="inactivarCategoria(Categ.Id,Categ,$event.target.checked)" [checked]="Categ.NomEstado" />
+                                        <label class="custom-control-label" for="{{Categ.Id}}"></label>
+                                    </div>
+                                </td>
+                                <ng-template #elseBlock>
+                                    <td id="Colum">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="paginaCategoria = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Crear categoria -->
+<div class="modal fade " id="crearCategorias" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear categoria</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="CrearCategorias()" [formGroup]="FormCategoria">
+                        <div class="row m-0">
+                            <!--Campo para ingresar el nombre del modulo-->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Nombre Categoría <sup class="auth">*</sup> </label>
+                                <input type="text" class="form-control" formControlName="Nombre">
+                                <span *ngIf="submit && f.Nombre.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                            <!--Campo nombre de Observaciones-->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Descripción <sup class="auth">*</sup> </label>
+                                <textarea type="text" class="form-control" formControlName="descripcion"></textarea>
+                                <span *ngIf="submit && f.descripcion.errors" class="text-danger animated fadeIn">es requerido</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar usuario -->
+<div class="modal fade " id="EditarCategorias" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de categorias</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <form (ngSubmit)="Guardar()" [formGroup]="editFormCategoria">
+                        <div class="row m-0">
+                            <div class="col-12 col-md-12 mb-3 ">
+                                <label>Nombre categoría</label>
+                                <input type="text" class=" form-control" formControlName="Nombre">
+                            </div>
+                            <div class="col-12 col-md-12 mb-3 form-group ">
+                                <label>Descripcion</label>
+                                <textarea type="text " class="form-control " formControlName="descripcion"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

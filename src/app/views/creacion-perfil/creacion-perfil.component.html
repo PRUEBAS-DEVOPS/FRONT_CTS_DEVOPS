@@ -1,0 +1,320 @@
+<div class="container">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Perfiles</h1>
+        </div>
+        <div class="col-12 ">
+            <form class="col-12">
+                <div class="row m-0">
+                    <div class="col-12 col-md-8 ">
+                        <input type="text" class="form-control3" id="filterPerf" name="filterPerf" placeholder="Buscar..." [(ngModel)]="filterPerf" [ngModelOptions]="{standalone: true}"><i id="iconobuscar" class="fas fa-search"></i>
+                    </div>
+                    <div class="col-12 col-md-4"  *ngIf="IdRol!=6">
+                        <button class="btn1" type="button" (click)="modalCrearPerfil()"><i id="iconomas" class="fas fa-plus"></i> Crear nuevo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- esta parte es para la lista de los perfiles -->
+<div class="container">
+    <div class="Table" style="padding-top: 30px;">
+        <div class="col-12 col-md-12  mb-3 mt-3">
+            <h2>Gestion perfiles</h2>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="table_id" class="table ">
+                        <thead>
+                            <tr>
+                                <th>Nombre del Perfil</th>
+                                <th>Descripción</th>
+                                <th id="Colum">perfil</th>
+                                <th id="Colum">Editar</th>
+                                <th id="Colum">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of gesPerfil | filterPerfiles:filterPerf| paginate: {itemsPerPage: 7, currentPage: PaginationPerfil}">
+
+                            <tr>
+                                <td>{{item.nombre}} </td>
+                                <td> {{item.descripcion}}</td>
+                                <!-- Boton de agregar perfiles -->
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="Consultarporperfil(item.id)">
+                                    <i class="fas fa-plus-square"></i></button></td>
+
+                                <!-- Boton de editar -->
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock"><button class="btn-primary" (click)="Editarinformacion(item.id, item)"><i class="fas fa-edit"></i></button></td>
+
+
+
+                                <!-- Boton activar e inactivar -->
+                                <td id="Colum" *ngIf="IdRol!=6 ; else elseBlock">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="{{item.id}}" (change)="inactivarPerfil(item.id,item,$event.target.checked)" [checked]="item.EstadoBool" />
+                                        <label class="custom-control-label" for="{{item.id}}"></label>
+                                    </div>
+                                </td>
+                                <ng-template #elseBlock>
+                                    <td id="Colum">N/A</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="PaginationPerfil = $event" maxSize="5" previousLabel="" nextLabel="">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Crear  Perfil -->
+<div class="modal fade " id="CrearPerfiles" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Crear Perfiles</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12 mb-3">
+                    <form (ngSubmit)="CrearPerfil()" [formGroup]="form">
+                        <div class="row m-0">
+                            <!-- Campo para ingresar el nombre del modulo -->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Nombre del Perfil <sup class="auth">*</sup></label>
+                                <input type="text" class="form-control" formControlName="nombre">
+                                <span *ngIf="submit && f.nombre.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                            <!-- Campo nombre de Observaciones -->
+                            <div class="col-12 col-md-12 mb-3 form-group">
+                                <label>Descripción <sup class="auth">*</sup></label>
+                                <textarea type="text" class="form-control" formControlName="descripcion"></textarea>
+                                <span *ngIf="submit && f.descripcion.errors" class="text-danger animated fadeIn">es
+                                requerido</span>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer mt-1">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0">
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1">
+                                        <button type="submit" class="btn10">Crear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Editar Perfil -->
+<div class="modal fade " id="editarPefiles" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content1">
+            <div class="modal-header">
+                <p class="modal-title" id="exampleModalLabel1">Actualizacion de Perfiles</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-md-12 mb-3">
+                    <div *ngFor="let editar of informacionEdit">
+                        <form (ngSubmit)="Guardar()" [formGroup]="editform">
+                            <div class="row m-0">
+                                <div class="col-12 col-md-12 mb-3 ">
+                                    <label>Nombre Modulo</label>
+                                    <input type="text" class=" form-control" formControlName="nombre" value="{{editar.nombre}}">
+                                </div>
+                                <div class="col-12 col-md-12 mb-3 form-group ">
+                                    <label>Descripcion</label>
+                                    <textarea type="text " class="form-control " formControlName="descripcion" value="{{editar.descripcion}}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer mt-1">
+                                <div class="col-12 col-md-12 ">
+                                    <div class="row m-0">
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="button" class="btn12" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-1">
+                                            <button type="submit" class="btn10">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal Asignar Permisos -->
+<div class="modal fade" id="AgregarPermisos" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog modal-dialog-scrollable  modal-md">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <p class="modal-title " id="exampleModalLabel1">Perfil</p>
+                <button type="button " class="close" aria-label="Close " (click)="cerrarmodal()">
+                    <span aria-hidden="true ">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" class="col-12">
+                  <div class="row around">
+                    <div class="col-xs-4">
+                        <div class="">
+                        <strong>
+                            Modulo
+                        </strong>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="">
+                          <strong>
+                            Permitir
+                          </strong>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="">
+                          <strong>
+                            Denegar
+                          </strong>
+
+                        </div>
+                    </div>
+                </div>
+                <hr class="hrprimerlinea">
+                <ul>
+                  <li *ngFor="let Menu of menu" >
+                    <div class="row aroundM" data-toggle="collapse" [attr.data-target]="'#Permisos' + Menu.id" aria-expanded="false" aria-controls="collapseOne">
+                      <div class="col-xs-4 ">
+                          <div class="opcion">
+                            <b>
+                              {{Menu.opcion}}
+                            </b>
+                          </div>
+                      </div>
+                      <div class="col-xs-4">
+                          <div class="">
+                            <input class="form-check-input ModuloPermitir" type="radio" name="exampleRadios{{Menu.id}}" id="ModulP{{Menu.id}}">
+                          </div>
+                      </div>
+                      <div class="col-xs-4">
+                          <div class="">
+                            <input class="form-check-input ModuloDenegar" type="radio" name="exampleRadios{{Menu.id}}" id="ModulD{{Menu.id}}">
+                          </div>
+                      </div>
+                  </div>
+                  <hr style="background-color: #dee2e6;">
+                  <div  class="collapse col-xs-12" id="Permisos{{Menu.id}}" aria-labelledby="headingOne">
+                    <ul>
+                     <li *ngFor="let Sub of subMenu" class="hovermouse" id="StyleForm">
+                       <div class="row aroundS" *ngIf="Menu.id===Sub.depende">
+                        <div class="col-xs-4 ">
+                          <div class="opcionsSub">
+                            > {{Sub.opcion}}
+                          </div>
+                        </div>
+                        <div class="col-xs-4">
+                          <div class="">
+                            <input class="" type="radio" name="checkpermiso{{Sub.id}}" id="PerfPermi{{Sub.id}}" (change)="SaveTemp(Sub.id,1)">
+                          </div>
+                        </div>
+                        <div class="col-xs-4">
+                          <div class="">
+                            <input class="" type="radio" name="checkpermiso{{Sub.id}}" id="PerfDene{{Sub.id}}" (change)="SaveTemp(Sub.id,0)">
+                          </div>
+                        </div>
+                        <hr class="lineasubmenu">
+                      </div>
+                    </li>
+                    <hr>
+                    </ul>
+                  </div>
+                  </li>
+                </ul>
+
+                    <!-- <div class=" col-12 col-md-12 mb-3 table-responsive"> -->
+                        <!-- <table class="table">
+                            <thead>
+                                <tr>
+                                    <th id="Col1"> Modulo</th>
+                                    <th id="Col2"> Permitir</th>
+                                    <th id="Col3"> Denegar</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let Menu of menu">
+                                <tr>
+                                    <td data-toggle="collapse" [attr.data-target]="'#Permisos' + Menu.id" aria-expanded="false" aria-controls="collapseOne">
+                                        {{Menu.opcion}}
+                                        <div class="collapse col-12 col-md-12 table-responsive" id="Permisos{{Menu.id}}" aria-labelledby="headingOne">
+                                            <table class="table">
+
+                                                <tr *ngFor="let Sub of subMenu">
+                                                    <td *ngIf="Menu.id===Sub.depende">
+                                                        {{Sub.opcion}}
+                                                    </td>
+                                                    <td id="preuba" *ngIf="Menu.id===Sub.depende">
+                                                        <div>
+                                                            <input class="form-check-input radiosPermitir" type="radio" name="checkpermiso{{Sub.id}}" id="PerfPermi{{Sub.id}}" (change)="SaveTemp(Sub.id,1)">
+                                                        </div>
+                                                    </td>
+                                                    <td id="preuba" *ngIf="Menu.id===Sub.depende">
+                                                        <div>
+                                                            <input class="form-check-input radiosDenegar" type="radio" name="checkpermiso{{Sub.id}}" id="PerfDene{{Sub.id}}" (change)="SaveTemp(Sub.id,0)">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input ModuloPermitir" type="radio" name="exampleRadios{{Menu.id}}" id="ModulP{{Menu.id}}">
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input ModuloDenegar" type="radio" name="exampleRadios{{Menu.id}}" id="ModulD{{Menu.id}}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                        <div class="modal-footer mt-1 ">
+                            <div class="col-12 col-md-12 ">
+                                <div class="row m-0 ">
+                                    <div class="col-12 col-md-6 mt-1 ">
+                                        <button type="button " class="btn12" (click)="cerrarmodal()">Cancelar</button>
+                                    </div>
+                                    <div class="col-12 col-md-6 mt-1 ">
+                                        <button type="submit " class="btn10" (click)="SavePermiso()">Asignar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+/*Estilos del margin general*/
+
+.margin {
+    margin-left: 305px;
+    padding: 20px;
+    margin-top: 50px;
+    padding-top: 50px;
+}
+
+.btnsalir {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff !important;
+    text-align: center;
+    width: 100% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #Ef7D22 !important;
+    border: 1px solid #Ef7D22;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btnpermanecer {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff !important;
+    text-align: center;
+    width: 100% !important;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #0084b3 !important;
+    border: 1px solid #0084b3;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10px !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+/*Estilos de los mediaqueris*/
+
+@media screen and (max-width:991px) {
+    .margin {
+        margin-left: 0px;
+    }
+    .table-responsive {
+        width: 60%;
+    }
+}

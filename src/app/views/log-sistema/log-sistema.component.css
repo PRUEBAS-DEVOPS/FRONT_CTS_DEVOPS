@@ -1,0 +1,35 @@
+.btn3 {
+    background-color: #0084b3 !important;
+    color: white !important;
+}
+
+.bt4 {
+    background-image: url(/assets/images/excel.png);
+    width: 151px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border: none;
+    text-align: center !important;
+}
+
+.form-control {
+    border: 1px solid #0084b3;
+}
+
+.bt5 {
+    background-image: url(/assets/images/pdf.png);
+    width: 151px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border: none;
+    text-align: center !important;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
