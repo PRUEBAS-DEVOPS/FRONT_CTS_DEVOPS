@@ -19,7 +19,6 @@ steps:
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(61b532f2-d4bc-49e0-9643-ee037058aacb)'
-    appType: 'webAppLinux'
-    WebAppName: 'crm-frontend-colcan'
+    WebAppName: 'pruebas-seguridad-front'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    RuntimeStack: 'NODE|14-lts'
+    RuntimeStack: 'NODE|18-lts'
