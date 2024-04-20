@@ -4,29 +4,39 @@ trigger:
 
 # Define la imagen de la máquina virtual que se utilizará
 pool:
-  vmImage: 'ubuntu-latest'  # Aquí se usa Ubuntu; asegúrate de que esto es lo que necesitas
+  vmImage: 'ubuntu-latest'  # Aquí se usa Ubuntu; ajusta si necesitas otra plataforma
 
 # Define las etapas y pasos
 steps:
-# Instalar la versión necesaria de Node.js
+# Paso 1: Instalar la versión necesaria de Node.js
 - task: NodeTool@0
   inputs:
-    versionSpec: '16.x'  # Actualiza a la versión de Node.js que usas para Angular
+    versionSpec: '16.x'  # Elige la versión adecuada para Angular
   displayName: 'Instalar Node.js'
 
-# Instalar Angular CLI y las dependencias, y construir la aplicación
+# Paso 2: Instalar Angular CLI, dependencias, y construir la aplicación
 - script: |
-    npm install -g @angular/cli  # Instala Angular CLI globalmente
+    npm install -g @angular/cli  # Instala Angular CLI
     npm install  # Instala dependencias del proyecto
-    ng build --prod  # Compila el proyecto Angular para producción
+    ng build --prod  # Construcción de producción
   displayName: 'Instalar Angular CLI, dependencias, y construir la aplicación'
 
-# Desplegar el resultado en Azure App Service
+# Paso 3: Archivar los archivos construidos
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist'  # Ruta a los archivos construidos
+    includeRootFolder: true  # Incluye el directorio raíz en el archivo zip
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'  # Archivo de salida
+    replaceExistingArchive: true  # Reemplaza si ya existe
+  displayName: 'Archivar los archivos construidos'
+
+# Paso 4: Desplegar en Azure App Service
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(61b532f2-d4bc-49e0-9643-ee037058aacb)'  # Tu conexión de Azure
-    appType: 'webApp'  # Tipo de aplicación: webApp para Windows
-    WebAppName: 'pruebas-seguridad-front'  # Nombre de tu App Service
-    package: '$(System.DefaultWorkingDirectory)/dist/<nombre-de-tu-aplicación>'  # Ruta a los archivos construidos
+    azureSubscription: 'Azure subscription 1(61b532f2-d4bc-49e0-9643-ee037058aacb)'  # Tu suscripción de Azure
+    appType: 'webApp'  # Especifica el tipo de aplicación
+    WebAppName: 'pruebas-seguridad-front'  # Nombre del App Service
+    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'  # El archivo zip que se ha creado
   displayName: 'Desplegar a Azure App Service'
