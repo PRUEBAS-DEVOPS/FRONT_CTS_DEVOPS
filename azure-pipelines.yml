@@ -2,23 +2,25 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
 
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    versionSpec: '12.x'
+    displayName: 'Install Node.js'
 
 - script: |
-    npm install -g @angular/cli
     npm install
-    ng build --prod
-  displayName: 'npm install and build'
+    npm run build -- --prod
+  displayName: 'Install and build Angular app'
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(61b532f2-d4bc-49e0-9643-ee037058aacb)'
+    azureSubscription: '61b532f2-d4bc-49e0-9643-ee037058aacb'
+    appType: 'webAppWindows'  # Aquí se especifica el tipo de aplicación
     WebAppName: 'pruebas-seguridad-front'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    RuntimeStack: 'NODE|18-lts'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/dist'
+    enableCustomDeployment: true
+  displayName: 'Deploy to Azure App Service'
