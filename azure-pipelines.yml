@@ -29,18 +29,15 @@ stages:
       displayName: 'Publish build artifacts'
 
 - stage: Deploy
+  dependsOn: Build
   jobs:
-  - deployment: DeployWeb
-    environment: 'production'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - download: current
-            artifact: drop
+  - job: Deploy
+    steps:
+    - download: current
+      artifact: drop
 
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: '61b532f2-d4bc-49e0-9643-ee037058aacb'
-              appName: 'pruebas-seguridad-front'
-              package: '$(System.ArtifactsDirectory)/drop'
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: '61b532f2-d4bc-49e0-9643-ee037058aacb'
+        appName: 'pruebas-seguridad-front'
+        package: '$(System.ArtifactsDirectory)/drop'
