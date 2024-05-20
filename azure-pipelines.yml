@@ -16,6 +16,6 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install
+    npm install --force
     ng build --aot --configuration production --optimization     
     displayName: 'npm install and build'
