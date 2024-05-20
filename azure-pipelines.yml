@@ -17,6 +17,5 @@ steps:
 
 - script: |
     npm install
-    ng build --configuration
-    
+    ng build --aot --configuration production --optimization     
     displayName: 'npm install and build'
