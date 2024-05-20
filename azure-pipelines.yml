@@ -17,6 +17,6 @@ steps:
 
 - script: |
     npm install
-    ng build
+    ng build --configuration
     
     displayName: 'npm install and build'
